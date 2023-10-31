@@ -1,14 +1,14 @@
 # StartRailCaculator
 蒙特卡洛方法求解：卡池出货分布/抽卡结果分布/有效圣遗物出货概率
 
-参考图片（照骗）
+参考图片
 ![10 179抽出货分布](https://github.com/adsl-lucy/StartRailCaculator/assets/42862216/45f325f4-fbb4-4984-b9c1-8cdf64135e5c)
 
 开发工具：VS2017
 
 Qt版本：5.12.11\msvc2017_64
 
-下载地址：
+下载地址：release目录里面的rar就是
 
 编译所需包含Qt模块
 1.	charts
