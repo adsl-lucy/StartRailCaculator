@@ -1,0 +1,1855 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RelicCultivateWgt</class>
+ <widget class="QWidget" name="RelicCultivateWgt">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1324</width>
+    <height>870</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_22">
+   <item>
+    <widget class="QWidget" name="widget_graph" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_8">
+     <item>
+      <widget class="QWidget" name="widget_panel" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>544</width>
+         <height>826</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>544</width>
+         <height>826</height>
+        </size>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QGroupBox" name="groupBox_targetRelic">
+          <property name="title">
+           <string>计算圣遗物</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QRadioButton" name="radioButton_head">
+             <property name="minimumSize">
+              <size>
+               <width>48</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>48</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>头</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_hand">
+             <property name="minimumSize">
+              <size>
+               <width>48</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>48</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>手</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_clothes">
+             <property name="minimumSize">
+              <size>
+               <width>48</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>48</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>衣</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_shoes">
+             <property name="minimumSize">
+              <size>
+               <width>48</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>48</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>鞋</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="Line" name="line">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_cord">
+             <property name="minimumSize">
+              <size>
+               <width>48</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>48</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>绳</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton_ball">
+             <property name="minimumSize">
+              <size>
+               <width>48</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>48</width>
+               <height>24</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>球</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_ValidPriProperites">
+          <property name="title">
+           <string>有效主属性</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProAttactPercent">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>百分比攻击</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProCriticalProb">
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>暴击率</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProCriticalDamage">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>暴击伤害</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProSpeed">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>速度</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProChargeEfficiency">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>充能效率</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProBreakDamage">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>击破特攻</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProDebuffAccuracy">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>效果命中</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProHealAddition">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>治疗加成</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProHPPercentage">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>百分比生命</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProDefencePercentage">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>百分比防御</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_5" native="true">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_3" native="true">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_21">
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProFire">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>火伤加成</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProThunder">
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>雷伤加成</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProWind">
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>风伤加成</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProIce">
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>冰伤加成</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_23">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProNull">
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>虚无加成</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProQuantum">
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>量子加成</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_PriProPhysical">
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>物理加成</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_4" native="true">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>102</width>
+                 <height>24</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_SubProFilter">
+          <property name="title">
+           <string>副词缀筛选条件</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_17">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item>
+                <widget class="QCheckBox" name="checkBox_SubProAttackValue">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>固定攻击力</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_3">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>大于等于</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_SubProAttackValue">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
+               <item>
+                <widget class="QCheckBox" name="checkBox_SubProAttackPercentage">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>百分比攻击</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_4">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>大于等于</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_SubProAttactPercentage">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
+               <item>
+                <widget class="QCheckBox" name="checkBox_SubProCriticalPercentage">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>暴击率</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_10">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>大于等于</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_SubProCriticalPercentage">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_15">
+               <item>
+                <widget class="QCheckBox" name="checkBox_SubProCriticialDamage">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>暴击伤害</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_11">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>大于等于</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_SubProCriticalDamage">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_16">
+               <item>
+                <widget class="QCheckBox" name="checkBox_SubProSpeed">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>速度</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_12">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>大于等于</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_SubProSpeed">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_12">
+               <item>
+                <widget class="QCheckBox" name="checkBox_SubProDebuffAccuracy">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>效果命中</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_8">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>大于等于</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_SubProDebuffAccuracy">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_13">
+               <item>
+                <widget class="QCheckBox" name="checkBox_SubProBreakDamage">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>击破特攻</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_9">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>大于等于</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_SubProBreakDamage">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QCheckBox" name="checkBox_SubProHPValue">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>固定生命值</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>大于等于</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_SubProHPValue">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
+                <widget class="QCheckBox" name="checkBox_SubProHPPercentage">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>百分比生命</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_2">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>大于等于</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_SubProHPPercentage">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <item>
+                <widget class="QCheckBox" name="checkBox_SubProDefenceValue">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>固定防御力</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_5">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>大于等于</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_SubProDefenceValue">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_10">
+               <item>
+                <widget class="QCheckBox" name="checkBox_SubProDefencePercentage">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>百分比防御</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_6">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>大于等于</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_SubProDefencePercentage">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_11">
+               <item>
+                <widget class="QCheckBox" name="checkBox_SubProDebuffDefence">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>102</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>效果抵抗</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_7">
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>大于等于</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_SubProDebuffDefence">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>64</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::NoButtons</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget" native="true">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>56</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>56</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_18">
+          <item>
+           <widget class="QLabel" name="label_13">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>打本次数</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBox_playTime">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>48</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>48</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="buttonSymbols">
+             <enum>QAbstractSpinBox::NoButtons</enum>
+            </property>
+            <property name="maximum">
+             <number>10000000</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="widget_2" native="true"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_19">
+          <item>
+           <widget class="QPushButton" name="pushButton_startEstimate">
+            <property name="text">
+             <string>开始计算</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_resetPara">
+            <property name="text">
+             <string>重置参数</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_clearResult">
+            <property name="text">
+             <string>清理结果</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_14">
+            <property name="text">
+             <string>计算进度</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QProgressBar" name="progressBar_EstimateProgress">
+            <property name="value">
+             <number>24</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_ErrorMsg">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>错误码</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_statisticalConclusiaon">
+          <property name="title">
+           <string>统计结论</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_20">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <item>
+              <widget class="QLabel" name="label_PriProValidProportion">
+               <property name="text">
+                <string>主属性有效遗物比例：</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_PriProValidGetProbability">
+               <property name="text">
+                <string>打本获取主属性有效遗物概率：</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_PriProValidGetTimeExpectation">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>248</horstretch>
+                 <verstretch>12</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>248</width>
+                 <height>12</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>主属性有效遗物获取期望：</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_PriProValidGetPlayTimeExpectation">
+               <property name="text">
+                <string>获取主属性有效遗物打本次数期望：</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <item>
+              <widget class="QLabel" name="label_AllProValidProportion">
+               <property name="text">
+                <string>全属性有效遗物比例：</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_AllPropertyValidGetPercentage">
+               <property name="text">
+                <string>打本获取全属性有效遗物概率：</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_AllProValidGetTimeExpectation">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>248</horstretch>
+                 <verstretch>12</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>248</width>
+                 <height>12</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>全属性有效遗物获取期望：</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_AllPropertyGetPlayTimeExpectation">
+               <property name="text">
+                <string>获取全属性有效遗物打本次数期望：</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="title">
+           <string>备注</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <widget class="QLabel" name="label_15">
+             <property name="text">
+              <string>1.计算的是某一个本中某一个套装的某一个部件</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_16">
+             <property name="text">
+              <string>2.只有满足主属性有效+副属性有效的圣遗物才会被认作有效</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_19">
+             <property name="text">
+              <string>3.主属性有效比例：主属性有效遗物总数/获取遗物总数</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_20">
+             <property name="text">
+              <string>4.打本获取主属性有效概率：打本获得主属性有效遗物的次数/总打本次数</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
