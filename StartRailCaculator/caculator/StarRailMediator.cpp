@@ -142,7 +142,7 @@ void StarRailMediator::sendResourceEstErrorMsg(const EN_StarRailErrorNum ErrNum)
 		case EN_StarRailErrorNum::ResouceEst_CurrentCrystalInvaild		: ErrMsg = QString("当前星琼无效");break;
 		case EN_StarRailErrorNum::ResouceEst_SmallMonthCardRemainDayInvaild	: ErrMsg = QString("小月卡剩余天数无效");break;
 		case EN_StarRailErrorNum::ResouceEst_CurrentPaidCrystalInvaild		: ErrMsg = QString("当前古老梦华无效");break;
-		case EN_StarRailErrorNum::ResouceEst_AbyssAverageNumInvaild		: ErrMsg = QString("深渊平均通关数无效");	break;
+		case EN_StarRailErrorNum::ResouceEst_AbyssAverageNumInvaild		: ErrMsg = QString("深渊平均通关数无效");break;
 	}
 	emit signal_ResouceEstErrorMsg(ErrNum, ErrMsg);
 }
