@@ -251,9 +251,9 @@ void InvestmentIncomeWgt::setDrawCardType(En_DrawCardType drawCardType, En_PoolT
 				case En_PoolTransfromType::NWeaponMCharacter:
 					appendText = QString("先抽") + QString::number(N) + QString("个武器再抽")	+ QString::number(M) + QString("个角色");	break;
 				case En_PoolTransfromType::NTCharacterMTWeapon:
-					appendText = QString("先抽") + QString::number(N) + QString("发角色池再抽") + QString::number(M) + QString("发武器池"); break;
+					appendText = QString("先抽") + QString::number(N) + QString("发角色池再抽") 	+ QString::number(M) + QString("发武器池"); 	break;
 				case En_PoolTransfromType::NTWeaponMTCharacter:
-					appendText = QString("先抽") + QString::number(N) + QString("发武器池再抽") + QString::number(M) + QString("发角色池"); break;
+					appendText = QString("先抽") + QString::number(N) + QString("发武器池再抽") 	+ QString::number(M) + QString("发角色池"); 	break;
 			}
 		}
 	}
