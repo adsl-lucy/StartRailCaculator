@@ -21,142 +21,142 @@
 #ifndef RELIC_RESULT
 #define RELIC_RESULT
 
-//Ò»¸ö¾ßÌåµÄÊ¥ÒÅÎï
-//ÒòÎªĞ´³É½á¹¹Ìå+º¯ÊıµÄÂß¼­Ì«·±¸´£¬Ö±½Ó·â×°³ÉÀà
+//ä¸€ä¸ªå…·ä½“çš„åœ£é—ç‰©
+//å› ä¸ºå†™æˆç»“æ„ä½“+å‡½æ•°çš„é€»è¾‘å¤ªç¹å¤ï¼Œç›´æ¥å°è£…æˆç±»
 
 #include "./protocol_StarRailCaculator.h"
 #include <random>
 
 class RelicResult
 {
-	//ÒÀÕÕ¸±±¾ÀàĞÍ¹¹ÔìÒ»¸öÊ¥ÒÅÎïÅß×Ó
-	//¹¹ÔìµÄÊ±ºòÖ±½Óµ÷ÓÃgetBirthº¯Êı
-	//¹¹ÔìµÄËæ»úĞÔºÍËæ»úÊıÒıÇæµÄÖÖ×Ó/Ê¹ÓÃÎ»ÖÃÍêÈ«Ïà¹Ø
+	//ä¾ç…§å‰¯æœ¬ç±»å‹æ„é€ ä¸€ä¸ªåœ£é—ç‰©èƒšå­
+	//æ„é€ çš„æ—¶å€™ç›´æ¥è°ƒç”¨getBirthå‡½æ•°
+	//æ„é€ çš„éšæœºæ€§å’Œéšæœºæ•°å¼•æ“çš„ç§å­/ä½¿ç”¨ä½ç½®å®Œå…¨ç›¸å…³
 public:
 
-	//Ò»´ÎÄ£ÄâÖ»µ÷Ò»´Î£¬ÎªÁËĞÔÄÜ
+	//ä¸€æ¬¡æ¨¡æ‹Ÿåªè°ƒä¸€æ¬¡ï¼Œä¸ºäº†æ€§èƒ½
 	RelicResult();
 	~RelicResult();
 
 protected:
-	//³õÊ¼»¯Ö÷ÊôĞÔËæ»ú¿Ì¶È³Ø
+	//åˆå§‹åŒ–ä¸»å±æ€§éšæœºåˆ»åº¦æ± 
 	void initPriproMap();
-	//³õÊ¼»¯¸±ÊôĞÔÊıÁ¿¿Ì¶È
+	//åˆå§‹åŒ–å‰¯å±æ€§æ•°é‡åˆ»åº¦
 	void initSubProNumPos();
 
 public:
-	//Ëæ»ú²úÉú´òÒ»´Î±¾»ñµÃµÄ½ğÒÇÆ÷¸öÊı£¨2¸ö»ò3¸ö£©
+	//éšæœºäº§ç”Ÿæ‰“ä¸€æ¬¡æœ¬è·å¾—çš„é‡‘ä»ªå™¨ä¸ªæ•°ï¼ˆ2ä¸ªæˆ–3ä¸ªï¼‰
 	static int   getRelicNum(std::default_random_engine& engine);
 
-	//Í¨¹ıÒÅÆ÷²¿Î»ÅĞ¶Ï´òÊ²Ã´±¾
+	//é€šè¿‡é—å™¨éƒ¨ä½åˆ¤æ–­æ‰“ä»€ä¹ˆæœ¬
 	static const En_raidType getRaidType(const En_RelicType relicTYpe);
 
-	//ÊÇ·ñµ½´ï×î¸ßµÈ¼¶
-	const bool	isHighestLevel()	const { return m_CurrentLevel >= 15;};
+	//æ˜¯å¦åˆ°è¾¾æœ€é«˜ç­‰çº§
+	const bool 	isHighestLevel()	const { return m_CurrentLevel >= 15;};
 
-	//Ö÷ÊôĞÔÊÇ·ñÓĞĞ§
-	bool						isPrimePropertyValid(const St_RelicValidEstimatePara & EstPara);
+	//ä¸»å±æ€§æ˜¯å¦æœ‰æ•ˆ
+	bool 		isPrimePropertyValid(const St_RelicValidEstimatePara & EstPara);
 
-	//»ñÈ¡¸±´ÊÌõÊıÁ¿£¨¸±´Ê×ºÏÔÊ¾ÓĞ¼¸¸ö£¬¶ø²»ÊÇµşÁË¶àÉÙ´ÎÊôĞÔÉÏÈ¥£©
-	const int					getSubPropertyNum();
+	//è·å–å‰¯è¯æ¡æ•°é‡ï¼ˆå‰¯è¯ç¼€æ˜¾ç¤ºæœ‰å‡ ä¸ªï¼Œè€Œä¸æ˜¯å äº†å¤šå°‘æ¬¡å±æ€§ä¸Šå»ï¼‰
+	const int	getSubPropertyNum();
 
 public:
-	//³öÉú,Ò»Â·Éıµ½Âú¼¶£¬·ûºÏÈ«²¿ÊôĞÔÌõ¼şÌõ¼ş·µ»Øtrue£¬·ñÔò·µ»Øfalse£¨×îĞ¡µÄ¹¹Ôì´ú¼Û£©
-	//1.Ñ¡Ì××°
-	//2.Ñ¡Ö÷ÊôĞÔ
-	//3.Ñ¡Ôñ³öÉú´ÊÌõÊı
-	//4.Ñ¡Ôñ³öÉú´ÊÌõÀàĞÍ
-	//Ò»µ©ÖĞ¼ä³öÏÖ²»·ûºÏÌõ¼şµÄÇéĞÎ£¬Á¢¿Ì»Ø¸´false£¬Ö±µ½×îºóÂú×ãÁË²ÎÊıÌõ¼ş²Åtrue
-	//¹¹ÔìµÄËæ»úĞÔºÍËæ»úÊıÒıÇæµÄÖÖ×Ó/Ê¹ÓÃÎ»ÖÃÍêÈ«Ïà¹Ø
-	bool					getBirth(const En_raidType& raidType,const St_RelicValidEstimatePara & EstPara, std::default_random_engine& engine);
-	//ÖØÖÃ²ÎÊı
-	void					resetPara();
+	//å‡ºç”Ÿ,ä¸€è·¯å‡åˆ°æ»¡çº§ï¼Œç¬¦åˆå…¨éƒ¨å±æ€§æ¡ä»¶æ¡ä»¶è¿”å›trueï¼Œå¦åˆ™è¿”å›falseï¼ˆæœ€å°çš„æ„é€ ä»£ä»·ï¼‰
+	//1.é€‰å¥—è£…
+	//2.é€‰ä¸»å±æ€§
+	//3.é€‰æ‹©å‡ºç”Ÿè¯æ¡æ•°
+	//4.é€‰æ‹©å‡ºç”Ÿè¯æ¡ç±»å‹
+	//ä¸€æ—¦ä¸­é—´å‡ºç°ä¸ç¬¦åˆæ¡ä»¶çš„æƒ…å½¢ï¼Œç«‹åˆ»å›å¤falseï¼Œç›´åˆ°æœ€åæ»¡è¶³äº†å‚æ•°æ¡ä»¶æ‰true
+	//æ„é€ çš„éšæœºæ€§å’Œéšæœºæ•°å¼•æ“çš„ç§å­/ä½¿ç”¨ä½ç½®å®Œå…¨ç›¸å…³
+	bool		getBirth(const En_raidType& raidType,const St_RelicValidEstimatePara & EstPara, std::default_random_engine& engine);
+	//é‡ç½®å‚æ•°
+	void		resetPara();
 
-//¾ßÌåµÄËæ»úº¯Êı£¬·µ»ØĞÂµÄÊıÖµµÄÍ¬Ê±ÉèÖÃ³ÉÔ±±äÁ¿
-//Ä£ÄâĞÔÄÜÆ¿¾±ËùÔÚ
+//å…·ä½“çš„éšæœºå‡½æ•°ï¼Œè¿”å›æ–°çš„æ•°å€¼çš„åŒæ—¶è®¾ç½®æˆå‘˜å˜é‡
+//æ¨¡æ‹Ÿæ€§èƒ½ç“¶é¢ˆæ‰€åœ¨
 protected:
-	//Ëæ»ú¾ö¶¨Ì××°ÊÇ·ñÕıÈ·,
-	bool					creatSetState(std::default_random_engine& engine);
-	//Ëæ»ú¾ö¶¨Éú³ÉµÄ²¿Î»
-	En_RelicType			creatType(const En_raidType raidType, std::default_random_engine& engine);
-	//Ëæ»ú¾ö¶¨Ö÷ÊôĞÔ
+	//éšæœºå†³å®šå¥—è£…æ˜¯å¦æ­£ç¡®,
+	bool			creatSetState(std::default_random_engine& engine);
+	//éšæœºå†³å®šç”Ÿæˆçš„éƒ¨ä½
+	En_RelicType		creatType(const En_raidType raidType, std::default_random_engine& engine);
+	//éšæœºå†³å®šä¸»å±æ€§
 	En_RelicPrimeProperty	createPrimeProperty(std::default_random_engine& engine);
-	//Ëæ»ú¾ö¶¨Åß×ÓÓĞ¼¸¸ö¸±ÊôĞÔ
-	int						createSubPropertyNum(std::default_random_engine& engine);
-	//ÖØÖÃ¸±ÊôĞÔËæ»ú³Ø
-	void					resetSubPropertyVec();
-	//Ëæ»ú¹¹ÔìÒ»¸öĞÂµÄ¸±ÊôĞÔ
-	En_RelicSubProperty		creatNewSubProperty(std::default_random_engine& engine);
-	//¼ÓÇ¿Ò»´Î£¨1-4/4-8/8-12/12-15£©£¬»ñµÃ/Ç¿»¯Ò»¸ö¸±´Ê×º
-	//ÓÅÏÈÌîÂú¿Õ´Ê×º£¬ÎŞ¿Õ´Ê×º£¬ÔòµÈ¿ÉÄÜÇ¿»¯Ò»¸ö¸±´Ê×º£¬Ç¿»¯ÊıÖµÓĞ3ÖÖ¿ÉÄÜ
-	//Èç¹ûÒÑ¾­Âú¼¶ÄÇÃ´ÎŞ·¨¼ÓÇ¿
-	bool					upgradeOnce(const St_RelicValidEstimatePara & EstPara,std::default_random_engine& engine);
-	//»ñÈ¡Ò»¸öĞÂ´ÊÌõµÄÊıÖµ
-	double					createNewSubPropertyValue(En_RelicSubProperty SubProType, std::default_random_engine& engine);
-	//Ç¿»¯Ä³Ò»¸ö´ÊÌõ
-	void					upgradeOneSubProperty(En_RelicSubProperty SubProType,double value);
-	//¾ö¶¨Ç¿»¯´ÊÌõµÄÎ»ÖÃ£¨1/2/3/4£©
-	int						getUpgradeSubProPos(std::default_random_engine& engine);
+	//éšæœºå†³å®šèƒšå­æœ‰å‡ ä¸ªå‰¯å±æ€§
+	int			createSubPropertyNum(std::default_random_engine& engine);
+	//é‡ç½®å‰¯å±æ€§éšæœºæ± 
+	void			resetSubPropertyVec();
+	//éšæœºæ„é€ ä¸€ä¸ªæ–°çš„å‰¯å±æ€§
+	En_RelicSubProperty	creatNewSubProperty(std::default_random_engine& engine);
+	//åŠ å¼ºä¸€æ¬¡ï¼ˆ1-4/4-8/8-12/12-15ï¼‰ï¼Œè·å¾—/å¼ºåŒ–ä¸€ä¸ªå‰¯è¯ç¼€
+	//ä¼˜å…ˆå¡«æ»¡ç©ºè¯ç¼€ï¼Œæ— ç©ºè¯ç¼€ï¼Œåˆ™ç­‰å¯èƒ½å¼ºåŒ–ä¸€ä¸ªå‰¯è¯ç¼€ï¼Œå¼ºåŒ–æ•°å€¼æœ‰3ç§å¯èƒ½
+	//å¦‚æœå·²ç»æ»¡çº§é‚£ä¹ˆæ— æ³•åŠ å¼º
+	bool			upgradeOnce(const St_RelicValidEstimatePara & EstPara,std::default_random_engine& engine);
+	//è·å–ä¸€ä¸ªæ–°è¯æ¡çš„æ•°å€¼
+	double			createNewSubPropertyValue(En_RelicSubProperty SubProType, std::default_random_engine& engine);
+	//å¼ºåŒ–æŸä¸€ä¸ªè¯æ¡
+	void			upgradeOneSubProperty(En_RelicSubProperty SubProType,double value);
+	//å†³å®šå¼ºåŒ–è¯æ¡çš„ä½ç½®ï¼ˆ1/2/3/4ï¼‰
+	int			getUpgradeSubProPos(std::default_random_engine& engine);
 
-	//¼ì²éÖ÷ÊôĞÔÊÇ·ñÓĞĞ§
-	bool					checkPrimePropertyValid(const St_RelicValidEstimatePara& EstPara);
-	//¼ì²é¸±ÊôĞÔ´ÊÌõÊÇ·ñÓĞĞ§
-	bool					checkSubProTypeVaildity(En_RelicSubProperty SubProType, const St_RelicValidEstimatePara & EstPara);
-	//¼ì²âÄ³Ò»¸ö¸±ÊôĞÔÊıÖµÊÇ·ñÓĞĞ§
-	bool					checkSubProValueVaildity(En_RelicSubProperty SubProType, double SubProValue, const St_RelicValidEstimatePara & EstPara);
+	//æ£€æŸ¥ä¸»å±æ€§æ˜¯å¦æœ‰æ•ˆ
+	bool			checkPrimePropertyValid(const St_RelicValidEstimatePara& EstPara);
+	//æ£€æŸ¥å‰¯å±æ€§è¯æ¡æ˜¯å¦æœ‰æ•ˆ
+	bool			checkSubProTypeVaildity(En_RelicSubProperty SubProType, const St_RelicValidEstimatePara & EstPara);
+	//æ£€æµ‹æŸä¸€ä¸ªå‰¯å±æ€§æ•°å€¼æ˜¯å¦æœ‰æ•ˆ
+	bool			checkSubProValueVaildity(En_RelicSubProperty SubProType, double SubProValue, const St_RelicValidEstimatePara & EstPara);
 
-//¾ßÌå²ÎÊı£¬·½±ãµ÷ÊÔ
+//å…·ä½“å‚æ•°ï¼Œæ–¹ä¾¿è°ƒè¯•
 private:
 
-	bool							m_bSetCorrect		= false;							//Ì××°ÊÇ·ñÕıÈ·
-	En_RelicType					m_relicType			= En_RelicType::None;				//Ê¥ÒÅÎï²¿Î»
-	En_RelicPrimeProperty			m_primeProperty		= En_RelicPrimeProperty::None;		//Ê¥ÒÅÎïÖ÷ÊôĞÔ
+	bool			m_bSetCorrect		= false;				//å¥—è£…æ˜¯å¦æ­£ç¡®
+	En_RelicType		m_relicType		= En_RelicType::None;			//åœ£é—ç‰©éƒ¨ä½
+	En_RelicPrimeProperty	m_primeProperty		= En_RelicPrimeProperty::None;		//åœ£é—ç‰©ä¸»å±æ€§
 
 
-	int							m_CurrentLevel = 0;				//µ±Ç°Ê¥ÒÅÎïµÈ¼¶,0±íÊ¾Ã»Éú³ÉÖ÷ÊôĞÔ
+	int			m_CurrentLevel = 0;	//å½“å‰åœ£é—ç‰©ç­‰çº§,0è¡¨ç¤ºæ²¡ç”Ÿæˆä¸»å±æ€§
 
-	//4¸ö²¿Î»¾ßÌåµÄ´ÊÌõ£¬Ã»ÓĞ¾ÍÊÇnone
-	En_RelicSubProperty			m_firstSubProType		= En_RelicSubProperty::None;
-	En_RelicSubProperty			m_secondSubProType		= En_RelicSubProperty::None;
-	En_RelicSubProperty			m_thirdSubProType		= En_RelicSubProperty::None;
-	En_RelicSubProperty			m_fourthSubProType		= En_RelicSubProperty::None;
-
-
-	//¸±´Ê×º¾ßÌåÊıÖµ
-	double	m_dHPValue			= 0;			//¹Ì¶¨ÉúÃüÖµ
-	double	m_dHPPercentage		= 0;			//°Ù·Ö±ÈÉúÃüÖµ
-	double	m_dAttackValue		= 0;			//¹Ì¶¨¹¥»÷Á¦
-	double	m_dAttackPercent	= 0;			//°Ù·Ö±È¹¥»÷Á¦
-	double	m_dDefenceValue		= 0;			//¹Ì¶¨·ÀÓùÁ¦
-	double	m_dDefencePercentage= 0;			//°Ù·Ö±È·ÀÓùÁ¦
-
-	double	m_dCriticalProb		= 0;			//±©»÷ÂÊ
-	double	m_dCriticalDamage	= 0;			//±©»÷ÉËº¦
-	double	m_dSpeed			= 0;			//ËÙ¶È
-
-	double	m_dDeBuffDefence	= 0;			//Ğ§¹ûµÖ¿¹
-	double	m_dBreakDamage		= 0;			//»÷ÆÆÌØ¹¥
-	double	m_dDeBuffAccuracy	= 0;			//Ğ§¹ûÃüÖĞ
+	//4ä¸ªéƒ¨ä½å…·ä½“çš„è¯æ¡ï¼Œæ²¡æœ‰å°±æ˜¯none
+	En_RelicSubProperty	m_firstSubProType		= En_RelicSubProperty::None;
+	En_RelicSubProperty	m_secondSubProType		= En_RelicSubProperty::None;
+	En_RelicSubProperty	m_thirdSubProType		= En_RelicSubProperty::None;
+	En_RelicSubProperty	m_fourthSubProType		= En_RelicSubProperty::None;
 
 
-	//ÒÂ·şÖ÷ÊôĞÔËæ»úÓÃ¿Ì¶È
+	//å‰¯è¯ç¼€å…·ä½“æ•°å€¼
+	double	m_dHPValue		= 0;			//å›ºå®šç”Ÿå‘½å€¼
+	double	m_dHPPercentage		= 0;			//ç™¾åˆ†æ¯”ç”Ÿå‘½å€¼
+	double	m_dAttackValue		= 0;			//å›ºå®šæ”»å‡»åŠ›
+	double	m_dAttackPercent	= 0;			//ç™¾åˆ†æ¯”æ”»å‡»åŠ›
+	double	m_dDefenceValue		= 0;			//å›ºå®šé˜²å¾¡åŠ›
+	double	m_dDefencePercentage	= 0;			//ç™¾åˆ†æ¯”é˜²å¾¡åŠ›
+
+	double	m_dCriticalProb		= 0;			//æš´å‡»ç‡
+	double	m_dCriticalDamage	= 0;			//æš´å‡»ä¼¤å®³
+	double	m_dSpeed		= 0;			//é€Ÿåº¦
+
+	double	m_dDeBuffDefence	= 0;			//æ•ˆæœæŠµæŠ—
+	double	m_dBreakDamage		= 0;			//å‡»ç ´ç‰¹æ”»
+	double	m_dDeBuffAccuracy	= 0;			//æ•ˆæœå‘½ä¸­
+
+
+	//è¡£æœä¸»å±æ€§éšæœºç”¨åˆ»åº¦
 	QMap<int, En_RelicPrimeProperty> m_mapClothesPripro;
 
-	//Ğ¬×ÓÖ÷ÊôĞÔËæ»úÓÃ¿Ì¶È
+	//é‹å­ä¸»å±æ€§éšæœºç”¨åˆ»åº¦
 	QMap<int, En_RelicPrimeProperty> m_mapShoesPripro;
 
-	//Éş×ÓÖ÷ÊôĞÔËæ»úÓÃ¿Ì¶È
+	//ç»³å­ä¸»å±æ€§éšæœºç”¨åˆ»åº¦
 	QMap<int, En_RelicPrimeProperty> m_mapCordPripro;
 
-	//ÇòÖ÷ÊôĞÔËæ»úÓÃ¿Ì¶È
+	//çƒä¸»å±æ€§éšæœºç”¨åˆ»åº¦
 	QMap<int, En_RelicPrimeProperty> m_mapBallPripro;
 
-	//¸±ÊôĞÔÊıÁ¿¿Ì¶È
+	//å‰¯å±æ€§æ•°é‡åˆ»åº¦
 	int m_Affix2Pos = 0;
 	int m_Affix3Pos = 0;
 	int m_Affix4Pos = 0;
 
-	//¸±ÊôĞÔËæ»ú³Ø
+	//å‰¯å±æ€§éšæœºæ± 
 	QVector<En_RelicSubProperty> m_vecSubProperty;
 
 };
