@@ -602,13 +602,13 @@ void RelicCultivateWgt::slot_startEstimate()
 			EstiPara.PrimePro_Valid_HPPercentage		= Ui.checkBox_PriProHPPercentage->isChecked();
 			EstiPara.PrimePro_Valid_DefencePercentage	= Ui.checkBox_PriProDefencePercentage->isChecked();
 
-			EstiPara.PrimePro_Valid_Fire		= Ui.checkBox_PriProFire->isChecked();
-			EstiPara.PrimePro_Valid_Thunder		= Ui.checkBox_PriProThunder->isChecked();
-			EstiPara.PrimePro_Valid_Wind		= Ui.checkBox_PriProWind->isChecked();
-			EstiPara.PrimePro_Valid_Ice		= Ui.checkBox_PriProIce->isChecked();
-			EstiPara.PrimePro_Valid_Null		= Ui.checkBox_PriProNull->isChecked();
-			EstiPara.PrimePro_Valid_Quantum		= Ui.checkBox_PriProQuantum->isChecked();
-			EstiPara.PrimePro_Valid_Physical	= Ui.checkBox_PriProPhysical->isChecked();
+			EstiPara.PrimePro_Valid_Fire			= Ui.checkBox_PriProFire->isChecked();
+			EstiPara.PrimePro_Valid_Thunder			= Ui.checkBox_PriProThunder->isChecked();
+			EstiPara.PrimePro_Valid_Wind			= Ui.checkBox_PriProWind->isChecked();
+			EstiPara.PrimePro_Valid_Ice			= Ui.checkBox_PriProIce->isChecked();
+			EstiPara.PrimePro_Valid_Null			= Ui.checkBox_PriProNull->isChecked();
+			EstiPara.PrimePro_Valid_Quantum			= Ui.checkBox_PriProQuantum->isChecked();
+			EstiPara.PrimePro_Valid_Physical		= Ui.checkBox_PriProPhysical->isChecked();
 		}break;
 	}
 	//副词缀筛选器
