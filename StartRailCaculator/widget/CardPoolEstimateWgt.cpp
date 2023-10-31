@@ -50,8 +50,8 @@ void CardPoolEstimateWgt::initUI()
 	Ui.progressBar_EstimatePos->setValue(0);
 
 	connect(Ui.pushButton_startEstimate,	&QPushButton::clicked, this, &CardPoolEstimateWgt::slot_startEstimate);
-	connect(Ui.pushButton_resetPara,		&QPushButton::clicked, this, &CardPoolEstimateWgt::slot_resetPara);
-	connect(Ui.pushButton_clearResult,		&QPushButton::clicked, this, &CardPoolEstimateWgt::slot_clearResult);
+	connect(Ui.pushButton_resetPara,	&QPushButton::clicked, this, &CardPoolEstimateWgt::slot_resetPara);
+	connect(Ui.pushButton_clearResult,	&QPushButton::clicked, this, &CardPoolEstimateWgt::slot_clearResult);
 }
 
 void CardPoolEstimateWgt::initChartWgt()
@@ -59,17 +59,17 @@ void CardPoolEstimateWgt::initChartWgt()
 	m_axisTicket = new QValueAxis();
 	m_axisTicket->setRange(1, 180);
 	m_axisTicket->setLabelFormat("%d");
-	m_axisTicket->setTitleText("ÀÛ¼Æ³é¿¨´ÎÊı");
+	m_axisTicket->setTitleText("ç´¯è®¡æŠ½å¡æ¬¡æ•°");
 	m_axisProb = new QValueAxis();
 	m_axisProb->setRange(0, 100);
 	m_axisProb->setLabelFormat("%.0f%%");
-	m_axisProb->setTitleText("ÀÛ¼Æ³ö»õ¸ÅÂÊ");
+	m_axisProb->setTitleText("ç´¯è®¡å‡ºè´§æ¦‚ç‡");
 
 	m_seriesProbDistribution = nullptr;
 
 	m_ChtProbDistribution = new QChart();
 
-	m_ChtProbDistribution->setTitle("N³éÖ®ÄÚ³ö»õ¸ÅÂÊ");
+	m_ChtProbDistribution->setTitle("NæŠ½ä¹‹å†…å‡ºè´§æ¦‚ç‡");
 	m_ChtProbDistribution->legend()->hide();
 	m_ChtProbDistribution->addAxis(m_axisTicket, Qt::AlignBottom);
 	m_ChtProbDistribution->addAxis(m_axisProb, Qt::AlignLeft);
@@ -118,32 +118,32 @@ void CardPoolEstimateWgt::setPanelEnable(bool state)
 
 void CardPoolEstimateWgt::setCardPoolType(const QString & str)
 {
-	Ui.label_poolType->setText(QString("¿¨³ØÀàĞÍ:") + str);
+	Ui.label_poolType->setText(QString("å¡æ± ç±»å‹:") + str);
 }
 
 void CardPoolEstimateWgt::setDistanceToBigGuarantee(const QString & str)
 {
-	Ui.label_distanceToBigGuarantee->setText(QString("¾àÀë´ó±£µ×Ê£Óà³éÊı:") + str);
+	Ui.label_distanceToBigGuarantee->setText(QString("è·ç¦»å¤§ä¿åº•å‰©ä½™æŠ½æ•°:") + str);
 }
 
 void CardPoolEstimateWgt::setGetUpOnSmallGuarantee(const QString & str)
 {
-	Ui.label_PorbGetUpAtsmallGuarantee->setText(QString("ÓÚĞ¡±£µ×Î»ÖÃ³ö»õ¸ÅÂÊ:") + str);
+	Ui.label_PorbGetUpAtsmallGuarantee->setText(QString("äºå°ä¿åº•ä½ç½®å‡ºè´§æ¦‚ç‡:") + str);
 }
 
 void CardPoolEstimateWgt::setGetUpOnBigGuarantee(const QString & str)
 {
-	Ui.label_PorbGetUpAtBigGuarantee->setText(QString("ÓÚ´ó±£µ×Î»ÖÃ³ö»õ¸ÅÂÊ:") + str);
+	Ui.label_PorbGetUpAtBigGuarantee->setText(QString("äºå¤§ä¿åº•ä½ç½®å‡ºè´§æ¦‚ç‡:") + str);
 }
 
 void CardPoolEstimateWgt::setGetUpPosExpectation(const QString & str)
 {
-	Ui.label_ExpectationGetPos->setText(QString("ÆÚÍû³ö»õÎ»ÖÃ:") + str);
+	Ui.label_ExpectationGetPos->setText(QString("æœŸæœ›å‡ºè´§ä½ç½®:") + str);
 }
 
 void CardPoolEstimateWgt::setGetUpCrystalExpenceExpectation(const QString & str)
 {
-	Ui.label_ExpectationCrystalExpense->setText(QString("ÆÚÍûÍ¶ÈëĞÇÇí:") + str);
+	Ui.label_ExpectationCrystalExpense->setText(QString("æœŸæœ›æŠ•å…¥æ˜Ÿç¼:") + str);
 }
 
 int CardPoolEstimateWgt::getPointIndex(const QPointF & ChartPos)
@@ -199,7 +199,7 @@ void CardPoolEstimateWgt::slot_chartMouseHovered(const QPointF & point, bool sta
 	QString showText;
 
 	showText.push_back(QString::number(pointIndex));
-	showText.push_back("³éÖ®ÄÚ³ö»õ¸ÅÂÊ:");
+	showText.push_back("æŠ½ä¹‹å†…å‡ºè´§æ¦‚ç‡:");
 	showText.push_back(QString::asprintf("%.2f%%", PointProb));
 
 	QToolTip::showText(QCursor::pos(), showText);
@@ -209,21 +209,21 @@ void CardPoolEstimateWgt::slot_getCardPoolEstimateResult(const St_CardPoolEstima
 {
 	if (EstResult.poolType == EN_CardPoolType::character)
 	{
-		setCardPoolType("½ÇÉ«³Ø");
+		setCardPoolType("è§’è‰²æ± ");
 	}
 	else if (EstResult.poolType == EN_CardPoolType::weapon)
 	{
-		setCardPoolType("¹â×¶³Ø");
+		setCardPoolType("å…‰é”¥æ± ");
 	}
 
-	//´òÓ¡Í³¼Æ½á¹û
+	//æ‰“å°ç»Ÿè®¡ç»“æœ
 	setDistanceToBigGuarantee(QString::number(EstResult.distanceToBigGuarantee));
 	setGetUpOnSmallGuarantee(QString::asprintf("%.2f%%", EstResult.smallGraranteeGetUpProb * 100));
 	setGetUpOnBigGuarantee(QString::asprintf("%.2f%%", EstResult.bigGuaranteeGetTupProb *100));
 	setGetUpPosExpectation(QString::asprintf("%.2f", EstResult.getUpPosExpectation));
 	setGetUpCrystalExpenceExpectation(QString::asprintf("%.2f", EstResult.crystalExpenExpectation));
 
-	//´¦ÀíÍ¼±í
+	//å¤„ç†å›¾è¡¨
 	m_mapEstResult.clear();
 
 	m_axisTicket->setRange(0, EstResult.distanceToBigGuarantee);
@@ -252,10 +252,10 @@ void CardPoolEstimateWgt::slot_getCardPoolEstimateResult(const St_CardPoolEstima
 
 	m_ChtProbDistribution->addSeries(m_seriesProbDistribution);
 
-	//¼ÇÂ¼Í¼±íºÜ×ø±ê¼ÆËãÖĞ¼äÁ¿
+	//è®°å½•å›¾è¡¨å¾ˆåæ ‡è®¡ç®—ä¸­é—´é‡
 	QVector<QPointF> vecPointF = m_seriesProbDistribution->pointsVector();
 
-	//DebugÓÃ£¬Êµ¼Ê²»Ó¦´æÔÚµÄÇé¿ö
+	//Debugç”¨ï¼Œå®é™…ä¸åº”å­˜åœ¨çš„æƒ…å†µ
 	if (vecPointF.size() == 0 || vecPointF.size() == 1)
 	{
 		m_startValue = 0;
