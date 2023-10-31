@@ -39,23 +39,23 @@ void StarRailMainFrame::initUi()
 	m_ResourceEstimateWgt	= new ResourceEstimateWgt(this);
 	m_CardPoolEstimateWgt	= new CardPoolEstimateWgt(this);
 	m_InvestmentIncomeWgt	= new InvestmentIncomeWgt(this);
-	m_RelicCultivateWgt		= new RelicCultivateWgt(this);
+	m_RelicCultivateWgt	= new RelicCultivateWgt(this);
 
-	Ui.tabWidget->insertTab(0, m_ResourceEstimateWgt,	"×ÊÔ´¼ÆËãÆ÷");
-	Ui.tabWidget->insertTab(1, m_CardPoolEstimateWgt,	"N³éÖ®ÄÚ³ö»õ¸ÅÂÊ");
-	Ui.tabWidget->insertTab(2, m_InvestmentIncomeWgt,	"×ÊÔ´Í¶ÈëÓë³ö»õ·ÖÎö");
-	Ui.tabWidget->insertTab(3, m_RelicCultivateWgt,		"ÓÐÐ§Ê¥ÒÅÎï¹À¼Æ");
+	Ui.tabWidget->insertTab(0, m_ResourceEstimateWgt,	"èµ„æºè®¡ç®—å™¨");
+	Ui.tabWidget->insertTab(1, m_CardPoolEstimateWgt,	"NæŠ½ä¹‹å†…å‡ºè´§æ¦‚çŽ‡");
+	Ui.tabWidget->insertTab(2, m_InvestmentIncomeWgt,	"èµ„æºæŠ•å…¥ä¸Žå‡ºè´§åˆ†æž");
+	Ui.tabWidget->insertTab(3, m_RelicCultivateWgt,		"æœ‰æ•ˆåœ£é—ç‰©ä¼°è®¡");
 
-	//Ö±½ÓµÚ3Ò³£¬ÒòÎªÕâÒ»Ò³×îÓÐÓÃ
+	//ç›´æŽ¥ç¬¬3é¡µï¼Œå› ä¸ºè¿™ä¸€é¡µæœ€æœ‰ç”¨
 	Ui.tabWidget->setCurrentIndex(2);
 
 }
 
 void StarRailMainFrame::initSignalSlots()
 {
-	connect(m_ResourceEstimateWgt,  &ResourceEstimateWgt::signal_StartEstimateResource,	this,					&StarRailMainFrame::signal_StartEstimateResource);
-	connect(this,					&StarRailMainFrame::signal_ResouceEstErrorMsg,		m_ResourceEstimateWgt,	&ResourceEstimateWgt::slot_getErrorMsg);
-	connect(this,					&StarRailMainFrame::signal_ResouceEstResult,		m_ResourceEstimateWgt,	&ResourceEstimateWgt::slot_getResourceEstResult);
+	connect(m_ResourceEstimateWgt,  &ResourceEstimateWgt::signal_StartEstimateResource,	this,			&StarRailMainFrame::signal_StartEstimateResource);
+	connect(this,			&StarRailMainFrame::signal_ResouceEstErrorMsg,		m_ResourceEstimateWgt,	&ResourceEstimateWgt::slot_getErrorMsg);
+	connect(this,			&StarRailMainFrame::signal_ResouceEstResult,		m_ResourceEstimateWgt,	&ResourceEstimateWgt::slot_getResourceEstResult);
 
 	connect(m_CardPoolEstimateWgt,	&CardPoolEstimateWgt::signal_StartCardPoolEstimate, this,					
 		[=](const St_CardPoolEstimatePara& EstPara)
@@ -63,14 +63,14 @@ void StarRailMainFrame::initSignalSlots()
 		Ui.tabWidget->tabBar()->setEnabled(false);
 		emit signal_StartCardPoolEstimate(EstPara);
 	});
-	connect(this,					&StarRailMainFrame::signal_CardPoolEstResult,		this,
+	connect(this,	&StarRailMainFrame::signal_CardPoolEstResult,	this,
 		[=](const St_CardPoolEstimateResult& EstResult)
 	{
 		Ui.tabWidget->tabBar()->setEnabled(true);
 		m_CardPoolEstimateWgt->slot_getCardPoolEstimateResult(EstResult);
 	});
 
-	connect(this,					&StarRailMainFrame::signal_UpdateCardPoolEstmateProgress, m_CardPoolEstimateWgt, &CardPoolEstimateWgt::slot_updateEstimateProgressVal);
+	connect(this,	&StarRailMainFrame::signal_UpdateCardPoolEstmateProgress, m_CardPoolEstimateWgt, &CardPoolEstimateWgt::slot_updateEstimateProgressVal);
 
 	connect(m_InvestmentIncomeWgt, &InvestmentIncomeWgt::signal_StartInvestmentIncomeEstimate, this,
 		[=](const St_InvestmentEstimatePara& EstPara)
