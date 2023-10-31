@@ -21,9 +21,9 @@
 #ifndef CARD_POOL_ESTIMATE_WGT
 #define CARD_POOL_ESTIMATE_WGT
 
-//¿¨³Ø³ö»õÎ»ÖÃ¸ÅÂÊ·Ö²¼´°¿Ú
-//½ö°üº¬UIÂß¼­£¬¼ÆËãÂß¼­Î¯ÍĞÖĞ½éÆ÷Íê³É
-//ÕâÊÇÒ»¸öÖØÒªµÄ²Î¿¼Ö¸±ê£¬¿ÉÒÔÅĞ¶¨µ±Ç°×´Ì¬ÏÂ½ÇÉ«/ÎäÆ÷³ö»õµÄ³É±¾
+//å¡æ± å‡ºè´§ä½ç½®æ¦‚ç‡åˆ†å¸ƒçª—å£
+//ä»…åŒ…å«UIé€»è¾‘ï¼Œè®¡ç®—é€»è¾‘å§”æ‰˜ä¸­ä»‹å™¨å®Œæˆ
+//è¿™æ˜¯ä¸€ä¸ªé‡è¦çš„å‚è€ƒæŒ‡æ ‡ï¼Œå¯ä»¥åˆ¤å®šå½“å‰çŠ¶æ€ä¸‹è§’è‰²/æ­¦å™¨å‡ºè´§çš„æˆæœ¬
 
 #include <QWidget>
 #include <QDate>
@@ -44,7 +44,7 @@ signals:
 	void signal_StartCardPoolEstimate(const St_CardPoolEstimatePara& EstPara);
 
 public slots:
-	//¾ßÌåµÄÍ¼±íË¢ĞÂÂß¼­
+	//å…·ä½“çš„å›¾è¡¨åˆ·æ–°é€»è¾‘
 	void  slot_getCardPoolEstimateResult(const St_CardPoolEstimateResult& EstResult);
 	void  slot_updateEstimateProgressVal(const int value);
 
@@ -52,7 +52,7 @@ protected:
 	void initUI();
 
 	void initChartWgt();
-	//ÔÚ¼ÆËã¹ı³ÌÖĞ¿ØÖÆ¿Õ¼äÊÇ·ñ¿É¸ü¸Ä
+	//åœ¨è®¡ç®—è¿‡ç¨‹ä¸­æ§åˆ¶ç©ºé—´æ˜¯å¦å¯æ›´æ”¹
 	void setPanelEnable(bool state);
 
 
@@ -63,7 +63,7 @@ protected:
 	void setGetUpPosExpectation(const QString& str);
 	void setGetUpCrystalExpenceExpectation(const QString& str);
 
-	int	 getPointIndex(const QPointF& ChartPos);
+	int  getPointIndex(const QPointF& ChartPos);
 
 
 protected slots:
@@ -71,7 +71,7 @@ protected slots:
 	void  slot_resetPara();
 	void  slot_clearResult();
 
-	//´¦ÀíµÈĞ§ĞÇÇíÍ¼±íÊó±êĞü¸¡ĞÅºÅ
+	//å¤„ç†ç­‰æ•ˆæ˜Ÿç¼å›¾è¡¨é¼ æ ‡æ‚¬æµ®ä¿¡å·
 	void  slot_chartMouseHovered(const QPointF &point, bool state);
 
 
@@ -80,26 +80,26 @@ private:
 
 	QButtonGroup*		m_poolTypeButtonGroup = nullptr;
 
-	//´æ´¢Êı¾İ¼ÆËã½á¹û
+	//å­˜å‚¨æ•°æ®è®¡ç®—ç»“æœ
 	QMap<int, double>	m_mapEstResult;
 
-	//Í¼±íÏà¹Ø
-	QValueAxis*			m_axisTicket = nullptr;
+	//å›¾è¡¨ç›¸å…³
+	QValueAxis*		m_axisTicket = nullptr;
 
-	QValueAxis*			m_axisProb = nullptr;
+	QValueAxis*		m_axisProb = nullptr;
 
-	//ÁÙÊ±Êı¾İ´æ´¢¶ÔÏó£¬Í¼±íÇå¿ÕÊ±Îª¿ÕÖ¸Õë
+	//ä¸´æ—¶æ•°æ®å­˜å‚¨å¯¹è±¡ï¼Œå›¾è¡¨æ¸…ç©ºæ—¶ä¸ºç©ºæŒ‡é’ˆ
 	QLineSeries*		m_seriesProbDistribution = nullptr;
 
-	QChart*				m_ChtProbDistribution = nullptr;
+	QChart*			m_ChtProbDistribution = nullptr;
 
-	QChartView*			m_ChtViewProbDistribution = nullptr;
+	QChartView*		m_ChtViewProbDistribution = nullptr;
 
-	//ÒòÎªQChart×Ô´øÍ¼±íµÄÊı¾İÓĞ¶ªÊ§£¬ËùÒÔ¶îÍâÌí¼ÓÒ»¸öËãÎ»ÖÃµÄÖĞ¼äÁ¿
-	qreal				m_startValue	= 0;		//Í¼±í¿ªÊ¼µÄxÖµ
-	qreal				m_endValue		= 0;		//Í¼±í½áÊøµÄxÖµ
-	qreal				m_totalLength	= 0;		//Í¼±íxÖµ¿ç¶È
-	qreal				m_interval		= 0;		//Í¼±íÒ»¸öµãÕ¼¾İµÄ³¤¶È
+	//å› ä¸ºQChartè‡ªå¸¦å›¾è¡¨çš„æ•°æ®æœ‰ä¸¢å¤±ï¼Œæ‰€ä»¥é¢å¤–æ·»åŠ ä¸€ä¸ªç®—ä½ç½®çš„ä¸­é—´é‡
+	qreal			m_startValue	= 0;		//å›¾è¡¨å¼€å§‹çš„xå€¼
+	qreal			m_endValue	= 0;		//å›¾è¡¨ç»“æŸçš„xå€¼
+	qreal			m_totalLength	= 0;		//å›¾è¡¨xå€¼è·¨åº¦
+	qreal			m_interval	= 0;		//å›¾è¡¨ä¸€ä¸ªç‚¹å æ®çš„é•¿åº¦
 
 };
 
