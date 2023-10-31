@@ -10,7 +10,7 @@ Qt版本：5.12.11\msvc2017_64
 
 下载地址：
 
-编译所需包含模块
+编译所需包含Qt模块
 1.	charts
 2.	core
 3.	datavisualization
