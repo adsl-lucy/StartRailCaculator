@@ -21,7 +21,7 @@
 #ifndef STARRAIL_MAINFRAME
 #define STARRAIL_MAINFRAME
 
-//Ö÷´°¿Ú£¬ÓÃÓÚ·ÖÀë²»Í¬×Ó´°¿ÚÍ¬Ê±´«µİĞÅºÅ + ¿ØÖÆtabWidget±êÇ©°´Å¥×´Ì¬
+//ä¸»çª—å£ï¼Œç”¨äºåˆ†ç¦»ä¸åŒå­çª—å£åŒæ—¶ä¼ é€’ä¿¡å· + æ§åˆ¶tabWidgetæ ‡ç­¾æŒ‰é’®çŠ¶æ€
 
 #include <QWidget>
 #include <QTabWidget>
@@ -41,31 +41,31 @@ public:
 	~StarRailMainFrame();
 
 signals:
-	//·¢ËÍ×ÊÔ´¼ÆËãĞÅºÅ
+	//å‘é€èµ„æºè®¡ç®—ä¿¡å·
 	void signal_StartEstimateResource(const St_ResourceEstimateParameter& EstPara);
-	//·¢ËÍ×ÊÔ´´íÎóĞÅºÅ
+	//å‘é€èµ„æºé”™è¯¯ä¿¡å·
 	void signal_ResouceEstErrorMsg(const EN_StarRailErrorNum ErrNum, const QString& ErrMsg);
-	//´«µİ×ÊÔ´¼ÆËã½á¹ûĞÅºÅ
+	//ä¼ é€’èµ„æºè®¡ç®—ç»“æœä¿¡å·
 	void signal_ResouceEstResult(const QVector<St_ResourceEstimateDateResult>& EstResultVec);
-	//·¢ËÍ¿¨³ØÍ£Ö¹ÊµÑéÄ£ÄâĞÅºÅ
+	//å‘é€å¡æ± åœæ­¢å®éªŒæ¨¡æ‹Ÿä¿¡å·
 	void signal_StartCardPoolEstimate(const St_CardPoolEstimatePara& EstPara);
-	//N²½Ö®ÄÚ³ö»õ¸ÅÂÊÄ£Äâ½á¹û
+	//Næ­¥ä¹‹å†…å‡ºè´§æ¦‚ç‡æ¨¡æ‹Ÿç»“æœ
 	void signal_CardPoolEstResult(const St_CardPoolEstimateResult& EstResult);
-	//N²½Ö®ÄÚ³ö»õ¸ÅÂÊÄ£Äâ½ø¶È£¬0Îª¸Õ¿ªÊ¼£¬100ÎªÍê³É
+	//Næ­¥ä¹‹å†…å‡ºè´§æ¦‚ç‡æ¨¡æ‹Ÿè¿›åº¦ï¼Œ0ä¸ºåˆšå¼€å§‹ï¼Œ100ä¸ºå®Œæˆ
 	void signal_UpdateCardPoolEstmateProgress(const int value);
-	//¿ªÊ¼¹ÀËã×ÊÔ´Í¶ÈëÊÕÒæ
+	//å¼€å§‹ä¼°ç®—èµ„æºæŠ•å…¥æ”¶ç›Š
 	void signal_StartInvestmentIncomeEstimate(const St_InvestmentEstimatePara& EstPara);
-	//×ÊÔ´Í¶ÈëÊÕÒæÄ£Äâ¾«¶È£¬0Îª¸Õ¿ªÊ¼£¬100ÎªÍê³É
+	//èµ„æºæŠ•å…¥æ”¶ç›Šæ¨¡æ‹Ÿç²¾åº¦ï¼Œ0ä¸ºåˆšå¼€å§‹ï¼Œ100ä¸ºå®Œæˆ
 	void signal_UpdateInvestmentEstimateProgress(const int val);
-	//Í¶×ÊÓëÊÕÒæ½á¹ûÍ³¼Æ
+	//æŠ•èµ„ä¸æ”¶ç›Šç»“æœç»Ÿè®¡
 	void signal_InvestmentEstimateResult(const St_InvectmentEstimateResult& result);
-	//¿ªÊ¼¹ÀËãÓĞĞ§Ê¥ÒÅÎï
+	//å¼€å§‹ä¼°ç®—æœ‰æ•ˆåœ£é—ç‰©
 	void signal_StartRelicValidEstimate(const St_RelicValidEstimatePara& EstPara);
-	//ÓĞĞ§Ê¥ÒÅÎï¼ÆËã´íÎóĞÅºÅ
+	//æœ‰æ•ˆåœ£é—ç‰©è®¡ç®—é”™è¯¯ä¿¡å·
 	void signal_RelicEstErrorMsg(const EN_StarRailErrorNum ErrNum, const QString& ErrMsg);
-	//ÓĞĞ§Ê¥ÒÅÎï¼ÆËãÄ£Äâ½ø¶È£¬0Îª¸Õ¿ªÊ¼£¬100ÎªÍê³É
+	//æœ‰æ•ˆåœ£é—ç‰©è®¡ç®—æ¨¡æ‹Ÿè¿›åº¦ï¼Œ0ä¸ºåˆšå¼€å§‹ï¼Œ100ä¸ºå®Œæˆ
 	void signal_UpdateRelicEstimateProgress(const int val);
-	//ÓĞĞ§Ê¥ÒÅÎï¼ÆËã½á¹û
+	//æœ‰æ•ˆåœ£é—ç‰©è®¡ç®—ç»“æœ
 	void signal_RelicEstResult(const St_ValidRelicEstimateResult& EstResult);
 
 protected:
@@ -73,11 +73,11 @@ protected:
 	void initSignalSlots();
 
 private:
-	Ui_StarRainMainFrame Ui;
+	Ui_StarRainMainFrame 	Ui;
 	ResourceEstimateWgt*	m_ResourceEstimateWgt	= nullptr;
 	CardPoolEstimateWgt*	m_CardPoolEstimateWgt	= nullptr;
 	InvestmentIncomeWgt*	m_InvestmentIncomeWgt	= nullptr;
-	RelicCultivateWgt*		m_RelicCultivateWgt		= nullptr;
+	RelicCultivateWgt*	m_RelicCultivateWgt	= nullptr;
 };
 
 #endif
