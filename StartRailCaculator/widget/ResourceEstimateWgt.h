@@ -38,7 +38,7 @@ class ResourceEstimateWgt :
 {
     Q_OBJECT
 public:
-	ResourceEstimateWgt(QWidget* parent);
+    ResourceEstimateWgt(QWidget* parent);
     ~ResourceEstimateWgt();
 
 signals:
@@ -51,20 +51,20 @@ protected:
 
 protected:
 	//统计结论打印逻辑，输入-1则清空数值
-    void    setCurrentEqualCrystal(int value);
-    void    setCurrentEqualTicket(int value);
-    void    setStopDayCrystal(int value);
-    void    setStopDayTicket(int value);
-    void    setStopDayPaidCrystal(int value);
-    void    setStopDayEqualCrystal(int value);
-    void    setStopDayEqualTicket(int value);
-    void    setTotalSmallMonthCardExpense(int value);
-    void    setTotalBigMonthCardExpense(int value);
-    void    setTotalExpense(int value);
+    void setCurrentEqualCrystal(int value);
+    void setCurrentEqualTicket(int value);
+    void setStopDayCrystal(int value);
+    void setStopDayTicket(int value);
+    void setStopDayPaidCrystal(int value);
+    void setStopDayEqualCrystal(int value);
+    void setStopDayEqualTicket(int value);
+    void setTotalSmallMonthCardExpense(int value);
+    void setTotalBigMonthCardExpense(int value);
+    void setTotalExpense(int value);
 
-    int	    getEqualCrystal(const St_ResourceEstimateDateResult& EstResult);
-    int     getEqualTicket(const St_ResourceEstimateDateResult& EstResult);
-    int	    getPointIndex(const QPointF& ChartPos);
+    int	 getEqualCrystal(const St_ResourceEstimateDateResult& EstResult);
+    int  getEqualTicket(const St_ResourceEstimateDateResult& EstResult);
+    int	 getPointIndex(const QPointF& ChartPos);
 
 public slots:
     void slot_getErrorMsg(const EN_StarRailErrorNum ErrNum, const QString& ErrMsg);
