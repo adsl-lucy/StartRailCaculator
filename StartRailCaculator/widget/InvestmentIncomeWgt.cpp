@@ -28,7 +28,7 @@ InvestmentIncomeWgt::InvestmentIncomeWgt(QWidget* parent)
 	initUi();
 	init3DGraph();
 	slot_resetParameter();
-	//Ä¬ÈÏ0+1£¬ËùÒÔÊÇÎÒÈ«¶¼Òª
+	//é»˜è®¤0+1ï¼Œæ‰€ä»¥æ˜¯æˆ‘å…¨éƒ½è¦
 	Ui.radioButton_getAll->setChecked(true);
 	slot_drawCardObjChanged();
 }
@@ -39,22 +39,22 @@ InvestmentIncomeWgt::~InvestmentIncomeWgt()
 
 void InvestmentIncomeWgt::slot_getInvestmentIncomeResult(const St_InvectmentEstimateResult & result)
 {	
-	//´òÓ¡ÊäÈë²ÎÊı
+	//æ‰“å°è¾“å…¥å‚æ•°
 	setInputCrystal(result.inputCrystal);
 	setInputTicket(result.inputTicket);
 	setDrawCardType(result.drawCardType, result.poolTransformType, result.N, result.M);
 
-	//½«ÖµÊäÈë3DÍ¼Ïñ
+	//å°†å€¼è¾“å…¥3Då›¾åƒ
 	QSize matrixSize	= result.ProbDensityMatrix.getMatrixSize();
-	//´Ó¿É¶ÁĞÔµÄ½Ç¶ÈÀ´¿´£¬ÕâÀï¶à°üÒ»²ã²ÎÊı¿ÉÒÔ±ÜÃâ¾ØÕó¶¨ÒåµÄÆçÒå
-	int maxCharacterNum = matrixSize.height() - 1;
+	//ä»å¯è¯»æ€§çš„è§’åº¦æ¥çœ‹ï¼Œè¿™é‡Œå¤šåŒ…ä¸€å±‚å‚æ•°å¯ä»¥é¿å…çŸ©é˜µå®šä¹‰çš„æ­§ä¹‰
+	int maxCharacterNum 	= matrixSize.height() - 1;
 	int maxWeaponNum	= matrixSize.width() - 1;
 
 	QStringList RowNameList;
 
 	for (int currentRowNum = 0; currentRowNum <= maxCharacterNum; currentRowNum++)
 	{
-		QString currentRowName = QString::number(currentRowNum) + QString("¸ö½ÇÉ«");
+		QString currentRowName = QString::number(currentRowNum) + QString("ä¸ªè§’è‰²");
 		RowNameList << currentRowName;
 	}
 	m_axisCharacterNum->setLabels(RowNameList);
@@ -63,7 +63,7 @@ void InvestmentIncomeWgt::slot_getInvestmentIncomeResult(const St_InvectmentEsti
 
 	for (int currentColumn = 0; currentColumn <= maxWeaponNum; currentColumn++)
 	{
-		QString currentRowName = QString::number(currentColumn) + QString("¸öÎäÆ÷");
+		QString currentRowName = QString::number(currentColumn) + QString("ä¸ªæ­¦å™¨");
 		columnNameList << currentRowName;
 	}
 	m_axisWeaponNum->setLabels(columnNameList);
@@ -83,12 +83,12 @@ void InvestmentIncomeWgt::slot_getInvestmentIncomeResult(const St_InvectmentEsti
 		m_dataProxy->addRow(currentRowVec);
 	}
 
-	//ÉèÖÃÍ¼±í±êÇ©ÀàĞÍ+´òÓ¡Í³¼Æ½á¹û
+	//è®¾ç½®å›¾è¡¨æ ‡ç­¾ç±»å‹+æ‰“å°ç»Ÿè®¡ç»“æœ
 	switch (result.drawCardType)
 	{
 		case En_DrawCardType::characterOnly:
 		{
-			m_seriesProbabilityDenseMatrix->setItemLabelFormat("@rowIdx ¸ö½ÇÉ«µÄ¸ÅÂÊ: %.2f%%");
+			m_seriesProbabilityDenseMatrix->setItemLabelFormat("@rowIdx ä¸ªè§’è‰²çš„æ¦‚ç‡: %.2f%%");
 			setNoUpCharacterProb(result.NoUpCharacterPorb);
 			setUpCharacterGetExpectation(result.UpCharacterGetTimeExpectation);
 			setNoUpWeaponValue(-1);
@@ -96,7 +96,7 @@ void InvestmentIncomeWgt::slot_getInvestmentIncomeResult(const St_InvectmentEsti
 		}break;
 		case En_DrawCardType::waeponOnly:
 		{
-			m_seriesProbabilityDenseMatrix->setItemLabelFormat(" @colIdx ¸öÎäÆ÷µÄ¸ÅÂÊ: %.2f%%");
+			m_seriesProbabilityDenseMatrix->setItemLabelFormat(" @colIdx ä¸ªæ­¦å™¨çš„æ¦‚ç‡: %.2f%%");
 			setNoUpWeaponValue(result.NoUpWeaponProb);
 			setUpWeaponGetExpectation(result.UpWeaponGetExpectation);
 			setNoUpCharacterProb(-1);
@@ -104,7 +104,7 @@ void InvestmentIncomeWgt::slot_getInvestmentIncomeResult(const St_InvectmentEsti
 		}break;
 		case En_DrawCardType::getAll:
 		{
-			m_seriesProbabilityDenseMatrix->setItemLabelFormat("@rowIdx ¸ö½ÇÉ« @colIdx ¸öÎäÆ÷µÄ¸ÅÂÊ: %.2f%%");
+			m_seriesProbabilityDenseMatrix->setItemLabelFormat("@rowIdx ä¸ªè§’è‰² @colIdx ä¸ªæ­¦å™¨çš„æ¦‚ç‡: %.2f%%");
 			setNoUpWeaponValue(result.NoUpWeaponProb);
 			setUpWeaponGetExpectation(result.UpWeaponGetExpectation);
 			setNoUpCharacterProb(result.NoUpCharacterPorb);
@@ -136,12 +136,12 @@ void InvestmentIncomeWgt::initUi()
 	Ui.label_ErrMsg->clear();
 	Ui.progressBar_EstmateState->setValue(0);
 
-	connect(m_btnGroupDrawCardObj,			QOverload<int>::of(&QButtonGroup::buttonClicked), this, &InvestmentIncomeWgt::slot_drawCardObjChanged);
+	connect(m_btnGroupDrawCardObj,		QOverload<int>::of(&QButtonGroup::buttonClicked), this, &InvestmentIncomeWgt::slot_drawCardObjChanged);
 	connect(m_btnGroupPoolTransformType,	QOverload<int>::of(&QButtonGroup::buttonClicked), this, &InvestmentIncomeWgt::slot_transformTypeChanged);
 
 	connect(Ui.pushButton_startEstimate,	&QPushButton::clicked, this, &InvestmentIncomeWgt::slot_startEstimate);
-	connect(Ui.pushButton_resetPara,		&QPushButton::clicked, this, &InvestmentIncomeWgt::slot_resetParameter);
-	connect(Ui.pushButton_clearResult,		&QPushButton::clicked, this, &InvestmentIncomeWgt::slot_clearResult);
+	connect(Ui.pushButton_resetPara,	&QPushButton::clicked, this, &InvestmentIncomeWgt::slot_resetParameter);
+	connect(Ui.pushButton_clearResult,	&QPushButton::clicked, this, &InvestmentIncomeWgt::slot_clearResult);
 
 }
 
@@ -165,21 +165,21 @@ void InvestmentIncomeWgt::init3DGraph()
 	connect(m_camera, &Q3DCamera::yRotationChanged, this, &InvestmentIncomeWgt::slot_cameraVAanglechanged);
 	connect(m_camera, &Q3DCamera::zoomLevelChanged, this, &InvestmentIncomeWgt::slot_cameraZoomLevelChanged);
 
-	connect(Ui.horizontalSlider_Hangle, &QSlider::sliderMoved, this, &InvestmentIncomeWgt::slot_HAngleSliderValueChanged);
-	connect(Ui.horizontalSlider_Vangle, &QSlider::sliderMoved, this, &InvestmentIncomeWgt::slot_VAngleSliderValueChanged);
+	connect(Ui.horizontalSlider_Hangle, 	&QSlider::sliderMoved, this, &InvestmentIncomeWgt::slot_HAngleSliderValueChanged);
+	connect(Ui.horizontalSlider_Vangle, 	&QSlider::sliderMoved, this, &InvestmentIncomeWgt::slot_VAngleSliderValueChanged);
 	connect(Ui.horizontalSlider_Zoom,	&QSlider::sliderMoved, this, &InvestmentIncomeWgt::slot_ZoomLevelSliderValueChanged);
 
-	m_axisCharacterNum	= new QCategory3DAxis();
-	m_axisCharacterNum->setTitle("UP½ÇÉ«ÊıÁ¿");
+	m_axisCharacterNum = new QCategory3DAxis();
+	m_axisCharacterNum->setTitle("UPè§’è‰²æ•°é‡");
 	m_axisCharacterNum->setTitleVisible(true);
-	QStringList characterAxisSList{ "0¸ö½ÇÉ«",};
+	QStringList characterAxisSList{ "0ä¸ªè§’è‰²",};
 	m_axisCharacterNum->setLabels(characterAxisSList);
 	m_Graph->setRowAxis(m_axisCharacterNum);
 
-	m_axisWeaponNum		= new QCategory3DAxis();
-	m_axisWeaponNum->setTitle("UPÎäÆ÷ÊıÁ¿");
+	m_axisWeaponNum	= new QCategory3DAxis();
+	m_axisWeaponNum->setTitle("UPæ­¦å™¨æ•°é‡");
 	m_axisWeaponNum->setTitleVisible(true);
-	QStringList weaponAxisSList{ "0¸öÎäÆ÷" };
+	QStringList weaponAxisSList{ "0ä¸ªæ­¦å™¨" };
 	m_axisWeaponNum->setLabels(weaponAxisSList);
 	m_Graph->setColumnAxis(m_axisWeaponNum);
 
@@ -214,11 +214,11 @@ void InvestmentIncomeWgt::setInputCrystal(int value)
 {
 	if (value == -1)
 	{
-		Ui.label_InputCyrstal->setText("Í¶ÈëĞÇÇí:");
+		Ui.label_InputCyrstal->setText("æŠ•å…¥æ˜Ÿç¼:");
 	}
 	else
 	{
-		Ui.label_InputCyrstal->setText(QString("Í¶ÈëĞÇÇí:") + QString::number(value));
+		Ui.label_InputCyrstal->setText(QString("æŠ•å…¥æ˜Ÿç¼:") + QString::number(value));
 	}
 }
 
@@ -226,34 +226,34 @@ void InvestmentIncomeWgt::setInputTicket(int value)
 {
 	if (value == -1)
 	{
-		Ui.label_inputTicket->setText("Í¶Èë×¨Æ±:");
+		Ui.label_inputTicket->setText("æŠ•å…¥ä¸“ç¥¨:");
 	}
 	else
 	{
-		Ui.label_inputTicket->setText(QString("Í¶Èë×¨Æ±:") + QString::number(value));
+		Ui.label_inputTicket->setText(QString("æŠ•å…¥ä¸“ç¥¨:") + QString::number(value));
 	}
 }
 
 void InvestmentIncomeWgt::setDrawCardType(En_DrawCardType drawCardType, En_PoolTransfromType poolTransformType, int N, int M)
 {
-	QString title("³é¿¨·½Ê½:");
+	QString title("æŠ½å¡æ–¹å¼:");
 	QString appendText;
 	switch (drawCardType)
 	{
-		case En_DrawCardType::characterOnly	: appendText = QString("Ö»³é½ÇÉ«"); break;
-		case En_DrawCardType::waeponOnly	: appendText = QString("Ö»³éÎäÆ÷"); break;
+		case En_DrawCardType::characterOnly	: appendText = QString("åªæŠ½è§’è‰²"); break;
+		case En_DrawCardType::waeponOnly	: appendText = QString("åªæŠ½æ­¦å™¨"); break;
 		case En_DrawCardType::getAll:
 		{
 			switch (poolTransformType)
 			{
 				case En_PoolTransfromType::NCharacterMWeapon:
-					appendText = QString("ÏÈ³é") + QString::number(N) + QString("¸ö½ÇÉ«ÔÙ³é")	+ QString::number(M) + QString("¸öÎäÆ÷");	break;
+					appendText = QString("å…ˆæŠ½") + QString::number(N) + QString("ä¸ªè§’è‰²å†æŠ½")	+ QString::number(M) + QString("ä¸ªæ­¦å™¨");	break;
 				case En_PoolTransfromType::NWeaponMCharacter:
-					appendText = QString("ÏÈ³é") + QString::number(N) + QString("¸öÎäÆ÷ÔÙ³é")	+ QString::number(M) + QString("¸ö½ÇÉ«");	break;
+					appendText = QString("å…ˆæŠ½") + QString::number(N) + QString("ä¸ªæ­¦å™¨å†æŠ½")	+ QString::number(M) + QString("ä¸ªè§’è‰²");	break;
 				case En_PoolTransfromType::NTCharacterMTWeapon:
-					appendText = QString("ÏÈ³é") + QString::number(N) + QString("·¢½ÇÉ«³ØÔÙ³é") + QString::number(M) + QString("·¢ÎäÆ÷³Ø"); break;
+					appendText = QString("å…ˆæŠ½") + QString::number(N) + QString("å‘è§’è‰²æ± å†æŠ½") + QString::number(M) + QString("å‘æ­¦å™¨æ± "); break;
 				case En_PoolTransfromType::NTWeaponMTCharacter:
-					appendText = QString("ÏÈ³é") + QString::number(N) + QString("·¢ÎäÆ÷³ØÔÙ³é") + QString::number(M) + QString("·¢½ÇÉ«³Ø"); break;
+					appendText = QString("å…ˆæŠ½") + QString::number(N) + QString("å‘æ­¦å™¨æ± å†æŠ½") + QString::number(M) + QString("å‘è§’è‰²æ± "); break;
 			}
 		}
 	}
@@ -264,11 +264,11 @@ void InvestmentIncomeWgt::setNoUpCharacterProb(double prob)
 {
 	if ( prob < 0 )
 	{
-		Ui.label_NoUpCharacterProb->setText("Up½ÇÉ«³Á´¬¸ÅÂÊ:");
+		Ui.label_NoUpCharacterProb->setText("Upè§’è‰²æ²‰èˆ¹æ¦‚ç‡:");
 	}
 	else
 	{
-		Ui.label_NoUpCharacterProb->setText(QString("Up½ÇÉ«³Á´¬¸ÅÂÊ:") + QString::asprintf("%.2f%%", prob * 100));
+		Ui.label_NoUpCharacterProb->setText(QString("Upè§’è‰²æ²‰èˆ¹æ¦‚ç‡:") + QString::asprintf("%.2f%%", prob * 100));
 	}
 }
 
@@ -276,11 +276,11 @@ void InvestmentIncomeWgt::setNoUpWeaponValue(double prob)
 {
 	if ( prob < 0)
 	{
-		Ui.label_NoUpWeaponProb->setText("UpÎäÆ÷³Á´¬¸ÅÂÊ:");
+		Ui.label_NoUpWeaponProb->setText("Upæ­¦å™¨æ²‰èˆ¹æ¦‚ç‡:");
 	}
 	else
 	{
-		Ui.label_NoUpWeaponProb->setText(QString("UpÎäÆ÷³Á´¬¸ÅÂÊ:") + QString::asprintf("%.2f%%", prob * 100));
+		Ui.label_NoUpWeaponProb->setText(QString("Upæ­¦å™¨æ²‰èˆ¹æ¦‚ç‡:") + QString::asprintf("%.2f%%", prob * 100));
 	}
 }
 
@@ -288,11 +288,11 @@ void InvestmentIncomeWgt::setUpCharacterGetExpectation(double expectation)
 {
 	if (expectation < 0)
 	{
-		Ui.label_getChaExpectation->setText("Up½ÇÉ«»ñÈ¡ÆÚÍû:");
+		Ui.label_getChaExpectation->setText("Upè§’è‰²è·å–æœŸæœ›:");
 	}
 	else
 	{
-		Ui.label_getChaExpectation->setText(QString("Up½ÇÉ«»ñÈ¡ÆÚÍû:") + QString::asprintf("%.2f", expectation));
+		Ui.label_getChaExpectation->setText(QString("Upè§’è‰²è·å–æœŸæœ›:") + QString::asprintf("%.2f", expectation));
 	}
 }
 
@@ -300,11 +300,11 @@ void InvestmentIncomeWgt::setUpWeaponGetExpectation(double expectation)
 {
 	if (expectation < 0)
 	{
-		Ui.label_getWeaponExpectation->setText("UpÎäÆ÷»ñÈ¡ÆÚÍû:");
+		Ui.label_getWeaponExpectation->setText("Upæ­¦å™¨è·å–æœŸæœ›:");
 	}
 	else
 	{
-		Ui.label_getWeaponExpectation->setText(QString("UpÎäÆ÷»ñÈ¡ÆÚÍû:") + QString::asprintf("%.2f", expectation));
+		Ui.label_getWeaponExpectation->setText(QString("Upæ­¦å™¨è·å–æœŸæœ›:") + QString::asprintf("%.2f", expectation));
 	}
 }
 
@@ -390,7 +390,7 @@ void InvestmentIncomeWgt::slot_clearResult()
 	slot_updateEstimateProgress(0);
 	setInputCrystal(-1);
 	setInputTicket(-1);
-	Ui.label_drawCardType->setText("³é¿¨·½Ê½:");
+	Ui.label_drawCardType->setText("æŠ½å¡æ–¹å¼:");
 	setNoUpCharacterProb(-1);
 	setNoUpWeaponValue(-1);
 	setUpCharacterGetExpectation(-1);
@@ -413,9 +413,9 @@ void InvestmentIncomeWgt::slot_startEstimate()
 		case 2:	para.drawCardType = En_DrawCardType::getAll;			break;
 	}
 
-	para.lastGoldCharacterWrong			= Ui.checkBox_lastGoldCharacterWrong->isChecked();
+	para.lastGoldCharacterWrong		= Ui.checkBox_lastGoldCharacterWrong->isChecked();
 	para.areadyInCharacterPoolTicket	= Ui.spinBox_charPoolAreadyInTicket->value();
-	para.lastGoldWeaponWrong			= Ui.checkBox_lastGoldWeaponWrong->isChecked();
+	para.lastGoldWeaponWrong		= Ui.checkBox_lastGoldWeaponWrong->isChecked();
 	para.areadyInWeaponPoolTicket		= Ui.spinBox_WeaponPoolAreadyInTicket->value();
 
 	switch (m_btnGroupPoolTransformType->checkedId())
