@@ -21,8 +21,8 @@
 #ifndef RELIC_CULTIVATE_WGT
 #define RELIC_CULTIVATE_WGT
 
-//ÓĞĞ§Ê¥ÒÅÎï¼ÆËã´°¿Ú
-//Ô­ÔòÉÏÊ¥ÒÅÎïµÄÏêÏ¸Í³¼Æ½á¹ûÊÇÒ»¸ö15Î¬ÏòÁ¿£¬µ«ÊÇÎªÁË·½±ãÊ¹ÓÃ£¬ÕâÀïÖ»Í³¼Æ±ÈÄ³¸öÊ¥ÒÅÎïºÃµÄ³ö»õ¸ÅÂÊ·Ö²¼
+//æœ‰æ•ˆåœ£é—ç‰©è®¡ç®—çª—å£
+//åŸåˆ™ä¸Šåœ£é—ç‰©çš„è¯¦ç»†ç»Ÿè®¡ç»“æœæ˜¯ä¸€ä¸ª15ç»´å‘é‡ï¼Œä½†æ˜¯ä¸ºäº†æ–¹ä¾¿ä½¿ç”¨ï¼Œè¿™é‡Œåªç»Ÿè®¡æ¯”æŸä¸ªåœ£é—ç‰©å¥½çš„å‡ºè´§æ¦‚ç‡åˆ†å¸ƒ
 
 #include <QWidget>
 #include <QDate>
@@ -43,9 +43,9 @@ signals:
 	void	signal_StartRelicValidEstimate(const St_RelicValidEstimatePara& EstPara);
 public slots:
 	void	slot_getErrorMsg(const EN_StarRailErrorNum ErrNum, const QString& ErrMsg);
-	//¸üĞÂ¼ÆËã½ø¶ÈÌõ
+	//æ›´æ–°è®¡ç®—è¿›åº¦æ¡
 	void	slot_UpdateRelicEstimateProgress(int val);
-	//ÓĞĞ§Ê¥ÒÅÎï¼ÆËã½á¹û
+	//æœ‰æ•ˆåœ£é—ç‰©è®¡ç®—ç»“æœ
 	void	slot_getRelicEstResult(const St_ValidRelicEstimateResult& EstResult);
 
 protected:
@@ -63,8 +63,8 @@ protected:
 	void	setAllPropertyValidGetTimeExpectation(const QString& str);
 	void	setAllPropertyValidPlayTimeExpectation(const QString& str);
 
-	int		getPrimeChtPointIndex(const QPointF& ChartPos);
-	int		getAllChtPointIndex(const QPointF& ChartPos);
+	int	getPrimeChtPointIndex(const QPointF& ChartPos);
+	int	getAllChtPointIndex(const QPointF& ChartPos);
 
 	void	enablePannel(bool state);
 
@@ -75,7 +75,7 @@ protected slots:
 	void	slot_startEstimate();
 	void	slot_clearResult();
 
-	//´¦ÀíµÈĞ§ĞÇÇíÍ¼±íÊó±êĞü¸¡ĞÅºÅ
+	//å¤„ç†ç­‰æ•ˆæ˜Ÿç¼å›¾è¡¨é¼ æ ‡æ‚¬æµ®ä¿¡å·
 	void slot_PrimePropertyChartMouseHovered(const QPointF &point, bool state);
 	void slot_SubPropertyChartMouseHovered(const QPointF &point, bool state);
 
@@ -85,37 +85,37 @@ private:
 
 	QButtonGroup*		m_RelicBtnGroupBox = nullptr;
 
-	QVector <double>	m_VecPrimePropertyTimesProb;		//Ö÷ÊôĞÔÓĞĞ§ÒÅÆ÷¸ÅÂÊÃÜ¶È£¬index¾ÍÊÇ¸öÊı	
-	QVector <double>	m_VecAllPropertyTimesProb;			//ËùÓĞÊôĞÔÓĞĞ§ÒÅÆ÷¸ÅÂÊÃÜ¶È£¬index¾ÍÊÇ¸öÊı£¬È«ÊôĞÔÓĞĞ§= Ö÷ÊôĞÔÓĞĞ§+¸±ÊôĞÔÓĞĞ§
+	QVector <double>	m_VecPrimePropertyTimesProb;		//ä¸»å±æ€§æœ‰æ•ˆé—å™¨æ¦‚ç‡å¯†åº¦ï¼Œindexå°±æ˜¯ä¸ªæ•°	
+	QVector <double>	m_VecAllPropertyTimesProb;		//æ‰€æœ‰å±æ€§æœ‰æ•ˆé—å™¨æ¦‚ç‡å¯†åº¦ï¼Œindexå°±æ˜¯ä¸ªæ•°ï¼Œå…¨å±æ€§æœ‰æ•ˆ= ä¸»å±æ€§æœ‰æ•ˆ+å‰¯å±æ€§æœ‰æ•ˆ
 
-	//Í¼±íÏà¹Ø
-	QValueAxis*			m_axisPrimePropertyValidTime	= nullptr;
-	QValueAxis*			m_axisAllPropertyValidTime		= nullptr;
+	//å›¾è¡¨ç›¸å…³
+	QValueAxis*		m_axisPrimePropertyValidTime	= nullptr;
+	QValueAxis*		m_axisAllPropertyValidTime	= nullptr;
 
-	QValueAxis*			m_axisPrimePropertyValidProb	= nullptr;
-	QValueAxis*			m_axisAllPropertyValidProb		= nullptr;
+	QValueAxis*		m_axisPrimePropertyValidProb	= nullptr;
+	QValueAxis*		m_axisAllPropertyValidProb	= nullptr;
 
-	//ÁÙÊ±Êı¾İ´æ´¢¶ÔÏó£¬Í¼±íÇå¿ÕÊ±Îª¿ÕÖ¸Õë
+	//ä¸´æ—¶æ•°æ®å­˜å‚¨å¯¹è±¡ï¼Œå›¾è¡¨æ¸…ç©ºæ—¶ä¸ºç©ºæŒ‡é’ˆ
 	QLineSeries*		m_seriesPrimePropertyDensity	= nullptr;
-	QLineSeries*		m_seriesAllPropertyDensity		= nullptr;
+	QLineSeries*		m_seriesAllPropertyDensity	= nullptr;
 
-	QChart*				m_ChartPrimeProperty			= nullptr;
-	QChart*				m_ChartAllProperty				= nullptr;
+	QChart*			m_ChartPrimeProperty		= nullptr;
+	QChart*			m_ChartAllProperty		= nullptr;
 		
-	QChartView*			m_ChartViewPrimeProperty		= nullptr;
-	QChartView*			m_ChartViewAllProperty			= nullptr;
+	QChartView*		m_ChartViewPrimeProperty	= nullptr;
+	QChartView*		m_ChartViewAllProperty		= nullptr;
 
-	//ÒòÎªQChart×Ô´øÍ¼±íµÄÊı¾İÓĞ¶ªÊ§£¬ËùÒÔ¶îÍâÌí¼ÓÒ»¸öËãÎ»ÖÃµÄÖĞ¼äÁ¿
-	//Ö÷ÊôĞÔÍ¼
-	qreal			m_PriChtStartValue	= 0;//Í¼±í¿ªÊ¼µÄxÖµ
-	qreal			m_PriChtEndValue	= 0;//Í¼±í½áÊøµÄxÖµ
-	qreal			m_PriChtTotalLength = 0;//Í¼±íxÖµ¿ç¶È
-	qreal			m_PriChtInterval	= 0;//Í¼±íÒ»¸öµãÕ¼¾İµÄ³¤¶È
-	//È«ÊôĞÔÍ¼
-	qreal			m_AllChtStartValue	= 0;//Í¼±í¿ªÊ¼µÄxÖµ
-	qreal			m_AllChtEndValue	= 0;//Í¼±í½áÊøµÄxÖµ
-	qreal			m_AllChtTotalLength = 0;//Í¼±íxÖµ¿ç¶È
-	qreal			m_AllChtInterval	= 0;//Í¼±íÒ»¸öµãÕ¼¾İµÄ³¤¶È
+	//å› ä¸ºQChartè‡ªå¸¦å›¾è¡¨çš„æ•°æ®æœ‰ä¸¢å¤±ï¼Œæ‰€ä»¥é¢å¤–æ·»åŠ ä¸€ä¸ªç®—ä½ç½®çš„ä¸­é—´é‡
+	//ä¸»å±æ€§å›¾
+	qreal			m_PriChtStartValue	= 0;//å›¾è¡¨å¼€å§‹çš„xå€¼
+	qreal			m_PriChtEndValue	= 0;//å›¾è¡¨ç»“æŸçš„xå€¼
+	qreal			m_PriChtTotalLength 	= 0;//å›¾è¡¨xå€¼è·¨åº¦
+	qreal			m_PriChtInterval	= 0;//å›¾è¡¨ä¸€ä¸ªç‚¹å æ®çš„é•¿åº¦
+	//å…¨å±æ€§å›¾
+	qreal			m_AllChtStartValue	= 0;//å›¾è¡¨å¼€å§‹çš„xå€¼
+	qreal			m_AllChtEndValue	= 0;//å›¾è¡¨ç»“æŸçš„xå€¼
+	qreal			m_AllChtTotalLength 	= 0;//å›¾è¡¨xå€¼è·¨åº¦
+	qreal			m_AllChtInterval	= 0;//å›¾è¡¨ä¸€ä¸ªç‚¹å æ®çš„é•¿åº¦
 
 };
 
