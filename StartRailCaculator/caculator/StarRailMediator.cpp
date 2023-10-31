@@ -132,17 +132,17 @@ void StarRailMediator::sendResourceEstErrorMsg(const EN_StarRailErrorNum ErrNum)
 	switch (ErrNum)
 	{
 		case EN_StarRailErrorNum::ResouceEst_InputNoError			: break;
-		case EN_StarRailErrorNum::ResouceEst_StartDateTooEarly			: ErrMsg = QString("开始日期早于开服日期（2023/4/26）");	break;
-		case EN_StarRailErrorNum::ResouceEst_StartDateTooLate			: ErrMsg = QString("开始时间太晚（大于2024/4/26）");	break;
-		case EN_StarRailErrorNum::ResouceEst_StartEndSameDay			: ErrMsg = QString("开始日期和终止日期相同");		break;
-		case EN_StarRailErrorNum::ResouceEst_StartDayLateThanEndDay		: ErrMsg = QString("终止日期早于起始日期");		break;
-		case EN_StarRailErrorNum::ResouceEst_StopDayTooLate			: ErrMsg = QString("终止日期太晚（大于2020/4/26）");	break;
+		case EN_StarRailErrorNum::ResouceEst_StartDateTooEarly			: ErrMsg = QString("开始日期早于开服日期（2023/4/26）");		break;
+		case EN_StarRailErrorNum::ResouceEst_StartDateTooLate			: ErrMsg = QString("开始时间太晚（大于2024/4/26）");		break;
+		case EN_StarRailErrorNum::ResouceEst_StartEndSameDay			: ErrMsg = QString("开始日期和终止日期相同");			break;
+		case EN_StarRailErrorNum::ResouceEst_StartDayLateThanEndDay		: ErrMsg = QString("终止日期早于起始日期");			break;
+		case EN_StarRailErrorNum::ResouceEst_StopDayTooLate			: ErrMsg = QString("终止日期太晚（大于2020/4/26）");		break;
 
-		case EN_StarRailErrorNum::ResouceEst_CurrentTicketNumInvaild		: ErrMsg = QString("当前票数无效");			break;
-		case EN_StarRailErrorNum::ResouceEst_CurrentCrystalInvaild		: ErrMsg = QString("当前星琼无效");			break;
-		case EN_StarRailErrorNum::ResouceEst_SmallMonthCardRemainDayInvaild	: ErrMsg = QString("小月卡剩余天数无效");			break;
-		case EN_StarRailErrorNum::ResouceEst_CurrentPaidCrystalInvaild		: ErrMsg = QString("当前古老梦华无效");			break;
-		case EN_StarRailErrorNum::ResouceEst_AbyssAverageNumInvaild		: ErrMsg = QString("深渊平均通关数无效");			break;
+		case EN_StarRailErrorNum::ResouceEst_CurrentTicketNumInvaild		: ErrMsg = QString("当前票数无效");				break;
+		case EN_StarRailErrorNum::ResouceEst_CurrentCrystalInvaild		: ErrMsg = QString("当前星琼无效");				break;
+		case EN_StarRailErrorNum::ResouceEst_SmallMonthCardRemainDayInvaild	: ErrMsg = QString("小月卡剩余天数无效");				break;
+		case EN_StarRailErrorNum::ResouceEst_CurrentPaidCrystalInvaild		: ErrMsg = QString("当前古老梦华无效");				break;
+		case EN_StarRailErrorNum::ResouceEst_AbyssAverageNumInvaild		: ErrMsg = QString("深渊平均通关数无效");				break;
 	}
 	emit signal_ResouceEstErrorMsg(ErrNum, ErrMsg);
 }
