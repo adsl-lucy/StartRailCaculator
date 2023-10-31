@@ -655,11 +655,11 @@ void StarRailMediator::slot_startRelicValidEstimate(const St_RelicValidEstimateP
 	{
 		std::default_random_engine engine(startRandomSeed + currentExpTime);
 
-		int		totalRelic = 0;
-		int		primePropertyValidGetNum	= 0;//主属性有效遗物个数
-		int		primePropertyValidGetTime	= 0;//打本获取主属性有效遗物的次数
-		int		allPropertyValidGetNum		= 0;//全属性有效遗物个数
-		int		allPropertyValidGetTime		= 0;//打本获取全属性有效遗物的次数
+		int	totalRelic = 0;
+		int	primePropertyValidGetNum		= 0;//主属性有效遗物个数
+		int	primePropertyValidGetTime		= 0;//打本获取主属性有效遗物的次数
+		int	allPropertyValidGetNum			= 0;//全属性有效遗物个数
+		int	allPropertyValidGetTime			= 0;//打本获取全属性有效遗物的次数
 
 		double	primePropertyValidProportion		= 0;//主属性有效遗物比例
 		double	getPrimePropertyValidProbability	= 0;//打本获取主属性有效遗物的概率
