@@ -10,7 +10,10 @@
 
 Qt版本：5.12.11\msvc2017_64
 
-下载地址：release目录里面的rar就是
+下载地址：见Git内的release
+![image](https://github.com/adsl-lucy/StartRailCaculator/assets/42862216/97bc7bd7-c0ec-4a39-a87e-cf855cc3f58b)
+
+
 
 编译所需包含Qt模块
 1.	charts
