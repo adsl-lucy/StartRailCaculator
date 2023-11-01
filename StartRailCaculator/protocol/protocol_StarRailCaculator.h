@@ -21,8 +21,8 @@
 #ifndef PROTOCOL_STARRAILCACULATOR
 #define PROTOCOL_STARRAILCACULATOR
 
-//»ù±¾¶¨ÒåÒÔ¼°È«¾Ö³£Á¿ËùÔÚ
-//Ö®ËùÒÔ½Ğprotocol£¬ÊÇÒòÎªÏà±Èbase_defineÕâ¸üÏñÒ»¸öÄ£¿éÖ®¼äµÄÍ¨ĞÅĞ­Òé
+//åŸºæœ¬å®šä¹‰ä»¥åŠå…¨å±€å¸¸é‡æ‰€åœ¨
+//ä¹‹æ‰€ä»¥å«protocolï¼Œæ˜¯å› ä¸ºç›¸æ¯”base_defineè¿™æ›´åƒä¸€ä¸ªæ¨¡å—ä¹‹é—´çš„é€šä¿¡åè®®
 
 #include <QDate>
 #include <QDateTime>
@@ -32,457 +32,457 @@
 #include "DoubleMatrix.h"
 
 
-	//ÓÎÏ·ÔËÎ¬³£Á¿
-	const QDateTime Const_StarRailOpenDay	= QDateTime(QDate(2023, 4, 26), QTime(10, 0));		//¿ª·şÈÕÆÚÎª2023/4/26 10:00
-	const QDateTime Const_StarRailLatestDay = QDateTime(QDate(2024, 4, 26), QTime(10, 0));		//ÔÊĞí¼ÆËãµÄ×îÍíÈÕÆÚÎª2024/4/26 10:00£¨²»È»Îó²îÌ«´óÁË£©
+	//æ¸¸æˆè¿ç»´å¸¸é‡
+	const QDateTime Const_StarRailOpenDay	= QDateTime(QDate(2023, 4, 26), QTime(10, 0));		//å¼€æœæ—¥æœŸä¸º2023/4/26 10:00
+	const QDateTime Const_StarRailLatestDay = QDateTime(QDate(2024, 4, 26), QTime(10, 0));		//å…è®¸è®¡ç®—çš„æœ€æ™šæ—¥æœŸä¸º2024/4/26 10:00ï¼ˆä¸ç„¶è¯¯å·®å¤ªå¤§äº†ï¼‰
 	
-	//42ÌìÒ»¸ö´ó°æ±¾
-	//Ò»¸ö´ó°æ±¾Ë¢ĞÂ»áË¢ĞÂ´óÔÂ¿¨£¬²¢ÇÒÔËÎ¬»áËÍÎ¬»¤300ãß+ĞŞBUG300ãß£¨Ö±²¥½±Àø²»Ëã£©
+	//42å¤©ä¸€ä¸ªå¤§ç‰ˆæœ¬
+	//ä¸€ä¸ªå¤§ç‰ˆæœ¬åˆ·æ–°ä¼šåˆ·æ–°å¤§æœˆå¡ï¼Œå¹¶ä¸”è¿ç»´ä¼šé€ç»´æŠ¤300æ°µ+ä¿®BUG300æ°µï¼ˆç›´æ’­å¥–åŠ±ä¸ç®—ï¼‰
 	const int		Const_BigMonthCardPeriod = 42;
 	
-	//×î¸ßµÈ¼¶Ä£ÄâÓîÖæÃ¿ÖÜ´òÍêËÍ225ãß
+	//æœ€é«˜ç­‰çº§æ¨¡æ‹Ÿå®‡å®™æ¯å‘¨æ‰“å®Œé€225æ°µ
 	const int		Const_MonitorSpaceCrystal = 225;
 
-	//ÉîÔ¨1²ã60Ë®
+	//æ·±æ¸Š1å±‚60æ°´
 	const int		Const_AbyssCrystalPerLevel = 60;
 
-	//¿¨³Ø³£Á¿
-	const double	Const_GoldCharacterProbability				=	0.006;		//ÎåĞÇ½ÇÉ«³öÂÊ
-	const double    Const_GoldUpCharacterProbability			=	0.5;		//ÎåĞÇ½ÇÉ«ÊÇUP½ÇÉ«µÄ¸ÅÂÊ
-	const double	Const_GoldWeaponProbability					=   0.008;		//ÎåĞÇÎäÆ÷³öÂÊ
-	const double	Const_GoldUpWeaponProbability				=	0.75;		//ÎåĞÇÎäÆ÷ÊÇUPÎäÆ÷µÄ¸ÅÂÊ
-	const int		Const_LargestGetGoldCharTNum				=	90;			//ÎåĞÇ½ÇÉ«±£µ×ÊıÁ¿
-	const int		Const_LargetGetGoldWeaponTNum				=	80;			//ÎåĞÇÎäÆ÷±£µ×ÊıÁ¿
+	//å¡æ± å¸¸é‡
+	const double	Const_GoldCharacterProbability		= 0.006;	//äº”æ˜Ÿè§’è‰²å‡ºç‡
+	const double    Const_GoldUpCharacterProbability	= 0.5;		//äº”æ˜Ÿè§’è‰²æ˜¯UPè§’è‰²çš„æ¦‚ç‡
+	const double	Const_GoldWeaponProbability		= 0.008;	//äº”æ˜Ÿæ­¦å™¨å‡ºç‡
+	const double	Const_GoldUpWeaponProbability		= 0.75;		//äº”æ˜Ÿæ­¦å™¨æ˜¯UPæ­¦å™¨çš„æ¦‚ç‡
+	const int	Const_LargestGetGoldCharTNum		= 90;		//äº”æ˜Ÿè§’è‰²ä¿åº•æ•°é‡
+	const int	Const_LargetGetGoldWeaponTNum		= 80;		//äº”æ˜Ÿæ­¦å™¨ä¿åº•æ•°é‡
 
-//ĞÇÌú¼ÆËãÆ÷´íÎóÂë
+//æ˜Ÿé“è®¡ç®—å™¨é”™è¯¯ç 
 enum class EN_StarRailErrorNum : int	
 {
-	//×ÊÔ´¼ÆËãÆ÷ÊäÈë´íÎóÂë
+	//èµ„æºè®¡ç®—å™¨è¾“å…¥é”™è¯¯ç 
 
-	ResouceEst_InputNoError,						//Ã»ÓĞÊäÈë´íÎó
+	ResouceEst_InputNoError,			//æ²¡æœ‰è¾“å…¥é”™è¯¯
 
-	ResouceEst_StartDateTooEarly,					//¿ªÊ¼ÈÕÆÚÔçÓÚ¿ª·şÈÕÆÚ
-	ResouceEst_StartDateTooLate,					//ÖÕÖ¹ÈÕÆÚÍíÓÚ¿ª·şÁ½Äêºó£¨ÆäÊµÊÇÀÁµÃ¸ã³¤Í¼±í£©
-	ResouceEst_StartEndSameDay,						//¿ªÊ¼ÈÕÆÚºÍÖÕÖ¹ÈÕÆÚÏàÍ¬
-	ResouceEst_StartDayLateThanEndDay,				//ÖÕÖ¹ÈÕÆÚÔçÓÚÆğÊ¼ÈÕÆÚ
-	ResouceEst_StopDayTooLate,						//ÖÕÖ¹ÈÕÆÚÌ«Íí
+	ResouceEst_StartDateTooEarly,			//å¼€å§‹æ—¥æœŸæ—©äºå¼€æœæ—¥æœŸ
+	ResouceEst_StartDateTooLate,			//ç»ˆæ­¢æ—¥æœŸæ™šäºå¼€æœä¸¤å¹´åï¼ˆå…¶å®æ˜¯æ‡’å¾—æé•¿å›¾è¡¨ï¼‰
+	ResouceEst_StartEndSameDay,			//å¼€å§‹æ—¥æœŸå’Œç»ˆæ­¢æ—¥æœŸç›¸åŒ
+	ResouceEst_StartDayLateThanEndDay,		//ç»ˆæ­¢æ—¥æœŸæ—©äºèµ·å§‹æ—¥æœŸ
+	ResouceEst_StopDayTooLate,			//ç»ˆæ­¢æ—¥æœŸå¤ªæ™š
 
-	ResouceEst_CurrentTicketNumInvaild,				//µ±Ç°Æ±ÊıÎŞĞ§
-	ResouceEst_CurrentCrystalInvaild,				//µ±Ç°ĞÇÇíÎŞĞ§
-	ResouceEst_SmallMonthCardRemainDayInvaild,		//Ğ¡ÔÂ¿¨Ê£ÓàÌìÊıÎŞĞ§
-	ResouceEst_CurrentPaidCrystalInvaild,			//µ±Ç°¹ÅÀÏÃÎ»ªÎŞĞ§
-	ResouceEst_AbyssAverageNumInvaild,				//ÉîÔ¨Æ½¾ùÍ¨¹ØÊıÎŞĞ§
+	ResouceEst_CurrentTicketNumInvaild,		//å½“å‰ç¥¨æ•°æ— æ•ˆ
+	ResouceEst_CurrentCrystalInvaild,		//å½“å‰æ˜Ÿç¼æ— æ•ˆ
+	ResouceEst_SmallMonthCardRemainDayInvaild,	//å°æœˆå¡å‰©ä½™å¤©æ•°æ— æ•ˆ
+	ResouceEst_CurrentPaidCrystalInvaild,		//å½“å‰å¤è€æ¢¦åæ— æ•ˆ
+	ResouceEst_AbyssAverageNumInvaild,		//æ·±æ¸Šå¹³å‡é€šå…³æ•°æ— æ•ˆ
 
-	//Ê¥ÒÅÎï¹ÀËã
+	//åœ£é—ç‰©ä¼°ç®—
 	RelicEst_InputNoError,
 
-	RelicEst_NoPlayTime,					//´ò±¾´ÎÊıÎª0
-	RelicEst_ValidPrimePropertyZero,		//Ã»Ñ¡ÓĞĞ§Ö÷ÊôĞÔ
-	RelicEst_ValidSubPropertyLessThan4,		//ÓĞĞ§¸±ÊôĞÔĞ¡ÓÚ4¸ö
+	RelicEst_NoPlayTime,				//æ‰“æœ¬æ¬¡æ•°ä¸º0
+	RelicEst_ValidPrimePropertyZero,		//æ²¡é€‰æœ‰æ•ˆä¸»å±æ€§
+	RelicEst_ValidSubPropertyLessThan4,		//æœ‰æ•ˆå‰¯å±æ€§å°äº4ä¸ª
 };
 
 
 
-//×ÊÔ´¼ÆËã²ÎÊı
+//èµ„æºè®¡ç®—å‚æ•°
 struct St_ResourceEstimateParameter
 {
-	QDate	startDate;								//¿ªÊ¼ÈÕÆÚ
-	QDate	stopDate;								//½áÊøÈÕÆÚ
-	int		currentTicket			= 0;			//µ±Ç°×¨Æ±
-	int		currentCrystal			= 0;			//µ±Ç°ĞÇÇí
-	int		currentPaidCrystal		= 0;			//µ±Ç°¹ÅÀÏÃÎ»ª
-	bool	buySmallMonthCard		= true;			//Âò²»ÂòĞ¡ÔÂ¿¨
-	bool	buyBigMonthCard			= false;		//Âò²»Âò´óÔÂ¿¨
-	int		smallMonthCardLastday	= 0;			//µ±Ç°Ğ¡ÔÂ¿¨Ê£ÓàÌìÊı
-	int		abyssAverageNum			= 0;			//Æ½¾ùÉîÔ¨Ê£ÓàÌìÊı
+	QDate	startDate;				//å¼€å§‹æ—¥æœŸ
+	QDate	stopDate;				//ç»“æŸæ—¥æœŸ
+	int	currentTicket		= 0;		//å½“å‰ä¸“ç¥¨
+	int	currentCrystal		= 0;		//å½“å‰æ˜Ÿç¼
+	int	currentPaidCrystal	= 0;		//å½“å‰å¤è€æ¢¦å
+	bool	buySmallMonthCard	= true;		//ä¹°ä¸ä¹°å°æœˆå¡
+	bool	buyBigMonthCard		= false;	//ä¹°ä¸ä¹°å¤§æœˆå¡
+	int	smallMonthCardLastday	= 0;		//å½“å‰å°æœˆå¡å‰©ä½™å¤©æ•°
+	int	abyssAverageNum		= 0;		//å¹³å‡æ·±æ¸Šå‰©ä½™å¤©æ•°
 };
 
-//×ÊÔ´¼ÆËã·µ»Ø½á¹ûÖĞÄ³Ò»ÌìµÄ×´Ì¬
+//èµ„æºè®¡ç®—è¿”å›ç»“æœä¸­æŸä¸€å¤©çš„çŠ¶æ€
 struct St_ResourceEstimateDateResult
 {
-	QDate	currentDate;							//µ±ÌìÈÕÆÚ
-	int		TodayCrystalIncome		= 0;			//µ±ÌìĞÇÇíÊÕÒæ
+	QDate	currentDate;						//å½“å¤©æ—¥æœŸ
+	int	TodayCrystalIncome	= 0;			//å½“å¤©æ˜Ÿç¼æ”¶ç›Š
 
-	int		currentTicket			= 0;			//µ±Ç°×¨Æ±
-	int		currentCrystal			= 0;			//µ±Ç°ĞÇÇí
-	int		currentPaidCrystal		= 0;			//µ±Ç°¹ÅÀÏÃÎ»ª
+	int	currentTicket		= 0;			//å½“å‰ä¸“ç¥¨
+	int	currentCrystal		= 0;			//å½“å‰æ˜Ÿç¼
+	int	currentPaidCrystal	= 0;			//å½“å‰å¤è€æ¢¦å
 
-	bool	buySmallMonthCard		= false;		//µ±Ìì¹ºÂòÁËĞ¡ÔÂ¿¨
-	bool	buyBigMonthCard			= false;		//µ±Ìì¹ºÂòÁË´óÔÂ¿¨
+	bool	buySmallMonthCard	= false;		//å½“å¤©è´­ä¹°äº†å°æœˆå¡
+	bool	buyBigMonthCard		= false;		//å½“å¤©è´­ä¹°äº†å¤§æœˆå¡
 
-	bool	playAbyss				= false;		//µ±Ìì´òÁËĞÂÉîÔ¨
-	bool	playMonitorSpace		= false;		//µ±Ìì´òÁËÄ£ÄâÓîÖæ
+	bool	playAbyss		= false;		//å½“å¤©æ‰“äº†æ–°æ·±æ¸Š
+	bool	playMonitorSpace	= false;		//å½“å¤©æ‰“äº†æ¨¡æ‹Ÿå®‡å®™
 
-	int		currentdayExpense			= 0;		//µ±Ìì¿ªÏú
-	int		totalSmallCardExpence		= 0;		//ÀÛ¼ÆĞ¡ÔÂ¿¨Í¶Èë	
-	int		totalBigMonthCardExpence	= 0;		//ÀÛ¼Æ´óÔÂ¿¨Í¶Èë
-	int		totalExpense				= 0;		//ÀÛ¼Æ×ÜÍ¶Èë
+	int	currentdayExpense		= 0;		//å½“å¤©å¼€é”€
+	int	totalSmallCardExpence		= 0;		//ç´¯è®¡å°æœˆå¡æŠ•å…¥	
+	int	totalBigMonthCardExpence	= 0;		//ç´¯è®¡å¤§æœˆå¡æŠ•å…¥
+	int	totalExpense			= 0;		//ç´¯è®¡æ€»æŠ•å…¥
 };
 
-//¿¨³ØÀàĞÍ
+//å¡æ± ç±»å‹
 enum class EN_CardPoolType : int
 {
-	character,		//½ÇÉ«³Ø
-	weapon,			//ÎäÆ÷³Ø
+	character,	//è§’è‰²æ± 
+	weapon,		//æ­¦å™¨æ± 
 };
 
-//µ¥´Î³é¿¨½á¹û
+//å•æ¬¡æŠ½å¡ç»“æœ
 enum class En_DrawCardResult : int
 {
-	normal,					//ÆÕÍ¨¿¨£¨À±¼¦£©
-	character_wrongGold,	//½ÇÉ«³ØÍáÁË
-	character_UpGold,		//½ÇÉ«³Ø³ö»õ
-	weapon_wrongGold,		//ÎäÆ÷³ØÍáÁË
-	weapon_UpGold			//ÎäÆ÷³Ø³ö»õ
+	normal,			//æ™®é€šå¡ï¼ˆè¾£é¸¡ï¼‰
+	character_wrongGold,	//è§’è‰²æ± æ­ªäº†
+	character_UpGold,	//è§’è‰²æ± å‡ºè´§
+	weapon_wrongGold,	//æ­¦å™¨æ± æ­ªäº†
+	weapon_UpGold		//æ­¦å™¨æ± å‡ºè´§
 };
 
-//¿¨³ØÍ£Ö¹ÊµÑé¼ÆËã²ÎÊı
+//å¡æ± åœæ­¢å®éªŒè®¡ç®—å‚æ•°
 struct St_CardPoolEstimatePara
 {
-	EN_CardPoolType	poolType = EN_CardPoolType::character;		//¼ÆËãµÄ¿¨³ØÀàĞÍ
-	bool			wrongGold = false;							//ÉÏÒ»¸öÎåĞÇÍáÁË
-	int				areadyInTicket = 0;							//ÒÑ¾­µæÁË¶àÉÙ³é
+	EN_CardPoolType	poolType = EN_CardPoolType::character;	//è®¡ç®—çš„å¡æ± ç±»å‹
+	bool		wrongGold = false;			//ä¸Šä¸€ä¸ªäº”æ˜Ÿæ­ªäº†
+	int		areadyInTicket = 0;			//å·²ç»å«äº†å¤šå°‘æŠ½
 };
 
-//N²½Ö®ÄÚ³ö»õ¸ÅÂÊ½á¹û
+//Næ­¥ä¹‹å†…å‡ºè´§æ¦‚ç‡ç»“æœ
 struct St_CardPoolEstimateResult
 {
-	EN_CardPoolType	poolType					= EN_CardPoolType::character;//¿¨³ØÀàĞÍ
-	int				distanceToBigGuarantee		= 0;		//×î´ó³éÊı
-	bool			smallGuaranteeInCase		= true;		//Õâ¸ö³é¿¨¹ı³ÌÊÇ·ñ´æÔÚĞ¡±£µ×£¨±ÈÈçÉÏÒ»¸ö½ğÍáÁË£¬ÄÇ¾ÍÖ»ÓĞ´ó±£µ×£©
-	double			smallGraranteeGetUpProb		= 0;		//Ğ¡±£µ×Î»ÖÃ³ö»õ¸ÅÂÊ
-	double			bigGuaranteeGetTupProb		= 0;		//´ó±£µ×²Å³ö»õ¸ÅÂÊ
-	double			getUpPosExpectation			= 0;		//ÆÚÍû³ö»õÎ»ÖÃ
-	double			crystalExpenExpectation		= 0;		//ÆÚÍûÍ¶ÈëĞÇÇí
-	QMap<int, double> mapPorbDistribution;					//ÀÛ¼Æ³ö»õ¸ÅÂÊ·Ö²¼Ä£Äâ½áÂÛ
+	EN_CardPoolType	poolType		= EN_CardPoolType::character;//å¡æ± ç±»å‹
+	int		distanceToBigGuarantee	= 0;		//æœ€å¤§æŠ½æ•°
+	bool		smallGuaranteeInCase	= true;		//è¿™ä¸ªæŠ½å¡è¿‡ç¨‹æ˜¯å¦å­˜åœ¨å°ä¿åº•ï¼ˆæ¯”å¦‚ä¸Šä¸€ä¸ªé‡‘æ­ªäº†ï¼Œé‚£å°±åªæœ‰å¤§ä¿åº•ï¼‰
+	double		smallGraranteeGetUpProb	= 0;		//å°ä¿åº•ä½ç½®å‡ºè´§æ¦‚ç‡
+	double		bigGuaranteeGetTupProb	= 0;		//å¤§ä¿åº•æ‰å‡ºè´§æ¦‚ç‡
+	double		getUpPosExpectation	= 0;		//æœŸæœ›å‡ºè´§ä½ç½®
+	double		crystalExpenExpectation	= 0;		//æœŸæœ›æŠ•å…¥æ˜Ÿç¼
+	QMap<int, double> mapPorbDistribution;			//ç´¯è®¡å‡ºè´§æ¦‚ç‡åˆ†å¸ƒæ¨¡æ‹Ÿç»“è®º
 };
 
-//³é¿¨¶ÔÏó
+//æŠ½å¡å¯¹è±¡
 enum class En_DrawCardType : int
 {
-	characterOnly,	//Ö»³é½ÇÉ«
-	waeponOnly,		//Ö»³éÎäÆ÷
-	getAll,			//ÎÒÈ«¶¼Òª
+	characterOnly,	//åªæŠ½è§’è‰²
+	waeponOnly,	//åªæŠ½æ­¦å™¨
+	getAll,		//æˆ‘å…¨éƒ½è¦
 };
 
-//¿¨³ØÇĞ»»·½Ê½
+//å¡æ± åˆ‡æ¢æ–¹å¼
 enum class En_PoolTransfromType :int
 {
-	NCharacterMWeapon,		//½ÇÉ«³ö»õN´ÎÔÙÎäÆ÷³ö»õM´Î
-	NWeaponMCharacter,		//ÎäÆ÷³ö»õN´ÎÔÙ½ÇÉ«³ö»õM´Î
-	NTCharacterMTWeapon,	//½ÇÉ«³ØÍ¶ÈëN³é£¬ÎäÆ÷³ØÍ¶ÈëM³é
-	NTWeaponMTCharacter,	//ÎäÆ÷³ØÍ¶ÈëN³é£¬½ÇÉ«³ØÍ¶ÈëM³é
+	NCharacterMWeapon,	//è§’è‰²å‡ºè´§Næ¬¡å†æ­¦å™¨å‡ºè´§Mæ¬¡
+	NWeaponMCharacter,	//æ­¦å™¨å‡ºè´§Næ¬¡å†è§’è‰²å‡ºè´§Mæ¬¡
+	NTCharacterMTWeapon,	//è§’è‰²æ± æŠ•å…¥NæŠ½ï¼Œæ­¦å™¨æ± æŠ•å…¥MæŠ½
+	NTWeaponMTCharacter,	//æ­¦å™¨æ± æŠ•å…¥NæŠ½ï¼Œè§’è‰²æ± æŠ•å…¥MæŠ½
 };
 
-//×ÊÔ´Í¶ÈëÓë³ö»õ·ÖÎö¼ÆËã²ÎÊı
+//èµ„æºæŠ•å…¥ä¸å‡ºè´§åˆ†æè®¡ç®—å‚æ•°
 struct St_InvestmentEstimatePara
 {
-	int inputCrystal	= 0;//Í¶ÈëĞÇÇí
-	int inputTicket		= 0;//Í¶Èë×¨Æ±
+	int inputCrystal	= 0;//æŠ•å…¥æ˜Ÿç¼
+	int inputTicket		= 0;//æŠ•å…¥ä¸“ç¥¨
 
-	En_DrawCardType			drawCardType		= En_DrawCardType::characterOnly;			//³é¿¨¶ÔÏó
-	En_PoolTransfromType	poolTransformType	= En_PoolTransfromType::NCharacterMWeapon;	//ÂÖ»»·½Ê½
+	En_DrawCardType		drawCardType		= En_DrawCardType::characterOnly;		//æŠ½å¡å¯¹è±¡
+	En_PoolTransfromType	poolTransformType	= En_PoolTransfromType::NCharacterMWeapon;	//è½®æ¢æ–¹å¼
 
-	bool lastGoldCharacterWrong			= false;	//ÉÏÒ»¸öÎåĞÇ½ÇÉ«ÊÇ·ñÍáÁË
-	int  areadyInCharacterPoolTicket	= 0;		//½ÇÉ«³ØÒÑ¾­Í¶ÈëµÄ³éÊı£¨¾àÀëÉÏÒ»¸öÎåĞÇ½ÇÉ«£©
-	bool lastGoldWeaponWrong			= false;	//ÉÏÒ»¸öÎåĞÇÎäÆ÷ÊÇ·ñÍáÁË
-	int  areadyInWeaponPoolTicket		= 0;		//ÎäÆ÷³ØÒÑ¾­Í¶ÈëµÄ³éÊı£¨¾àÀëÉÏÒ»¸öÎåĞÇÎäÆ÷£©
+	bool lastGoldCharacterWrong		= false;	//ä¸Šä¸€ä¸ªäº”æ˜Ÿè§’è‰²æ˜¯å¦æ­ªäº†
+	int  areadyInCharacterPoolTicket	= 0;		//è§’è‰²æ± å·²ç»æŠ•å…¥çš„æŠ½æ•°ï¼ˆè·ç¦»ä¸Šä¸€ä¸ªäº”æ˜Ÿè§’è‰²ï¼‰
+	bool lastGoldWeaponWrong		= false;	//ä¸Šä¸€ä¸ªäº”æ˜Ÿæ­¦å™¨æ˜¯å¦æ­ªäº†
+	int  areadyInWeaponPoolTicket		= 0;		//æ­¦å™¨æ± å·²ç»æŠ•å…¥çš„æŠ½æ•°ï¼ˆè·ç¦»ä¸Šä¸€ä¸ªäº”æ˜Ÿæ­¦å™¨ï¼‰
 
-	//ÂÖ»»²ÎÊı£¬NÎªµÚÒ»¸öÊäÈë¿ò£¬MÎªµÚ¶ş¸öÊäÈë¿ò
+	//è½®æ¢å‚æ•°ï¼ŒNä¸ºç¬¬ä¸€ä¸ªè¾“å…¥æ¡†ï¼ŒMä¸ºç¬¬äºŒä¸ªè¾“å…¥æ¡†
 	int N = 0;
 	int M = 0;
 
 };
 
-//×ÊÔ´Í¶ÈëÓë³ö»õ·ÖÎö¼ÆËã½á¹û
+//èµ„æºæŠ•å…¥ä¸å‡ºè´§åˆ†æè®¡ç®—ç»“æœ
 struct St_InvectmentEstimateResult
 {
-	int inputCrystal	= 0;		//Í¶ÈëĞÇÇí£¨Ã»Ëã×¨Æ±£©
-	int inputTicket		= 0;		//Í¶Èë×¨Æ±£¨Ã»ËãĞÇÇí£©
+	int inputCrystal	= 0;	//æŠ•å…¥æ˜Ÿç¼ï¼ˆæ²¡ç®—ä¸“ç¥¨ï¼‰
+	int inputTicket		= 0;	//æŠ•å…¥ä¸“ç¥¨ï¼ˆæ²¡ç®—æ˜Ÿç¼ï¼‰
 
-	En_DrawCardType			drawCardType		= En_DrawCardType::characterOnly;			//³é¿¨·½Ê½
-	En_PoolTransfromType	poolTransformType	= En_PoolTransfromType::NCharacterMWeapon;	//ÂÖ»»·½Ê½
-	//ÂÖ»»²ÎÊı£¬NÎªµÚÒ»¸öÊäÈë¿ò£¬MÎªµÚ¶ş¸öÊäÈë¿ò
+	En_DrawCardType		drawCardType		= En_DrawCardType::characterOnly;		//æŠ½å¡æ–¹å¼
+	En_PoolTransfromType	poolTransformType	= En_PoolTransfromType::NCharacterMWeapon;	//è½®æ¢æ–¹å¼
+	//è½®æ¢å‚æ•°ï¼ŒNä¸ºç¬¬ä¸€ä¸ªè¾“å…¥æ¡†ï¼ŒMä¸ºç¬¬äºŒä¸ªè¾“å…¥æ¡†
 	int N = 0;
 	int M = 0;
 
 
-	double NoUpCharacterPorb				= 0;	//UP½ÇÉ«³Á´¬¸ÅÂÊ
-	double UpCharacterGetTimeExpectation	= 0;	//UP½ÇÉ«»ñÈ¡ÆÚÍû
+	double NoUpCharacterPorb		= 0;	//UPè§’è‰²æ²‰èˆ¹æ¦‚ç‡
+	double UpCharacterGetTimeExpectation	= 0;	//UPè§’è‰²è·å–æœŸæœ›
 
-	double NoUpWeaponProb					= 0;	//UPÎäÆ÷³Á´¬¸ÅÂÊ
-	double UpWeaponGetExpectation			= 0;	//UPÎäÆ÷»ñÈ¡ÆÚÍû
+	double NoUpWeaponProb			= 0;	//UPæ­¦å™¨æ²‰èˆ¹æ¦‚ç‡
+	double UpWeaponGetExpectation		= 0;	//UPæ­¦å™¨è·å–æœŸæœ›
 
-	DoubleMatrix ProbDensityMatrix;					//¸ÅÂÊ·Ö²¼¾ØÕó£¬ĞĞÊÇ»ñÈ¡UP½ÇÉ«ÊıÁ¿£¬ÁĞÊÇ»ñÈ¡UPÎäÆ÷ÊıÁ¿£¬ÖµÊÇ¸ÅÂÊ
+	DoubleMatrix ProbDensityMatrix;		//æ¦‚ç‡åˆ†å¸ƒçŸ©é˜µï¼Œè¡Œæ˜¯è·å–UPè§’è‰²æ•°é‡ï¼Œåˆ—æ˜¯è·å–UPæ­¦å™¨æ•°é‡ï¼Œå€¼æ˜¯æ¦‚ç‡
 
 };
 
-//Ê¥ÒÅÎï
-	const double	Const_3RelicProb = 0.1;		//65¼¶¾ùºâ±¾³ö3½ğÒÇÆ÷¸ÅÂÊ£¨Ê£Óà¸ÅÂÊ¾ÍÊÇ2½ğ£©
+//åœ£é—ç‰©
+	const double	Const_3RelicProb = 0.1;		//65çº§å‡è¡¡æœ¬å‡º3é‡‘ä»ªå™¨æ¦‚ç‡ï¼ˆå‰©ä½™æ¦‚ç‡å°±æ˜¯2é‡‘ï¼‰
 
-	//ÒÂ·şÖ÷ÊôĞÔ¸ÅÂÊ
-	const double	Const_PriPro_ratio_clothes_HPPercentage			= 0.22;
-	const double	Const_PriPro_ratio_clothes_attackPercentage		= 0.22;
+	//è¡£æœä¸»å±æ€§æ¦‚ç‡
+	const double	Const_PriPro_ratio_clothes_HPPercentage		= 0.22;
+	const double	Const_PriPro_ratio_clothes_attackPercentage	= 0.22;
 	const double	Const_PriPro_ratio_clothes_defencePercentage	= 0.22;
-	const double	Const_PriPro_ratio_clothes_CRITProb				= 0.10;
-	const double	Const_PriPro_ratio_clothes_CRITDamage			= 0.10;
-	const double	Const_PriPro_ratio_clothes_HealAddition			= 0.10;
-	const double	Const_PriPro_ratio_clothes_DebuffAccuracy		= 0.04;
+	const double	Const_PriPro_ratio_clothes_CRITProb		= 0.10;
+	const double	Const_PriPro_ratio_clothes_CRITDamage		= 0.10;
+	const double	Const_PriPro_ratio_clothes_HealAddition		= 0.10;
+	const double	Const_PriPro_ratio_clothes_DebuffAccuracy	= 0.04;
 
-	//Ğ¬×ÓÖ÷ÊôĞÔ¸ÅÂÊ
+	//é‹å­ä¸»å±æ€§æ¦‚ç‡
 	const double	Const_PriPro_ratio_shoes_HPPercentage		= 0.3;
 	const double	Const_PriPro_ratio_shoes_attackPercentage	= 0.3;
 	const double	Const_PriPro_ratio_shoes_defencePercentage	= 0.3;
-	const double	Const_PriPro_ratio_shoes_speed				= 0.1;
+	const double	Const_PriPro_ratio_shoes_speed			= 0.1;
 
-	//Éş×ÓÖ÷ÊôĞÔ¸ÅÂÊ(¼ÓÆğÀ´ÊÇ99.9%)
+	//ç»³å­ä¸»å±æ€§æ¦‚ç‡(åŠ èµ·æ¥æ˜¯99.9%)
 	const double	Const_PriPro_ratio_cord_HPPercentage		= 0.283;
 	const double	Const_PriPro_ratio_cord_attackPercentage	= 0.283;
 	const double	Const_PriPro_ratio_cord_defencePercentage	= 0.283;
-	const double	Const_PriPro_ratio_cord_breakDamage			= 0.1;
+	const double	Const_PriPro_ratio_cord_breakDamage		= 0.1;
 	const double	Const_PriPro_ratio_cord_chargeEfficiency	= 0.05;
 
-	//ÇòÖ÷ÊôĞÔ¸ÅÂÊ(¼ÓÆğÀ´ÊÇ100.1%)
+	//çƒä¸»å±æ€§æ¦‚ç‡(åŠ èµ·æ¥æ˜¯100.1%)
 	const double	Const_PriPro_ratio_ball_HPPercentage		= 0.147;
 	const double	Const_PriPro_ratio_ball_attackPercentage	= 0.147;
 	const double	Const_PriPro_ratio_ball_defencePercentage	= 0.147;
 
-	const double	Const_PriPro_ratio_ball_fire				= 0.08;
-	const double	Const_PriPro_ratio_ball_thunder				= 0.08;
-	const double	Const_PriPro_ratio_ball_wind				= 0.08;
-	const double	Const_PriPro_ratio_ball_ice					= 0.08;
-	const double	Const_PriPro_ratio_ball_null				= 0.08;
-	const double	Const_PriPro_ratio_ball_quantum				= 0.08;
-	const double	Const_PriPro_ratio_ball_physical			= 0.08;
+	const double	Const_PriPro_ratio_ball_fire			= 0.08;
+	const double	Const_PriPro_ratio_ball_thunder			= 0.08;
+	const double	Const_PriPro_ratio_ball_wind			= 0.08;
+	const double	Const_PriPro_ratio_ball_ice			= 0.08;
+	const double	Const_PriPro_ratio_ball_null			= 0.08;
+	const double	Const_PriPro_ratio_ball_quantum			= 0.08;
+	const double	Const_PriPro_ratio_ball_physical		= 0.08;
 
-	//³ö»õ¸±´ÊÌõÊıÁ¿¸ÅÂÊ
-	const double	Const_ratio_SubPro_2Affix = 0.33;//³ö»õ2´ÊÌõ
-	const double	Const_ratio_SubPro_3Affix = 0.33;//³ö»õ3´ÊÌõ
-	const double	Const_ratio_SubPro_4Affix = 0.33;//³ö»õ4´ÊÌõ
+	//å‡ºè´§å‰¯è¯æ¡æ•°é‡æ¦‚ç‡
+	const double	Const_ratio_SubPro_2Affix = 0.33;//å‡ºè´§2è¯æ¡
+	const double	Const_ratio_SubPro_3Affix = 0.33;//å‡ºè´§3è¯æ¡
+	const double	Const_ratio_SubPro_4Affix = 0.33;//å‡ºè´§4è¯æ¡
 
-	//¸±´Ê×ºÈ¨ÖØ
-	const int	Const_SubPro_weight_HPValue				= 11;	//¹Ì¶¨ÉúÃüÖµ
-	const int	Const_SubPro_weight_HPPercentage		= 11;	//°Ù·Ö±ÈÉúÃüÖµ
-	const int	Const_SubPro_weight_attackValue			= 11;	//¹Ì¶¨¹¥»÷Á¦
-	const int	Const_SubPro_weight_attackPercentage	= 11;	//°Ù·Ö±È¹¥»÷
-	const int	Const_SubPro_weight_defenceValue		= 11;	//¹Ì¶¨·ÀÓùÁ¦
-	const int	Const_SubPro_weight_defencePercentage	= 11;	//°Ù·Ö±È·ÀÓù
-	const int	Const_SubPro_weight_CRITProb			= 7;	//±©»÷ÂÊ
-	const int	Const_SubPro_weight_CRITDamage			= 7;	//±©»÷ÉËº¦
-	const int	Const_SubPro_weight_DebuffDefence		= 5;	//Ğ§¹ûµÖ¿¹
-	const int	Const_SubPro_weight_DebuffAccuracy		= 5;	//Ğ§¹ûÃüÖĞ
-	const int	Const_SubPro_weight_breakDamage			= 5;	//»÷ÆÆÌØ¹¥
-	const int	Const_SubPro_weight_speed				= 5;	//ËÙ¶È
+	//å‰¯è¯ç¼€æƒé‡
+	const int	Const_SubPro_weight_HPValue		= 11;	//å›ºå®šç”Ÿå‘½å€¼
+	const int	Const_SubPro_weight_HPPercentage	= 11;	//ç™¾åˆ†æ¯”ç”Ÿå‘½å€¼
+	const int	Const_SubPro_weight_attackValue		= 11;	//å›ºå®šæ”»å‡»åŠ›
+	const int	Const_SubPro_weight_attackPercentage	= 11;	//ç™¾åˆ†æ¯”æ”»å‡»
+	const int	Const_SubPro_weight_defenceValue	= 11;	//å›ºå®šé˜²å¾¡åŠ›
+	const int	Const_SubPro_weight_defencePercentage	= 11;	//ç™¾åˆ†æ¯”é˜²å¾¡
+	const int	Const_SubPro_weight_CRITProb		= 7;	//æš´å‡»ç‡
+	const int	Const_SubPro_weight_CRITDamage		= 7;	//æš´å‡»ä¼¤å®³
+	const int	Const_SubPro_weight_DebuffDefence	= 5;	//æ•ˆæœæŠµæŠ—
+	const int	Const_SubPro_weight_DebuffAccuracy	= 5;	//æ•ˆæœå‘½ä¸­
+	const int	Const_SubPro_weight_breakDamage		= 5;	//å‡»ç ´ç‰¹æ”»
+	const int	Const_SubPro_weight_speed		= 5;	//é€Ÿåº¦
 
-	//¸±´Ê×ºÇ¿»¯Öµ
-	//¹Ì¶¨ÉúÃüÖµ
+	//å‰¯è¯ç¼€å¼ºåŒ–å€¼
+	//å›ºå®šç”Ÿå‘½å€¼
 	const double	Const_SubPro_value_caseA_HPValue = 33.8;	
 	const double	Const_SubPro_value_caseB_HPValue = 38;	
 	const double	Const_SubPro_value_caseC_HPValue = 42;	
 
-	//°Ù·Ö±ÈÉúÃüÖµ
+	//ç™¾åˆ†æ¯”ç”Ÿå‘½å€¼
 	const double	Const_SubPro_value_caseA_HPPercentage = 0.0346;	
 	const double	Const_SubPro_value_caseB_HPPercentage = 0.0389;	
 	const double	Const_SubPro_value_caseC_HPPercentage = 0.0432;	
 
-	//¹Ì¶¨¹¥»÷Á¦
+	//å›ºå®šæ”»å‡»åŠ›
 	const double	Const_SubPro_value_caseA_attackValue = 16.9;	
 	const double	Const_SubPro_value_caseB_attackValue = 19;	
 	const double	Const_SubPro_value_caseC_attackValue = 21;	
 
-	//°Ù·Ö±È¹¥»÷
+	//ç™¾åˆ†æ¯”æ”»å‡»
 	const double	Const_SubPro_value_caseA_aattackPercentage = 0.0346;	
 	const double	Const_SubPro_value_caseB_aattackPercentage = 0.0389;	
 	const double	Const_SubPro_value_caseC_aattackPercentage = 0.0432;
 
-	//¹Ì¶¨·ÀÓùÁ¦
+	//å›ºå®šé˜²å¾¡åŠ›
 	const double	Const_SubPro_value_caseA_defenceValue = 16.9;	
 	const double	Const_SubPro_value_caseB_defenceValue = 19;	
 	const double	Const_SubPro_value_caseC_defenceValue = 21;	
 
-	//°Ù·Ö±È·ÀÓù
+	//ç™¾åˆ†æ¯”é˜²å¾¡
 	const double	Const_SubPro_value_caseA_defencePercentage = 0.0432;	
 	const double	Const_SubPro_value_caseB_defencePercentage = 0.0486;	
 	const double	Const_SubPro_value_caseC_defencePercentage = 0.054;	
 
-	//±©»÷ÂÊ
+	//æš´å‡»ç‡
 	const double	Const_SubPro_value_caseA_CRITProb = 0.0259;	
 	const double	Const_SubPro_value_caseB_CRITProb = 0.0292;	
 	const double	Const_SubPro_value_caseC_CRITProb = 0.0324;	
 
-	//±©»÷ÉËº¦
+	//æš´å‡»ä¼¤å®³
 	const double	Const_SubPro_value_caseA_CRITDamage = 0.0518;	
 	const double	Const_SubPro_value_caseB_CRITDamage = 0.0583;	
 	const double	Const_SubPro_value_caseC_CRITDamage = 0.0648;	
 
-	//Ğ§¹ûµÖ¿¹
+	//æ•ˆæœæŠµæŠ—
 	const double	Const_SubPro_value_caseA_DebuffDefence = 0.0346;	
 	const double	Const_SubPro_value_caseB_DebuffDefence = 0.0389;
 	const double	Const_SubPro_value_caseC_DebuffDefence = 0.0432;
 
-	//Ğ§¹ûÃüÖĞ
+	//æ•ˆæœå‘½ä¸­
 	const double	Const_SubPro_value_caseA_DebuffAccuracy = 0.0346;
 	const double	Const_SubPro_value_caseB_DebuffAccuracy = 0.0389;
 	const double	Const_SubPro_value_caseC_DebuffAccuracy = 0.0432;
 
-	//»÷ÆÆÌØ¹¥
+	//å‡»ç ´ç‰¹æ”»
 	const double	Const_SubPro_value_caseA_breakDamage = 0.0518;
 	const double	Const_SubPro_value_caseB_breakDamage = 0.0583;
 	const double	Const_SubPro_value_caseC_breakDamage = 0.0648;
 
-	//ËÙ¶È
+	//é€Ÿåº¦
 	const double	Const_SubPro_value_caseA_speed = 2;
 	const double	Const_SubPro_value_caseB_speed = 2.25;
 	const double	Const_SubPro_value_caseC_speed = 2.5;
 
 
-//¸±±¾ÀàĞÍ
+//å‰¯æœ¬ç±»å‹
 enum class En_raidType:int
 {
-	Relic,//ÒÅÆ÷±¾
-	SimulateUniverse,//Ä£ÄâÓîÖæ
+	Relic,//é—å™¨æœ¬
+	SimulateUniverse,//æ¨¡æ‹Ÿå®‡å®™
 };
 
-//Ê¥ÒÅÎï²¿Î»
+//åœ£é—ç‰©éƒ¨ä½
 enum class En_RelicType :int
 {
-	None,		//Î´Éú³É£¨DebugÓÃ£©
-	Head,		//Í·
-	Hand,		//ÊÖ
-	Clothes,	//ÒÂ·ş
-	Shoes,		//Ğ¬×Ó
-	Cord,		//Éş×Ó
-	Ball		//Çò
+	None,		//æœªç”Ÿæˆï¼ˆDebugç”¨ï¼‰
+	Head,		//å¤´
+	Hand,		//æ‰‹
+	Clothes,	//è¡£æœ
+	Shoes,		//é‹å­
+	Cord,		//ç»³å­
+	Ball		//çƒ
 };
 
-//Ê¥ÒÅÎïÖ÷ÊôĞÔ
+//åœ£é—ç‰©ä¸»å±æ€§
 enum class En_RelicPrimeProperty :int
 {
-	None,					//Ã»ÓĞÖ÷ÊôĞÔ£¨DebugÓÃ£©
-	HPValue,				//¹Ì¶¨ÉúÃüÖµ
-	HPPercentage,			//°Ù·Ö±ÈÉúÃüÖµ
-	AttackValue,			//¹Ì¶¨¹¥»÷Á¦
-	AttackPercentage,		//°Ù·Ö±È¹¥»÷Á¦
-	DefencePercentage,		//°Ù·Ö±È·ÀÓù
-	CriticalProb,			//±©»÷ÂÊ
-	CriticalDamage,			//±©»÷ÉËº¦
-	Speed,					//ËÙ¶È
-	ChargeEfficiency,		//³äÄÜĞ§ÂÊ
-	BreakDamage,			//»÷ÆÆÌØ¹¥
-	DeBuffAccuracy,			//Ğ§¹ûÃüÖĞ
-	HealAddition,			//ÖÎÁÆ¼Ó³É
+	None,				//æ²¡æœ‰ä¸»å±æ€§ï¼ˆDebugç”¨ï¼‰
+	HPValue,			//å›ºå®šç”Ÿå‘½å€¼
+	HPPercentage,			//ç™¾åˆ†æ¯”ç”Ÿå‘½å€¼
+	AttackValue,			//å›ºå®šæ”»å‡»åŠ›
+	AttackPercentage,		//ç™¾åˆ†æ¯”æ”»å‡»åŠ›
+	DefencePercentage,		//ç™¾åˆ†æ¯”é˜²å¾¡
+	CriticalProb,			//æš´å‡»ç‡
+	CriticalDamage,			//æš´å‡»ä¼¤å®³
+	Speed,				//é€Ÿåº¦
+	ChargeEfficiency,		//å……èƒ½æ•ˆç‡
+	BreakDamage,			//å‡»ç ´ç‰¹æ”»
+	DeBuffAccuracy,			//æ•ˆæœå‘½ä¸­
+	HealAddition,			//æ²»ç–—åŠ æˆ
 
-	Fire,				//»ğÉË¼Ó³É
-	Thunder,			//À×ÉË¼Ó³É
-	Wind,				//·çÉË¼Ó³É
-	Ice,				//±ùÉË¼Ó³É
-	Null,				//ĞéÎŞ¼Ó³É
-	Quantum,			//Á¿×Ó¼Ó³É
-	Physical			//ÎïÀí¼Ó³É
+	Fire,				//ç«ä¼¤åŠ æˆ
+	Thunder,			//é›·ä¼¤åŠ æˆ
+	Wind,				//é£ä¼¤åŠ æˆ
+	Ice,				//å†°ä¼¤åŠ æˆ
+	Null,				//è™šæ— åŠ æˆ
+	Quantum,			//é‡å­åŠ æˆ
+	Physical			//ç‰©ç†åŠ æˆ
 };
 
-//Ê¥ÒÅÎï¸±ÊôĞÔ
+//åœ£é—ç‰©å‰¯å±æ€§
 enum class En_RelicSubProperty :int
 {
-	None,					//Ã»ÊôĞÔ£¬ÓÃÓÚÌí¼Ó´Ê×ºÂß¼­
+	None,				//æ²¡å±æ€§ï¼Œç”¨äºæ·»åŠ è¯ç¼€é€»è¾‘
 
-	HPValue,				//¹Ì¶¨ÉúÃüÖµ
-	HPPercentage,			//°Ù·Ö±ÈÉúÃüÖµ
-	AttackValue,			//¹Ì¶¨¹¥»÷Á¦
-	AttackPercentage,		//°Ù·Ö±È¹¥»÷Á¦
-	DefenceValue,			//¹Ì¶¨·ÀÓùÁ¦
-	DefencePercentage,		//°Ù·Ö±È·ÀÓùÁ¦
+	HPValue,			//å›ºå®šç”Ÿå‘½å€¼
+	HPPercentage,			//ç™¾åˆ†æ¯”ç”Ÿå‘½å€¼
+	AttackValue,			//å›ºå®šæ”»å‡»åŠ›
+	AttackPercentage,		//ç™¾åˆ†æ¯”æ”»å‡»åŠ›
+	DefenceValue,			//å›ºå®šé˜²å¾¡åŠ›
+	DefencePercentage,		//ç™¾åˆ†æ¯”é˜²å¾¡åŠ›
 
-	CriticalProb,			//±©»÷ÂÊ
-	CriticalDamage,			//±©»÷ÉËº¦
-	Speed,					//ËÙ¶È
+	CriticalProb,			//æš´å‡»ç‡
+	CriticalDamage,			//æš´å‡»ä¼¤å®³
+	Speed,				//é€Ÿåº¦
 
-	DeBuffDefence,			//Ğ§¹ûµÖ¿¹
-	BreakDamage,			//»÷ÆÆÌØ¹¥
-	DeBuffAccuracy,			//Ğ§¹ûÃüÖĞ
+	DeBuffDefence,			//æ•ˆæœæŠµæŠ—
+	BreakDamage,			//å‡»ç ´ç‰¹æ”»
+	DeBuffAccuracy,			//æ•ˆæœå‘½ä¸­
 };
 
-//ÓĞĞ§Ê¥ÒÅÎï²ÎÊı
+//æœ‰æ•ˆåœ£é—ç‰©å‚æ•°
 struct St_RelicValidEstimatePara
 {
-	int	playTime	= 0;//´ò±¾´ÎÊı
+	int	playTime	= 0;//æ‰“æœ¬æ¬¡æ•°
 
-	En_RelicType	relicType = En_RelicType::None;				//¼ÆËãÊ¥ÒÅÎï²¿Î»
+	En_RelicType	relicType = En_RelicType::None;				//è®¡ç®—åœ£é—ç‰©éƒ¨ä½
 	
-	//Ê¥ÒÅÎïÓĞĞ§Ö÷ÊôĞÔ±êÖ¾Î»
-	bool		PrimePro_Valid_HPValue				= false;	//¹Ì¶¨ÉúÃüÖµ
-	bool		PrimePro_Valid_HPPercentage			= false;	//°Ù·Ö±ÈÉúÃüÖµ
-	bool		PrimePro_Valid_AttackValue			= false;	//¹Ì¶¨¹¥»÷Á¦
-	bool		PrimePro_Valid_AttackPercentage		= false;	//°Ù·Ö±È¹¥»÷Á¦
-	bool		PrimePro_Valid_DefencePercentage	= false;	//°Ù·Ö±È·ÀÓù
-	bool		PrimePro_Valid_CriticalProb			= false;	//±©»÷ÂÊ
-	bool		PrimePro_Valid_CriticalDamage		= false;	//±©»÷ÉËº¦
-	bool		PrimePro_Valid_Speed				= false;	//ËÙ¶È
-	bool		PrimePro_Valid_ChargeEfficiency		= false;	//³äÄÜĞ§ÂÊ
-	bool		PrimePro_Valid_BreakDamage			= false;	//»÷ÆÆÌØ¹¥
-	bool		PrimePro_Valid_DeBuffAccuracy		= false;	//Ğ§¹ûÃüÖĞ
-	bool		PrimePro_Valid_HealAddition			= false;	//ÖÎÁÆ¼Ó³É
+	//åœ£é—ç‰©æœ‰æ•ˆä¸»å±æ€§æ ‡å¿—ä½
+	bool		PrimePro_Valid_HPValue			= false;	//å›ºå®šç”Ÿå‘½å€¼
+	bool		PrimePro_Valid_HPPercentage		= false;	//ç™¾åˆ†æ¯”ç”Ÿå‘½å€¼
+	bool		PrimePro_Valid_AttackValue		= false;	//å›ºå®šæ”»å‡»åŠ›
+	bool		PrimePro_Valid_AttackPercentage		= false;	//ç™¾åˆ†æ¯”æ”»å‡»åŠ›
+	bool		PrimePro_Valid_DefencePercentage	= false;	//ç™¾åˆ†æ¯”é˜²å¾¡
+	bool		PrimePro_Valid_CriticalProb		= false;	//æš´å‡»ç‡
+	bool		PrimePro_Valid_CriticalDamage		= false;	//æš´å‡»ä¼¤å®³
+	bool		PrimePro_Valid_Speed			= false;	//é€Ÿåº¦
+	bool		PrimePro_Valid_ChargeEfficiency		= false;	//å……èƒ½æ•ˆç‡
+	bool		PrimePro_Valid_BreakDamage		= false;	//å‡»ç ´ç‰¹æ”»
+	bool		PrimePro_Valid_DeBuffAccuracy		= false;	//æ•ˆæœå‘½ä¸­
+	bool		PrimePro_Valid_HealAddition		= false;	//æ²»ç–—åŠ æˆ
 
-	bool		PrimePro_Valid_Fire					= false;	//»ğÉË¼Ó³É
-	bool		PrimePro_Valid_Thunder				= false;	//À×ÉË¼Ó³É
-	bool		PrimePro_Valid_Wind					= false;	//·çÉË¼Ó³É
-	bool		PrimePro_Valid_Ice					= false;	//±ùÉË¼Ó³É
-	bool		PrimePro_Valid_Null					= false;	//ĞéÎŞ¼Ó³É
-	bool		PrimePro_Valid_Quantum				= false;	//Á¿×Ó¼Ó³É
-	bool		PrimePro_Valid_Physical				= false;	//ÎïÀí¼Ó³É
+	bool		PrimePro_Valid_Fire			= false;	//ç«ä¼¤åŠ æˆ
+	bool		PrimePro_Valid_Thunder			= false;	//é›·ä¼¤åŠ æˆ
+	bool		PrimePro_Valid_Wind			= false;	//é£ä¼¤åŠ æˆ
+	bool		PrimePro_Valid_Ice			= false;	//å†°ä¼¤åŠ æˆ
+	bool		PrimePro_Valid_Null			= false;	//è™šæ— åŠ æˆ
+	bool		PrimePro_Valid_Quantum			= false;	//é‡å­åŠ æˆ
+	bool		PrimePro_Valid_Physical			= false;	//ç‰©ç†åŠ æˆ
 
-	//Ê¥ÒÅÎïÓĞĞ§¸±ÊôĞÔ±êÖ¾Î»
-	bool		SubPro_Valid_HPValue				= true;		//¹Ì¶¨ÉúÃüÖµ
-	bool		SubPro_Valid_HPPercentage			= true;		//°Ù·Ö±ÈÉúÃüÖµ
-	bool		SubPro_Valid_AttackValue			= true;		//¹Ì¶¨¹¥»÷Á¦
-	bool		SubPro_Valid_AttackPercentage		= true;		//°Ù·Ö±È¹¥»÷Á¦
-	bool		SubPro_Valid_DefenceValue			= true;		//¹Ì¶¨·ÀÓùÁ¦
-	bool		SubPro_Valid_DefencePercentage		= true;		//°Ù·Ö±È·ÀÓùÁ¦
+	//åœ£é—ç‰©æœ‰æ•ˆå‰¯å±æ€§æ ‡å¿—ä½
+	bool		SubPro_Valid_HPValue			= true;		//å›ºå®šç”Ÿå‘½å€¼
+	bool		SubPro_Valid_HPPercentage		= true;		//ç™¾åˆ†æ¯”ç”Ÿå‘½å€¼
+	bool		SubPro_Valid_AttackValue		= true;		//å›ºå®šæ”»å‡»åŠ›
+	bool		SubPro_Valid_AttackPercentage		= true;		//ç™¾åˆ†æ¯”æ”»å‡»åŠ›
+	bool		SubPro_Valid_DefenceValue		= true;		//å›ºå®šé˜²å¾¡åŠ›
+	bool		SubPro_Valid_DefencePercentage		= true;		//ç™¾åˆ†æ¯”é˜²å¾¡åŠ›
 
-	bool		SubPro_Valid_CriticalProb			= true;		//±©»÷ÂÊ
-	bool		SubPro_Valid_CriticalDamage			= true;		//±©»÷ÉËº¦
-	bool		SubPro_Valid_Speed					= true;		//ËÙ¶È
+	bool		SubPro_Valid_CriticalProb		= true;		//æš´å‡»ç‡
+	bool		SubPro_Valid_CriticalDamage		= true;		//æš´å‡»ä¼¤å®³
+	bool		SubPro_Valid_Speed			= true;		//é€Ÿåº¦
 
-	bool		SubPro_Valid_DeBuffDefence			= true;		//Ğ§¹ûµÖ¿¹
-	bool		SubPro_Valid_BreakDamage			= true;		//»÷ÆÆÌØ¹¥
-	bool		SubPro_Valid_DeBuffAccuracy			= true;		//Ğ§¹ûÃüÖĞ
+	bool		SubPro_Valid_DeBuffDefence		= true;		//æ•ˆæœæŠµæŠ—
+	bool		SubPro_Valid_BreakDamage		= true;		//å‡»ç ´ç‰¹æ”»
+	bool		SubPro_Valid_DeBuffAccuracy		= true;		//æ•ˆæœå‘½ä¸­
 
-	//Ê¥ÒÅÎï¸±ÊôĞÔÓĞĞ§ÊıÖµ
-	double		SubPro_Value_HP					= 0;		//¹Ì¶¨ÉúÃüÖµ
-	double		SubPro_Value_HPPercentage		= 0;		//°Ù·Ö±ÈÉúÃüÖµ
-	double		SubPro_Value_AttackValue		= 0;		//¹Ì¶¨¹¥»÷Á¦
-	double		SubPro_Value_AttackPercentage	= 0;		//°Ù·Ö±È¹¥»÷Á¦
-	double		SubPro_Value_DefenceValue		= 0;		//¹Ì¶¨·ÀÓùÁ¦
-	double		SubPro_Value_DefencePercentage	= 0;		//°Ù·Ö±È·ÀÓùÁ¦
+	//åœ£é—ç‰©å‰¯å±æ€§æœ‰æ•ˆæ•°å€¼
+	double		SubPro_Value_HP				= 0;		//å›ºå®šç”Ÿå‘½å€¼
+	double		SubPro_Value_HPPercentage		= 0;		//ç™¾åˆ†æ¯”ç”Ÿå‘½å€¼
+	double		SubPro_Value_AttackValue		= 0;		//å›ºå®šæ”»å‡»åŠ›
+	double		SubPro_Value_AttackPercentage		= 0;		//ç™¾åˆ†æ¯”æ”»å‡»åŠ›
+	double		SubPro_Value_DefenceValue		= 0;		//å›ºå®šé˜²å¾¡åŠ›
+	double		SubPro_Value_DefencePercentage		= 0;		//ç™¾åˆ†æ¯”é˜²å¾¡åŠ›
 
-	double		SubPro_Value_CriticalProb		= 0;		//±©»÷ÂÊ
-	double		SubPro_Value_CriticalDamage		= 0;		//±©»÷ÉËº¦
-	double		SubPro_Value_Speed				= 0;		//ËÙ¶È
+	double		SubPro_Value_CriticalProb		= 0;		//æš´å‡»ç‡
+	double		SubPro_Value_CriticalDamage		= 0;		//æš´å‡»ä¼¤å®³
+	double		SubPro_Value_Speed			= 0;		//é€Ÿåº¦
 
-	double		SubPro_Value_DeBuffDefence		= 0;		//Ğ§¹ûµÖ¿¹
-	double		SubPro_Value_BreakDamage		= 0;		//»÷ÆÆÌØ¹¥
-	double		SubPro_Value_DeBuffAccuracy		= 0;		//Ğ§¹ûÃüÖĞ
+	double		SubPro_Value_DeBuffDefence		= 0;		//æ•ˆæœæŠµæŠ—
+	double		SubPro_Value_BreakDamage		= 0;		//å‡»ç ´ç‰¹æ”»
+	double		SubPro_Value_DeBuffAccuracy		= 0;		//æ•ˆæœå‘½ä¸­
 
-	//ÓĞÄÄĞ©¸±ÊôĞÔ´æÔÚÊıÖµÒªÇó
+	//æœ‰å“ªäº›å‰¯å±æ€§å­˜åœ¨æ•°å€¼è¦æ±‚
 	QVector<En_RelicSubProperty> vecSubPropertyValueRequirement;
 
 };
 
-//ÓĞĞ§Ê¥ÒÅÎï¾ßÌå¼ÆËã½á¹û
+//æœ‰æ•ˆåœ£é—ç‰©å…·ä½“è®¡ç®—ç»“æœ
 struct St_ValidRelicEstimateResult
 {
-	double	primePropertyValidProportion			= 0;		//Ö÷ÊôĞÔÓĞĞ§µÄÒÅÎïÕ¼ËùÓĞÒÅÎïµÄ±ÈÀı
-	double  primePropertyValidGetProbbability		= 0;		//»ñÈ¡Ö÷ÊôĞÔÓĞĞ§ÒÅÎï¸ÅÂÊ£¨»ñÈ¡´ÎÊı/´ò±¾´ÎÊı£©
-	double	primePropertyValidGetTimeExpectation	= 0;		//Ö÷ÊôĞÔÓĞĞ§ÒÅÆ÷»ñÈ¡ÆÚÍû(Ö÷ÊôĞÔÓĞĞ§ÒÅÎï¸öÊı/»ñÈ¡ÒÅÎï×Ü¸öÊı)
-	double	primePropertyValidPlayTimeExpectation	= 0;		//»ñÈ¡Ò»¸öÖ÷ÊôĞÔÓĞĞ§ÒÅÆ÷ĞèÒª´ò±¾´ÎÊıµÄÆÚÍû
+	double	primePropertyValidProportion		= 0;		//ä¸»å±æ€§æœ‰æ•ˆçš„é—ç‰©å æ‰€æœ‰é—ç‰©çš„æ¯”ä¾‹
+	double  primePropertyValidGetProbbability	= 0;		//è·å–ä¸»å±æ€§æœ‰æ•ˆé—ç‰©æ¦‚ç‡ï¼ˆè·å–æ¬¡æ•°/æ‰“æœ¬æ¬¡æ•°ï¼‰
+	double	primePropertyValidGetTimeExpectation	= 0;		//ä¸»å±æ€§æœ‰æ•ˆé—å™¨è·å–æœŸæœ›(ä¸»å±æ€§æœ‰æ•ˆé—ç‰©ä¸ªæ•°/è·å–é—ç‰©æ€»ä¸ªæ•°)
+	double	primePropertyValidPlayTimeExpectation	= 0;		//è·å–ä¸€ä¸ªä¸»å±æ€§æœ‰æ•ˆé—å™¨éœ€è¦æ‰“æœ¬æ¬¡æ•°çš„æœŸæœ›
 
-	double	allPropertyValidProportion				= 0;		//È«ÊôĞÔÓĞĞ§µÄÒÅÎïÕ¼ËùÓĞÒÅÎïµÄ±ÈÀı
-	double  allPropertyValidGetProbbability			= 0;		//»ñÈ¡È«ÊôĞÔÓĞĞ§ÒÅÎï¸ÅÂÊ£¨»ñÈ¡´ÎÊı/´ò±¾´ÎÊı£©
-	double	allPropertyValidGetTimeExpectation		= 0;		//È«ÊôĞÔÓĞĞ§ÒÅÆ÷»ñÈ¡ÆÚÍû(È«ÊôĞÔÓĞĞ§ÒÅÎï¸öÊı/»ñÈ¡ÒÅÎï×Ü¸öÊı)	
-	double	allPropertyValidPlayTimeExpectation		= 0;		//»ñÈ¡Ò»¸öÈ«ÊôĞÔÓĞĞ§ÒÅÆ÷ĞèÒª´ò±¾´ÎÊıµÄÆÚÍû	
+	double	allPropertyValidProportion		= 0;		//å…¨å±æ€§æœ‰æ•ˆçš„é—ç‰©å æ‰€æœ‰é—ç‰©çš„æ¯”ä¾‹
+	double  allPropertyValidGetProbbability		= 0;		//è·å–å…¨å±æ€§æœ‰æ•ˆé—ç‰©æ¦‚ç‡ï¼ˆè·å–æ¬¡æ•°/æ‰“æœ¬æ¬¡æ•°ï¼‰
+	double	allPropertyValidGetTimeExpectation	= 0;		//å…¨å±æ€§æœ‰æ•ˆé—å™¨è·å–æœŸæœ›(å…¨å±æ€§æœ‰æ•ˆé—ç‰©ä¸ªæ•°/è·å–é—ç‰©æ€»ä¸ªæ•°)	
+	double	allPropertyValidPlayTimeExpectation	= 0;		//è·å–ä¸€ä¸ªå…¨å±æ€§æœ‰æ•ˆé—å™¨éœ€è¦æ‰“æœ¬æ¬¡æ•°çš„æœŸæœ›	
 
-	QMap <int, double>	mapPriProValidGetNumProb;		//Ö÷ÊôĞÔÓĞĞ§ÒÅÆ÷¶Ô£¨Ö÷ÊôĞÔÓĞĞ§ÒÅÎï¸öÊı£¬·¢Éú¸ÅÂÊ£©	
-	QMap <int, double>	mapAllProValidGetNumProb;		//È«ÊôĞÔÓĞĞ§ÒÅÆ÷¶Ô£¨¸±ÊôĞÔÓĞĞ§ÒÅÎï¸öÊı£¬·¢Éú¸ÅÂÊ£©£¬¸±ÊôĞÔÓĞĞ§+Ö÷ÊôĞÔÓĞĞ§
+	QMap <int, double>	mapPriProValidGetNumProb;		//ä¸»å±æ€§æœ‰æ•ˆé—å™¨å¯¹ï¼ˆä¸»å±æ€§æœ‰æ•ˆé—ç‰©ä¸ªæ•°ï¼Œå‘ç”Ÿæ¦‚ç‡ï¼‰	
+	QMap <int, double>	mapAllProValidGetNumProb;		//å…¨å±æ€§æœ‰æ•ˆé—å™¨å¯¹ï¼ˆå‰¯å±æ€§æœ‰æ•ˆé—ç‰©ä¸ªæ•°ï¼Œå‘ç”Ÿæ¦‚ç‡ï¼‰ï¼Œå‰¯å±æ€§æœ‰æ•ˆ+ä¸»å±æ€§æœ‰æ•ˆ
 	
 };
 

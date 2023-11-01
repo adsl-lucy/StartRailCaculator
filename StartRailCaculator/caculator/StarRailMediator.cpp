@@ -50,74 +50,74 @@ void StarRailMediator::initUi()
 
 void StarRailMediator::initSignalSlots()
 {
-	connect(m_mainFrame,	&StarRailMainFrame::signal_StartEstimateResource,			this,			&StarRailMediator::slot_startResourceEstmate);
-	connect(this,			&StarRailMediator::signal_ResouceEstErrorMsg,				m_mainFrame,	&StarRailMainFrame::signal_ResouceEstErrorMsg);
-	connect(this,			&StarRailMediator::signal_ResouceEstResult,					m_mainFrame,	&StarRailMainFrame::signal_ResouceEstResult);
+	connect(m_mainFrame,	&StarRailMainFrame::signal_StartEstimateResource,		this,		&StarRailMediator::slot_startResourceEstmate);
+	connect(this,		&StarRailMediator::signal_ResouceEstErrorMsg,			m_mainFrame,	&StarRailMainFrame::signal_ResouceEstErrorMsg);
+	connect(this,		&StarRailMediator::signal_ResouceEstResult,			m_mainFrame,	&StarRailMainFrame::signal_ResouceEstResult);
 
-	connect(m_mainFrame,	&StarRailMainFrame::signal_StartCardPoolEstimate,			this,			&StarRailMediator::slot_startCardPoolEstimate);
-	connect(this,			&StarRailMediator::signal_CardPoolEstResult,				m_mainFrame,	&StarRailMainFrame::signal_CardPoolEstResult);
-	connect(this,			&StarRailMediator::signal_UpdateCardPoolEstmateProgress,	m_mainFrame,	&StarRailMainFrame::signal_UpdateCardPoolEstmateProgress);
+	connect(m_mainFrame,	&StarRailMainFrame::signal_StartCardPoolEstimate,		this,		&StarRailMediator::slot_startCardPoolEstimate);
+	connect(this,		&StarRailMediator::signal_CardPoolEstResult,			m_mainFrame,	&StarRailMainFrame::signal_CardPoolEstResult);
+	connect(this,		&StarRailMediator::signal_UpdateCardPoolEstmateProgress,	m_mainFrame,	&StarRailMainFrame::signal_UpdateCardPoolEstmateProgress);
 
-	connect(m_mainFrame,	&StarRailMainFrame::signal_StartInvestmentIncomeEstimate,	this,			&StarRailMediator::slot_startInvestmentIncomeEstimate);
-	connect(this,			&StarRailMediator::signal_UpdateInvestmentEstimateProgress, m_mainFrame,	&StarRailMainFrame::signal_UpdateInvestmentEstimateProgress);
-	connect(this,			&StarRailMediator::signal_InvestmentEstimateResult,			m_mainFrame,	&StarRailMainFrame::signal_InvestmentEstimateResult);
+	connect(m_mainFrame,	&StarRailMainFrame::signal_StartInvestmentIncomeEstimate,	this,		&StarRailMediator::slot_startInvestmentIncomeEstimate);
+	connect(this,		&StarRailMediator::signal_UpdateInvestmentEstimateProgress, 	m_mainFrame,	&StarRailMainFrame::signal_UpdateInvestmentEstimateProgress);
+	connect(this,		&StarRailMediator::signal_InvestmentEstimateResult,		m_mainFrame,	&StarRailMainFrame::signal_InvestmentEstimateResult);
 
-	connect(m_mainFrame,	&StarRailMainFrame::signal_StartRelicValidEstimate,			this,			&StarRailMediator::slot_startRelicValidEstimate);
-	connect(this,			&StarRailMediator::signal_RelicEstErrorMsg,					m_mainFrame,	&StarRailMainFrame::signal_RelicEstErrorMsg);
-	connect(this,			&StarRailMediator::signal_UpdateRelicEstimateProgress,		m_mainFrame,	&StarRailMainFrame::signal_UpdateRelicEstimateProgress);
-	connect(this,			&StarRailMediator::signal_RelicEstResult,					m_mainFrame,	&StarRailMainFrame::signal_RelicEstResult);
+	connect(m_mainFrame,	&StarRailMainFrame::signal_StartRelicValidEstimate,		this,		&StarRailMediator::slot_startRelicValidEstimate);
+	connect(this,		&StarRailMediator::signal_RelicEstErrorMsg,			m_mainFrame,	&StarRailMainFrame::signal_RelicEstErrorMsg);
+	connect(this,		&StarRailMediator::signal_UpdateRelicEstimateProgress,		m_mainFrame,	&StarRailMainFrame::signal_UpdateRelicEstimateProgress);
+	connect(this,		&StarRailMediator::signal_RelicEstResult,			m_mainFrame,	&StarRailMainFrame::signal_RelicEstResult);
 
 
 }
 
 const EN_StarRailErrorNum StarRailMediator::checkResourceEstInputErr(const St_ResourceEstimateParameter& EstPara)
 {
-	if (EstPara.startDate < Const_StarRailOpenDay.date())//²»ÄÜ±È¿ª·ş»¹Ôç
+	if (EstPara.startDate < Const_StarRailOpenDay.date())//ä¸èƒ½æ¯”å¼€æœè¿˜æ—©
 	{
 		return EN_StarRailErrorNum::ResouceEst_StartDateTooEarly;
 	}
 
-	if (EstPara.startDate > Const_StarRailLatestDay.date())//¿ªÊ¼Ê±¼äÌ«Íí
+	if (EstPara.startDate > Const_StarRailLatestDay.date())//å¼€å§‹æ—¶é—´å¤ªæ™š
 	{
 		return EN_StarRailErrorNum::ResouceEst_StartDateTooLate;;
 	}
 
-	if (EstPara.stopDate < EstPara.startDate)//½áÊøÈÕÆÚÔçÓÚ¿ªÊ¼ÈÕÆÚ
+	if (EstPara.stopDate < EstPara.startDate)//ç»“æŸæ—¥æœŸæ—©äºå¼€å§‹æ—¥æœŸ
 	{
 		return EN_StarRailErrorNum::ResouceEst_StartDayLateThanEndDay;
 	}
 
-	if (EstPara.startDate == EstPara.stopDate)//½áÊøÈÕÆÚºÍ¿ªÊ¼ÈÕÆÚÏàÍ¬
+	if (EstPara.startDate == EstPara.stopDate)//ç»“æŸæ—¥æœŸå’Œå¼€å§‹æ—¥æœŸç›¸åŒ
 	{
 		return EN_StarRailErrorNum::ResouceEst_StartEndSameDay;
 	}
 
-	if (EstPara.stopDate > Const_StarRailLatestDay.date())//½áÊøÈÕÆÚÌ«Íí
+	if (EstPara.stopDate > Const_StarRailLatestDay.date())//ç»“æŸæ—¥æœŸå¤ªæ™š
 	{
 		return EN_StarRailErrorNum::ResouceEst_StopDayTooLate;
 	}
 
-	if (EstPara.currentCrystal < 0)//µ±Ç°ĞÇÇí²»ÄÜĞ¡ÓÚ0
+	if (EstPara.currentCrystal < 0)//å½“å‰æ˜Ÿç¼ä¸èƒ½å°äº0
 	{
 		return EN_StarRailErrorNum::ResouceEst_CurrentCrystalInvaild;
 	}
 
-	if (EstPara.currentTicket < 0)//µ±Ç°Æ±Êı²»ÄÜĞ¡ÓÚ0
+	if (EstPara.currentTicket < 0)//å½“å‰ç¥¨æ•°ä¸èƒ½å°äº0
 	{
 		return EN_StarRailErrorNum::ResouceEst_CurrentTicketNumInvaild;
 	}
 
-	if (EstPara.currentPaidCrystal < 0)//µ±Ç°¹ÅÀÏÃÎ»ª²»ÄÜĞ¡ÓÚ0
+	if (EstPara.currentPaidCrystal < 0)//å½“å‰å¤è€æ¢¦åä¸èƒ½å°äº0
 	{
 		return EN_StarRailErrorNum::ResouceEst_CurrentPaidCrystalInvaild;
 	}
 
-	if (EstPara.abyssAverageNum < 0 || EstPara.abyssAverageNum > 10)//ÉîÔ¨ÊıÁ¿´íÎó
+	if (EstPara.abyssAverageNum < 0 || EstPara.abyssAverageNum > 10)//æ·±æ¸Šæ•°é‡é”™è¯¯
 	{
 		return EN_StarRailErrorNum::ResouceEst_AbyssAverageNumInvaild;
 	}
 
-	if (EstPara.smallMonthCardLastday < 0 || EstPara.smallMonthCardLastday>30)//Ğ¡ÔÂ¿¨Ê£ÓàÌìÊıÎŞĞ§
+	if (EstPara.smallMonthCardLastday < 0 || EstPara.smallMonthCardLastday>30)//å°æœˆå¡å‰©ä½™å¤©æ•°æ— æ•ˆ
 	{
 		return EN_StarRailErrorNum::ResouceEst_SmallMonthCardRemainDayInvaild;
 	}
@@ -131,31 +131,31 @@ void StarRailMediator::sendResourceEstErrorMsg(const EN_StarRailErrorNum ErrNum)
 	QString ErrMsg;
 	switch (ErrNum)
 	{
-		case EN_StarRailErrorNum::ResouceEst_InputNoError						: break;
-		case EN_StarRailErrorNum::ResouceEst_StartDateTooEarly					: ErrMsg = QString("¿ªÊ¼ÈÕÆÚÔçÓÚ¿ª·şÈÕÆÚ£¨2023/4/26£©");	break;
-		case EN_StarRailErrorNum::ResouceEst_StartDateTooLate					: ErrMsg = QString("¿ªÊ¼Ê±¼äÌ«Íí£¨´óÓÚ2024/4/26£©");		break;
-		case EN_StarRailErrorNum::ResouceEst_StartEndSameDay					: ErrMsg = QString("¿ªÊ¼ÈÕÆÚºÍÖÕÖ¹ÈÕÆÚÏàÍ¬");				break;
-		case EN_StarRailErrorNum::ResouceEst_StartDayLateThanEndDay				: ErrMsg = QString("ÖÕÖ¹ÈÕÆÚÔçÓÚÆğÊ¼ÈÕÆÚ");					break;
-		case EN_StarRailErrorNum::ResouceEst_StopDayTooLate						: ErrMsg = QString("ÖÕÖ¹ÈÕÆÚÌ«Íí£¨´óÓÚ2020/4/26£©");		break;
+		case EN_StarRailErrorNum::ResouceEst_InputNoError			: break;
+		case EN_StarRailErrorNum::ResouceEst_StartDateTooEarly			: ErrMsg = QString("å¼€å§‹æ—¥æœŸæ—©äºå¼€æœæ—¥æœŸï¼ˆ2023/4/26ï¼‰");break;
+		case EN_StarRailErrorNum::ResouceEst_StartDateTooLate			: ErrMsg = QString("å¼€å§‹æ—¶é—´å¤ªæ™šï¼ˆå¤§äº2024/4/26ï¼‰");break;
+		case EN_StarRailErrorNum::ResouceEst_StartEndSameDay			: ErrMsg = QString("å¼€å§‹æ—¥æœŸå’Œç»ˆæ­¢æ—¥æœŸç›¸åŒ");break;
+		case EN_StarRailErrorNum::ResouceEst_StartDayLateThanEndDay		: ErrMsg = QString("ç»ˆæ­¢æ—¥æœŸæ—©äºèµ·å§‹æ—¥æœŸ");break;
+		case EN_StarRailErrorNum::ResouceEst_StopDayTooLate			: ErrMsg = QString("ç»ˆæ­¢æ—¥æœŸå¤ªæ™šï¼ˆå¤§äº2020/4/26ï¼‰");break;
 
-		case EN_StarRailErrorNum::ResouceEst_CurrentTicketNumInvaild			: ErrMsg = QString("µ±Ç°Æ±ÊıÎŞĞ§");				break;
-		case EN_StarRailErrorNum::ResouceEst_CurrentCrystalInvaild				: ErrMsg = QString("µ±Ç°ĞÇÇíÎŞĞ§");				break;
-		case EN_StarRailErrorNum::ResouceEst_SmallMonthCardRemainDayInvaild		: ErrMsg = QString("Ğ¡ÔÂ¿¨Ê£ÓàÌìÊıÎŞĞ§");		break;
-		case EN_StarRailErrorNum::ResouceEst_CurrentPaidCrystalInvaild			: ErrMsg = QString("µ±Ç°¹ÅÀÏÃÎ»ªÎŞĞ§");			break;
-		case EN_StarRailErrorNum::ResouceEst_AbyssAverageNumInvaild				: ErrMsg = QString("ÉîÔ¨Æ½¾ùÍ¨¹ØÊıÎŞĞ§");		break;
+		case EN_StarRailErrorNum::ResouceEst_CurrentTicketNumInvaild		: ErrMsg = QString("å½“å‰ç¥¨æ•°æ— æ•ˆ"); break;
+		case EN_StarRailErrorNum::ResouceEst_CurrentCrystalInvaild		: ErrMsg = QString("å½“å‰æ˜Ÿç¼æ— æ•ˆ");break;
+		case EN_StarRailErrorNum::ResouceEst_SmallMonthCardRemainDayInvaild	: ErrMsg = QString("å°æœˆå¡å‰©ä½™å¤©æ•°æ— æ•ˆ");break;
+		case EN_StarRailErrorNum::ResouceEst_CurrentPaidCrystalInvaild		: ErrMsg = QString("å½“å‰å¤è€æ¢¦åæ— æ•ˆ");break;
+		case EN_StarRailErrorNum::ResouceEst_AbyssAverageNumInvaild		: ErrMsg = QString("æ·±æ¸Šå¹³å‡é€šå…³æ•°æ— æ•ˆ");break;
 	}
 	emit signal_ResouceEstErrorMsg(ErrNum, ErrMsg);
 }
 
 void StarRailMediator::slot_startResourceEstmate(const St_ResourceEstimateParameter& EstPara)
 {
-	//²é¿´ÊäÈë´íÎó
+	//æŸ¥çœ‹è¾“å…¥é”™è¯¯
 	EN_StarRailErrorNum ErrNum = checkResourceEstInputErr(EstPara);
 
-	//²»ÂÛÊäÈë³É¹¦Óë·ñ¶¼»á·¢ËÍ´íÎóÂë£¬ÕâÑùÊäÈë³É¹¦¾Í»áÏû³ı´íÎóÏûÏ¢
+	//ä¸è®ºè¾“å…¥æˆåŠŸä¸å¦éƒ½ä¼šå‘é€é”™è¯¯ç ï¼Œè¿™æ ·è¾“å…¥æˆåŠŸå°±ä¼šæ¶ˆé™¤é”™è¯¯æ¶ˆæ¯
 	sendResourceEstErrorMsg(ErrNum);
 
-	if (ErrNum != EN_StarRailErrorNum::ResouceEst_InputNoError) return;//ÊäÈëÓĞÎÊÌâ¾Í²»ËãÁË
+	if (ErrNum != EN_StarRailErrorNum::ResouceEst_InputNoError) return;//è¾“å…¥æœ‰é—®é¢˜å°±ä¸ç®—äº†
 
 
 	QDate	currentDate				= EstPara.startDate;
@@ -165,13 +165,13 @@ void StarRailMediator::slot_startResourceEstmate(const St_ResourceEstimateParame
 	int		smallMonthCardRemainday = EstPara.smallMonthCardLastday;
 
 	
-	int		totalSmallMonthCardExpense	= 0;	//ÀÛ¼ÆĞ¡ÔÂ¿¨Í¶Èë
-	int		totalBigMonthCardExpense	= 0;	//ÀÛ¼Æ´óÔÂ¿¨Í¶Èë
-	int		totalExpense				= 0;	//ÀÛ¼Æ×ÜÍ¶Èë
+	int		totalSmallMonthCardExpense	= 0;	//ç´¯è®¡å°æœˆå¡æŠ•å…¥
+	int		totalBigMonthCardExpense	= 0;	//ç´¯è®¡å¤§æœˆå¡æŠ•å…¥
+	int		totalExpense			= 0;	//ç´¯è®¡æ€»æŠ•å…¥
 
 	QVector<St_ResourceEstimateDateResult> resultVec;
 
-	//µÚÒ»ÌìÄ¬ÈÏ¶ª½øÈ¥µÄÊı¾İÊÇÒÑ¾­»ñµÃÁËËùÓĞÊÕÒæºóµÄ½á¹û
+	//ç¬¬ä¸€å¤©é»˜è®¤ä¸¢è¿›å»çš„æ•°æ®æ˜¯å·²ç»è·å¾—äº†æ‰€æœ‰æ”¶ç›Šåçš„ç»“æœ
 	{
 		St_ResourceEstimateDateResult currentDayResult;
 
@@ -185,48 +185,48 @@ void StarRailMediator::slot_startResourceEstmate(const St_ResourceEstimateParame
 		currentDayResult.buySmallMonthCard		= false;
 		currentDayResult.buyBigMonthCard		= false;
 		currentDayResult.playMonitorSpace		= false;
-		currentDayResult.playAbyss				= false;
+		currentDayResult.playAbyss			= false;
 
-		currentDayResult.currentdayExpense			= 0;
+		currentDayResult.currentdayExpense		= 0;
 		currentDayResult.totalSmallCardExpence		= 0;
 		currentDayResult.totalBigMonthCardExpence	= 0;
-		currentDayResult.totalExpense				= 0;
+		currentDayResult.totalExpense			= 0;
 
 		resultVec.push_back(currentDayResult);
 		currentDate = currentDate.addDays(1);
 	}
 
-	//¿ªÊ¼½øĞĞµÚ¶şÌìµ½×îºóÒ»ÌìµÄ¼ÆËã
+	//å¼€å§‹è¿›è¡Œç¬¬äºŒå¤©åˆ°æœ€åä¸€å¤©çš„è®¡ç®—
 	do
 	{
-		//µ±Ìì¿ªÏú
+		//å½“å¤©å¼€é”€
 		int currentdayExpense = 0;
-		//¼ÆËã½ñÌìĞÇÇíÊÕÈë£¬ÏÈ»ñµÃÃ»½øÓÎÏ·µÄĞÇÇí
+		//è®¡ç®—ä»Šå¤©æ˜Ÿç¼æ”¶å…¥ï¼Œå…ˆè·å¾—æ²¡è¿›æ¸¸æˆçš„æ˜Ÿç¼
 		int LastdayCrystal = currentCrystal;
 
-		//Æô¶¯ÓÎÏ·ÏÈ´¥·¢Ğ¡ÔÂ¿¨»úÖÆ
+		//å¯åŠ¨æ¸¸æˆå…ˆè§¦å‘å°æœˆå¡æœºåˆ¶
 		bool buySmallMonthCard = EstPara.buySmallMonthCard && smallMonthCardRemainday == 0;
 
-		if (buySmallMonthCard)//Ğ¡ÔÂ¿¨µ½ÆÚÁË£¬³äÖµ30£¬»ñµÃ300¹ÅÀÏÃÎ»ª
+		if (buySmallMonthCard)//å°æœˆå¡åˆ°æœŸäº†ï¼Œå……å€¼30ï¼Œè·å¾—300å¤è€æ¢¦å
 		{
-			currentPaidCrystal			+= 300;
+			currentPaidCrystal		+= 300;
 			smallMonthCardRemainday		+= 30;			
-			currentdayExpense			+= 30;
+			currentdayExpense		+= 30;
 			totalSmallMonthCardExpense	+= 30;
-			totalExpense				+= 30;
+			totalExpense			+= 30;
 		}
 
-		if (EstPara.buySmallMonthCard)//ÔÚÂòĞ¡ÔÂ¿¨Éè¶¨ÏÂ£¬Ã¿Ìì»ñµÃ90Ë®
+		if (EstPara.buySmallMonthCard)//åœ¨ä¹°å°æœˆå¡è®¾å®šä¸‹ï¼Œæ¯å¤©è·å¾—90æ°´
 		{
 			currentCrystal += 90;
 			smallMonthCardRemainday -= 1;
 		}
 
 
-		//È»ºó×öÈÕ³£»ñµÃ60Ë®
+		//ç„¶ååšæ—¥å¸¸è·å¾—60æ°´
 		currentCrystal		+= 60;
 
-		//Èç¹ûÊÇÃ¿ÖÜµÚÒ»Ìì£¬ÄÇÃ´´òÄ£ÄâÓîÖæ»ñµÃ225ãß£¨×î¸ßÍ»ÆÆµÈ¼¶£©
+		//å¦‚æœæ˜¯æ¯å‘¨ç¬¬ä¸€å¤©ï¼Œé‚£ä¹ˆæ‰“æ¨¡æ‹Ÿå®‡å®™è·å¾—225æ°µï¼ˆæœ€é«˜çªç ´ç­‰çº§ï¼‰
 		bool playMonitorSpace = currentDate.dayOfWeek() == 1;
 
 		if (playMonitorSpace)
@@ -234,7 +234,7 @@ void StarRailMediator::slot_startResourceEstmate(const St_ResourceEstimateParame
 			currentCrystal += Const_MonitorSpaceCrystal;
 		}
 
-		//Ã¿¸öÔÂµÚÒ»ÌìÈ¥ÉÌµê»ñµÃ5³é
+		//æ¯ä¸ªæœˆç¬¬ä¸€å¤©å»å•†åº—è·å¾—5æŠ½
 		if (currentDate.day() == 1)
 		{
 			currentTicket += 5;
@@ -242,33 +242,33 @@ void StarRailMediator::slot_startResourceEstmate(const St_ResourceEstimateParame
 
 		int dayFromOpen = Const_StarRailOpenDay.date().daysTo(currentDate);
 
-		//Èç¹ûÊÇ¿ª·şºó2ÖÜµÄ±¶Êı£¬ÄÇÃ´ÉîÔ¨Ë¢ĞÂ£¬»ñµÃÆÚÍûÊÕÒæ
+		//å¦‚æœæ˜¯å¼€æœå2å‘¨çš„å€æ•°ï¼Œé‚£ä¹ˆæ·±æ¸Šåˆ·æ–°ï¼Œè·å¾—æœŸæœ›æ”¶ç›Š
 		bool playAbyss = dayFromOpen % 14 == 0;
 		if (playAbyss)
 		{
 			currentCrystal += EstPara.abyssAverageNum * Const_AbyssCrystalPerLevel;
 		}
 
-		//ÅĞ¶Ï½ñÌìÊÇ²»ÊÇ´ó°æ±¾¸üĞÂ£¨¿ª·şºó6ÖÜÒ»´Î£©
+		//åˆ¤æ–­ä»Šå¤©æ˜¯ä¸æ˜¯å¤§ç‰ˆæœ¬æ›´æ–°ï¼ˆå¼€æœå6å‘¨ä¸€æ¬¡ï¼‰
 		bool bigupdate = dayFromOpen % Const_BigMonthCardPeriod == 0;
 
-		//´ó°æ±¾¸üĞÂËÍ300ãßÎ¬»¤ + 300ãßĞŞBUG
+		//å¤§ç‰ˆæœ¬æ›´æ–°é€300æ°µç»´æŠ¤ + 300æ°µä¿®BUG
 		if (bigupdate)
 		{
 			currentCrystal += 600;
 		}
 
-		//ÅĞ¶Ï½ñÌìÂò²»Âò´óÔÂ¿¨£¨ºÍ´ò°æ±¾¸üĞÂÍ¬ÆµÂÊ£©
+		//åˆ¤æ–­ä»Šå¤©ä¹°ä¸ä¹°å¤§æœˆå¡ï¼ˆå’Œæ‰“ç‰ˆæœ¬æ›´æ–°åŒé¢‘ç‡ï¼‰
 		bool buyBigMonthCard = EstPara.buyBigMonthCard && bigupdate;
 
 		if (buyBigMonthCard)
 		{		
-			currentdayExpense			+= 68;
+			currentdayExpense		+= 68;
 			totalBigMonthCardExpense	+= 68;
-			totalExpense				+= 68;
+			totalExpense			+= 68;
 		}
 
-		//Ä¬ÈÏÃ¿ÖÜ°Ñ¾­Ñé´òÂú£¨Ò»ÖÜ10¼¶£©
+		//é»˜è®¤æ¯å‘¨æŠŠç»éªŒæ‰“æ»¡ï¼ˆä¸€å‘¨10çº§ï¼‰
 		if (EstPara.buyBigMonthCard)
 		{
 			switch (dayFromOpen % Const_BigMonthCardPeriod)
@@ -292,12 +292,12 @@ void StarRailMediator::slot_startResourceEstmate(const St_ResourceEstimateParame
 		currentDayResult.buySmallMonthCard	= buySmallMonthCard;
 		currentDayResult.buyBigMonthCard	= buyBigMonthCard;
 		currentDayResult.playMonitorSpace	= playMonitorSpace;
-		currentDayResult.playAbyss			= playAbyss;
+		currentDayResult.playAbyss		= playAbyss;
 
-		currentDayResult.currentdayExpense			= currentdayExpense;
+		currentDayResult.currentdayExpense		= currentdayExpense;
 		currentDayResult.totalSmallCardExpence		= totalSmallMonthCardExpense;
 		currentDayResult.totalBigMonthCardExpence	= totalBigMonthCardExpense;
-		currentDayResult.totalExpense				= totalExpense;
+		currentDayResult.totalExpense			= totalExpense;
 
 
 		resultVec.push_back(currentDayResult);
@@ -310,10 +310,10 @@ void StarRailMediator::slot_startResourceEstmate(const St_ResourceEstimateParame
 
 void StarRailMediator::slot_startCardPoolEstimate(const St_CardPoolEstimatePara& EstPara)
 {
-	//½á¹û³Ø£¬keyÎª³é¿¨´ÎÊı£¬valueÎª¸ÃÎ»ÖÃÍ£Ö¹´ÎÊı
+	//ç»“æœæ± ï¼Œkeyä¸ºæŠ½å¡æ¬¡æ•°ï¼Œvalueä¸ºè¯¥ä½ç½®åœæ­¢æ¬¡æ•°
 	QMap<int, int> resultMap;
 
-	int	largestDrawTime = 0;//Ò»´ÎÊµÑé×î¶à³é¶àÉÙ´Î¿¨
+	int	largestDrawTime = 0;//ä¸€æ¬¡å®éªŒæœ€å¤šæŠ½å¤šå°‘æ¬¡å¡
 
 	if (EstPara.poolType == EN_CardPoolType::character)
 	{
@@ -339,25 +339,25 @@ void StarRailMediator::slot_startCardPoolEstimate(const St_CardPoolEstimatePara&
 		}
 	}
 
-	//³õÊ¼»¯½á¹û³Ø
-	for (int i = 0; i <= largestDrawTime; i++)//ÕâÀïµÚ0¸öÖµ±ØÈ»ÊÇ0
+	//åˆå§‹åŒ–ç»“æœæ± 
+	for (int i = 0; i <= largestDrawTime; i++)//è¿™é‡Œç¬¬0ä¸ªå€¼å¿…ç„¶æ˜¯0
 	{
 		resultMap.insert(i, 0);
 	}
 
 	int startRandomSeed = time(nullptr);
-	int ExperimentTime = 100000;//ÊÕÁ²¶È½ÏºÃµÄÖØ¸´´ÎÊı
+	int ExperimentTime = 100000;//æ”¶æ•›åº¦è¾ƒå¥½çš„é‡å¤æ¬¡æ•°
 
 	for (int currentExpTime = 1; currentExpTime <= ExperimentTime; currentExpTime++)
 	{
-		//Ã¿´Î½øĞĞÊµÑé¶¼ÖØÖÃÒ»ÏÂËæ»úÊıÒıÇæµÄÊı±í
+		//æ¯æ¬¡è¿›è¡Œå®éªŒéƒ½é‡ç½®ä¸€ä¸‹éšæœºæ•°å¼•æ“çš„æ•°è¡¨
 		unsigned int seed = startRandomSeed + currentExpTime;
 		std::default_random_engine engine(seed);
 
-		int					distanceToLastGold	= EstPara.areadyInTicket + 1;
-		bool				wrongGoldBefore		= EstPara.wrongGold;
+		int			distanceToLastGold	= EstPara.areadyInTicket + 1;
+		bool			wrongGoldBefore		= EstPara.wrongGold;
 		En_DrawCardResult	currentResult		= En_DrawCardResult::normal;
-		int					currentPos			= 1;
+		int			currentPos		= 1;
 
 
 		while (currentPos <= largestDrawTime)
@@ -371,7 +371,7 @@ void StarRailMediator::slot_startCardPoolEstimate(const St_CardPoolEstimatePara&
 			else if (currentResult == En_DrawCardResult::character_wrongGold || currentResult == En_DrawCardResult::weapon_wrongGold)
 			{
 				wrongGoldBefore = true;
-				distanceToLastGold = 0;//ÒòÎªÍáÁË£¬ÖØÖÃµ½´ï½ğµÄ¾àÀë
+				distanceToLastGold = 0;//å› ä¸ºæ­ªäº†ï¼Œé‡ç½®åˆ°è¾¾é‡‘çš„è·ç¦»
 			}
 
 			currentPos++;
@@ -385,13 +385,13 @@ void StarRailMediator::slot_startCardPoolEstimate(const St_CardPoolEstimatePara&
 			mapPos.value()++;
 		}
 
-		if (currentExpTime % 1000 == 0)//Ë¢ĞÂ½ø¶ÈÌõ
+		if (currentExpTime % 1000 == 0)//åˆ·æ–°è¿›åº¦æ¡
 		{
 			emit signal_UpdateCardPoolEstmateProgress(currentExpTime/1000);
 		}
 	}
 	
-	QMap<int, double>PorbDensityMap;//¸ÅÂÊ·Ö²¼ÃÜ¶Èº¯Êı£¨·½±ãµ÷ÊÔ£©
+	QMap<int, double>PorbDensityMap;//æ¦‚ç‡åˆ†å¸ƒå¯†åº¦å‡½æ•°ï¼ˆæ–¹ä¾¿è°ƒè¯•ï¼‰
 
 	for (auto resultMapPos = resultMap.begin(); resultMapPos != resultMap.end(); resultMapPos++)
 	{
@@ -404,12 +404,12 @@ void StarRailMediator::slot_startCardPoolEstimate(const St_CardPoolEstimatePara&
 
 	St_CardPoolEstimateResult EstResult;
 
-	EstResult.poolType					= EstPara.poolType;
+	EstResult.poolType			= EstPara.poolType;
 	EstResult.distanceToBigGuarantee	= largestDrawTime;
 	EstResult.smallGuaranteeInCase		= !EstPara.wrongGold;
 
 	int smallGuaranteePos	= -1;
-	int bigGuaranteePos		= largestDrawTime;
+	int bigGuaranteePos	= largestDrawTime;
 
 	if (EstResult.smallGuaranteeInCase)
 	{
@@ -424,12 +424,12 @@ void StarRailMediator::slot_startCardPoolEstimate(const St_CardPoolEstimatePara&
 	}
 
 	EstResult.getUpPosExpectation	= 0;
-	double	accumulateProb			= 0;//¸ÅÂÊ·Ö²¼£¨ÀÛ¼Æ¸ÅÂÊ£©
-	int		currentPos				= 1;
+	double	accumulateProb		= 0;//æ¦‚ç‡åˆ†å¸ƒï¼ˆç´¯è®¡æ¦‚ç‡ï¼‰
+	int		currentPos	= 1;
 
 	for (auto densityMapPos = PorbDensityMap.begin(); densityMapPos != PorbDensityMap.end(); densityMapPos++)
 	{
-		int	TickNum				= densityMapPos.key();
+		int	TickNum			= densityMapPos.key();
 		double densityVal		= densityMapPos.value();
 		accumulateProb			+= densityVal;
 
@@ -464,14 +464,14 @@ void StarRailMediator::slot_startInvestmentIncomeEstimate(const St_InvestmentEst
 
 	for (int currentExpTime = 1; currentExpTime <= ExperimentTime; currentExpTime++)
 	{
-		bool lastGoldCharacterWrong		= EstPara.lastGoldCharacterWrong;
+		bool lastGoldCharacterWrong	= EstPara.lastGoldCharacterWrong;
 		int areadyInCharacterPoolTicket = EstPara.areadyInCharacterPoolTicket;
-		bool lastGoldWeaponWrong		= EstPara.lastGoldWeaponWrong;
+		bool lastGoldWeaponWrong	= EstPara.lastGoldWeaponWrong;
 		int areadyInWeaponPoolTicket	= EstPara.areadyInWeaponPoolTicket;
 
-		int currentTickCost		= 0;
+		int currentTickCost	= 0;
 		int getUpCharacterTime	= 0;
-		int getUpWeaponTime		= 0;
+		int getUpWeaponTime	= 0;
 
 		std::default_random_engine engine(startRandomSeed + currentExpTime);
 
@@ -479,12 +479,12 @@ void StarRailMediator::slot_startInvestmentIncomeEstimate(const St_InvestmentEst
 		{
 			while (currentTickCost < largestDrawTime)
 			{
-				if (EstPara.drawCardType == En_DrawCardType::characterOnly)//Ö»³é½ÇÉ«
+				if (EstPara.drawCardType == En_DrawCardType::characterOnly)//åªæŠ½è§’è‰²
 				{
 					int TicketCost = DrawCardUntilGetUp(EN_CardPoolType::character, lastGoldCharacterWrong, areadyInCharacterPoolTicket, engine);
 					currentTickCost += TicketCost;
 
-					if (currentTickCost > largestDrawTime)//¿ªÏú´óÓÚ×î´ó³éÊı£¬´ËÊ±Õâ¸ö³ö»õ½á¹ûÎŞĞ§
+					if (currentTickCost > largestDrawTime)//å¼€é”€å¤§äºæœ€å¤§æŠ½æ•°ï¼Œæ­¤æ—¶è¿™ä¸ªå‡ºè´§ç»“æœæ— æ•ˆ
 					{
 						break;
 					}
@@ -495,7 +495,7 @@ void StarRailMediator::slot_startInvestmentIncomeEstimate(const St_InvestmentEst
 						getUpCharacterTime++;
 					}
 				}
-				else if (EstPara.drawCardType == En_DrawCardType::waeponOnly)//Ö»³éÎäÆ÷
+				else if (EstPara.drawCardType == En_DrawCardType::waeponOnly)//åªæŠ½æ­¦å™¨
 				{
 					int TicketCost = DrawCardUntilGetUp(EN_CardPoolType::weapon, lastGoldWeaponWrong, areadyInWeaponPoolTicket, engine);
 					currentTickCost += TicketCost;
@@ -514,7 +514,7 @@ void StarRailMediator::slot_startInvestmentIncomeEstimate(const St_InvestmentEst
 			}
 		}
 
-		if (EstPara.drawCardType == En_DrawCardType::getAll)//¶¼³é
+		if (EstPara.drawCardType == En_DrawCardType::getAll)//éƒ½æŠ½
 		{
 			if (EstPara.poolTransformType == En_PoolTransfromType::NCharacterMWeapon)
 			{
@@ -527,28 +527,28 @@ void StarRailMediator::slot_startInvestmentIncomeEstimate(const St_InvestmentEst
 			{
 				QPair<int, int> result = DrawCardNPoolAMPoolB(EstPara.poolTransformType, largestDrawTime, engine,
 					lastGoldCharacterWrong, areadyInCharacterPoolTicket, lastGoldWeaponWrong, areadyInWeaponPoolTicket, EstPara.N, EstPara.M);
-				getUpWeaponTime = result.first;
-				getUpCharacterTime = result.second;
+				getUpWeaponTime 	= result.first;
+				getUpCharacterTime 	= result.second;
 			}
 			else if (EstPara.poolTransformType == En_PoolTransfromType::NTCharacterMTWeapon)
 			{
 				QPair<int, int> result = DrawCardNTPoolAMTPoolB(EstPara.poolTransformType, largestDrawTime, engine,
 					lastGoldCharacterWrong, areadyInCharacterPoolTicket, lastGoldWeaponWrong, areadyInWeaponPoolTicket, EstPara.N, EstPara.M);
-				getUpCharacterTime = result.first;
-				getUpWeaponTime = result.second;
+				getUpCharacterTime 	= result.first;
+				getUpWeaponTime 	= result.second;
 			}
 			else if (EstPara.poolTransformType == En_PoolTransfromType::NTWeaponMTCharacter)
 			{
 				QPair<int, int> result = DrawCardNTPoolAMTPoolB(EstPara.poolTransformType, largestDrawTime, engine,
 					lastGoldCharacterWrong, areadyInCharacterPoolTicket, lastGoldWeaponWrong, areadyInWeaponPoolTicket, EstPara.N, EstPara.M);
-				getUpWeaponTime = result.first;
-				getUpCharacterTime = result.second;
+				getUpWeaponTime 	= result.first;
+				getUpCharacterTime 	= result.second;
 			}
 		}
 
 		bool stateExist = resultNumMatrix.checkElementExist(getUpCharacterTime, getUpWeaponTime);
 
-		//Õâ¸ö²åÈë´ÎĞòÒâÎ¶×ÅĞĞÊı´ú±íÁËÁË»ñÈ¡½ÇÉ«µÄ´ÎÊı£¬ÁĞÊı´ú±íÁË»ñÈ¡ÎäÆ÷µÄ´ÎÊı
+		//è¿™ä¸ªæ’å…¥æ¬¡åºæ„å‘³ç€è¡Œæ•°ä»£è¡¨äº†äº†è·å–è§’è‰²çš„æ¬¡æ•°ï¼Œåˆ—æ•°ä»£è¡¨äº†è·å–æ­¦å™¨çš„æ¬¡æ•°
 		if (stateExist)
 		{
 			resultNumMatrix.getValueRefAt(getUpCharacterTime, getUpWeaponTime) += 1;
@@ -566,9 +566,9 @@ void StarRailMediator::slot_startInvestmentIncomeEstimate(const St_InvestmentEst
 	}
 
 	St_InvectmentEstimateResult result;
-	result.inputCrystal			= EstPara.inputCrystal;
-	result.inputTicket			= EstPara.inputTicket;
-	result.drawCardType			= EstPara.drawCardType;
+	result.inputCrystal		= EstPara.inputCrystal;
+	result.inputTicket		= EstPara.inputTicket;
+	result.drawCardType		= EstPara.drawCardType;
 	result.poolTransformType	= EstPara.poolTransformType;
 
 	result.N = EstPara.N;
@@ -578,10 +578,10 @@ void StarRailMediator::slot_startInvestmentIncomeEstimate(const St_InvestmentEst
 
 	result.ProbDensityMatrix.expandMatrix(resultSize);
 
-	result.NoUpCharacterPorb				= 0;
+	result.NoUpCharacterPorb		= 0;
 	result.UpCharacterGetTimeExpectation	= 0;
-	result.UpWeaponGetExpectation			= 0;
-	result.NoUpWeaponProb					= 0;
+	result.UpWeaponGetExpectation		= 0;
+	result.NoUpWeaponProb			= 0;
 
 	for (int currentRow = 0; currentRow < resultSize.height(); currentRow++)
 	{
@@ -604,7 +604,7 @@ void StarRailMediator::slot_startInvestmentIncomeEstimate(const St_InvestmentEst
 			}
 
 			result.UpCharacterGetTimeExpectation	+= probability * characterNum;
-			result.UpWeaponGetExpectation			+= probability * weaponNum;
+			result.UpWeaponGetExpectation		+= probability * weaponNum;
 
 			result.ProbDensityMatrix.setValue(currentRow, currentColumn,probability);
 		}
@@ -630,22 +630,22 @@ void StarRailMediator::slot_startRelicValidEstimate(const St_RelicValidEstimateP
 
 	int startRandomSeed = time(nullptr);
 
-	//Ö÷ÊôĞÔÓĞĞ§ÒÅÆ÷¶Ô£¨ÓĞĞ§ÒÅÎï¸öÊı£¬³ÉÁ¢µÄÇé¿öÊı£©
+	//ä¸»å±æ€§æœ‰æ•ˆé—å™¨å¯¹ï¼ˆæœ‰æ•ˆé—ç‰©ä¸ªæ•°ï¼Œæˆç«‹çš„æƒ…å†µæ•°ï¼‰
 	QMap <int, int> mapPrimePropertyGetNum;
-	//´ò±¾»ñÈ¡Ö÷ÊôĞÔÓĞĞ§ÒÅÆ÷¶Ô£¨´ò±¾»ñÈ¡Ö÷ÊôĞÔÓĞĞ§ÒÅÎïµÄ´ÎÊı£¬³ÉÁ¢µÄÇé¿öÊı£©
+	//æ‰“æœ¬è·å–ä¸»å±æ€§æœ‰æ•ˆé—å™¨å¯¹ï¼ˆæ‰“æœ¬è·å–ä¸»å±æ€§æœ‰æ•ˆé—ç‰©çš„æ¬¡æ•°ï¼Œæˆç«‹çš„æƒ…å†µæ•°ï¼‰
 	QMap <int, int> mapPrimePropertyGetTime;
-	//È«ÊôĞÔÓĞĞ§ÒÅÆ÷¶Ô£¨ÓĞĞ§ÒÅÎï¸öÊı£¬³ÉÁ¢µÄÇé¿öÊı£©£¬ÕâÀïÈ«ÊôĞÔÓĞĞ§ÊÇ½¨Á¢ÔÚÖ÷ÊôĞÔ+¸±ÊôĞÔ¶¼ÓĞĞ§µÄ»ù´¡Ö®ÉÏµÄ
+	//å…¨å±æ€§æœ‰æ•ˆé—å™¨å¯¹ï¼ˆæœ‰æ•ˆé—ç‰©ä¸ªæ•°ï¼Œæˆç«‹çš„æƒ…å†µæ•°ï¼‰ï¼Œè¿™é‡Œå…¨å±æ€§æœ‰æ•ˆæ˜¯å»ºç«‹åœ¨ä¸»å±æ€§+å‰¯å±æ€§éƒ½æœ‰æ•ˆçš„åŸºç¡€ä¹‹ä¸Šçš„
 	QMap <int, int> mapAllPropertyGetNum;
-	//´ò±¾»ñÈ¡È«ÊôĞÔÓĞĞ§ÒÅÆ÷¶Ô£¨´ò±¾»ñÈ¡È«ÊôĞÔÓĞĞ§ÒÅÎïµÄ´ÎÊı£¬³ÉÁ¢µÄÇé¿öÊı£©
+	//æ‰“æœ¬è·å–å…¨å±æ€§æœ‰æ•ˆé—å™¨å¯¹ï¼ˆæ‰“æœ¬è·å–å…¨å±æ€§æœ‰æ•ˆé—ç‰©çš„æ¬¡æ•°ï¼Œæˆç«‹çš„æƒ…å†µæ•°ï¼‰
 	QMap <int, int> mapAllPropertyGetTime;
 
-	//Ö÷ÊôĞÔÓĞĞ§µÄÒÅÎï±ÈÀıÇóºÍ£¬×îºó»á³ıÒÔ×ÜÊµÑé´ÎÊı
+	//ä¸»å±æ€§æœ‰æ•ˆçš„é—ç‰©æ¯”ä¾‹æ±‚å’Œï¼Œæœ€åä¼šé™¤ä»¥æ€»å®éªŒæ¬¡æ•°
 	double	totalPrimePropertyValidGetNumProbability = 0;
-	//´ò±¾»ñÈ¡Ö÷ÊôĞÔÓĞĞ§µÄÒÅÎïµÄ¸ÅÂÊ£¬×îºó»á³ıÒÔ×ÜÊµÑé´ÎÊı
+	//æ‰“æœ¬è·å–ä¸»å±æ€§æœ‰æ•ˆçš„é—ç‰©çš„æ¦‚ç‡ï¼Œæœ€åä¼šé™¤ä»¥æ€»å®éªŒæ¬¡æ•°
 	double	totalPrimePropertyValidGetTimeProbability = 0;
-	//È«ÊôĞÔÓĞĞ§µÄÒÅÎï±ÈÀıÇóºÍ£¬×îºó»á³ıÒÔ×ÜÊµÑé´ÎÊı
+	//å…¨å±æ€§æœ‰æ•ˆçš„é—ç‰©æ¯”ä¾‹æ±‚å’Œï¼Œæœ€åä¼šé™¤ä»¥æ€»å®éªŒæ¬¡æ•°
 	double	totalAllPropertyValidGetNumProbability = 0;
-	//´ò±¾»ñÈ¡È«ÊôĞÔÓĞĞ§µÄÒÅÎïµÄ¸ÅÂÊÇóºÍ£¬×îºó»á³ıÒÔ×ÜÊµÑé´ÎÊı
+	//æ‰“æœ¬è·å–å…¨å±æ€§æœ‰æ•ˆçš„é—ç‰©çš„æ¦‚ç‡æ±‚å’Œï¼Œæœ€åä¼šé™¤ä»¥æ€»å®éªŒæ¬¡æ•°
 	double	totalAllPropertyValidGetTimeProbability = 0;
 	
 
@@ -655,18 +655,18 @@ void StarRailMediator::slot_startRelicValidEstimate(const St_RelicValidEstimateP
 	{
 		std::default_random_engine engine(startRandomSeed + currentExpTime);
 
-		int		totalRelic = 0;
-		int		primePropertyValidGetNum	= 0;//Ö÷ÊôĞÔÓĞĞ§ÒÅÎï¸öÊı
-		int		primePropertyValidGetTime	= 0;//´ò±¾»ñÈ¡Ö÷ÊôĞÔÓĞĞ§ÒÅÎïµÄ´ÎÊı
-		int		allPropertyValidGetNum		= 0;//È«ÊôĞÔÓĞĞ§ÒÅÎï¸öÊı
-		int		allPropertyValidGetTime		= 0;//´ò±¾»ñÈ¡È«ÊôĞÔÓĞĞ§ÒÅÎïµÄ´ÎÊı
+		int	totalRelic = 0;
+		int	primePropertyValidGetNum		= 0;//ä¸»å±æ€§æœ‰æ•ˆé—ç‰©ä¸ªæ•°
+		int	primePropertyValidGetTime		= 0;//æ‰“æœ¬è·å–ä¸»å±æ€§æœ‰æ•ˆé—ç‰©çš„æ¬¡æ•°
+		int	allPropertyValidGetNum			= 0;//å…¨å±æ€§æœ‰æ•ˆé—ç‰©ä¸ªæ•°
+		int	allPropertyValidGetTime			= 0;//æ‰“æœ¬è·å–å…¨å±æ€§æœ‰æ•ˆé—ç‰©çš„æ¬¡æ•°
 
-		double	primePropertyValidProportion		= 0;//Ö÷ÊôĞÔÓĞĞ§ÒÅÎï±ÈÀı
-		double	getPrimePropertyValidProbability	= 0;//´ò±¾»ñÈ¡Ö÷ÊôĞÔÓĞĞ§ÒÅÎïµÄ¸ÅÂÊ
-		double	allPropertyValidProportion			= 0;//È«ÊôĞÔÓĞĞ§ÒÅÎï±ÈÀı
-		double	getAllPropertyValidProbability		= 0;//´ò±¾»ñÈ¡È«ÊôĞÔÓĞĞ§ÒÅÎïµÄ¸ÅÂÊ
+		double	primePropertyValidProportion		= 0;//ä¸»å±æ€§æœ‰æ•ˆé—ç‰©æ¯”ä¾‹
+		double	getPrimePropertyValidProbability	= 0;//æ‰“æœ¬è·å–ä¸»å±æ€§æœ‰æ•ˆé—ç‰©çš„æ¦‚ç‡
+		double	allPropertyValidProportion		= 0;//å…¨å±æ€§æœ‰æ•ˆé—ç‰©æ¯”ä¾‹
+		double	getAllPropertyValidProbability		= 0;//æ‰“æœ¬è·å–å…¨å±æ€§æœ‰æ•ˆé—ç‰©çš„æ¦‚ç‡
 
-		//ĞÔÄÜÆ¿¾±£¬¾¡×î´ó¿ÉÄÜ¶ªÆúÎŞĞ§µÄcase
+		//æ€§èƒ½ç“¶é¢ˆï¼Œå°½æœ€å¤§å¯èƒ½ä¸¢å¼ƒæ— æ•ˆçš„case
 		RelicResult newRelic;
 
 		for (int playRaidTime = 1; playRaidTime <= EstPara.playTime; playRaidTime++)
@@ -674,14 +674,14 @@ void StarRailMediator::slot_startRelicValidEstimate(const St_RelicValidEstimateP
 			int RelicNum = RelicResult::getRelicNum(engine);
 
 			bool getPrimePrortyValidState	= false;
-			bool getAllPrortyValidState		= false;
+			bool getAllPrortyValidState	= false;
 
 			for (int currentRelic = 1; currentRelic <= RelicNum; currentRelic++)
 			{
 				newRelic.resetPara();
 				totalRelic++;
 
-				bool allValidState				= newRelic.getBirth(raidType, EstPara, engine);
+				bool allValidState		= newRelic.getBirth(raidType, EstPara, engine);
 
 				bool PrimePropertyValidState	= newRelic.isPrimePropertyValid(EstPara);
 				
@@ -711,9 +711,9 @@ void StarRailMediator::slot_startRelicValidEstimate(const St_RelicValidEstimateP
 		}
 
 		primePropertyValidProportion		= (double)primePropertyValidGetNum	/ (double)totalRelic;
-		getPrimePropertyValidProbability	= (double)primePropertyValidGetTime / (double)EstPara.playTime;
+		getPrimePropertyValidProbability	= (double)primePropertyValidGetTime 	/ (double)EstPara.playTime;
 
-		allPropertyValidProportion			= (double)allPropertyValidGetNum	/ (double)totalRelic;
+		allPropertyValidProportion		= (double)allPropertyValidGetNum	/ (double)totalRelic;
 		getAllPropertyValidProbability		= (double)allPropertyValidGetTime	/ (double)EstPara.playTime;
 
 		totalPrimePropertyValidGetNumProbability	+= primePropertyValidProportion;
@@ -772,15 +772,15 @@ void StarRailMediator::slot_startRelicValidEstimate(const St_RelicValidEstimateP
 	St_ValidRelicEstimateResult EstResult;
 
 	EstResult.primePropertyValidProportion		= totalPrimePropertyValidGetNumProbability	/ ExperimentTime;
-	EstResult.primePropertyValidGetProbbability	= totalPrimePropertyValidGetTimeProbability / ExperimentTime;
+	EstResult.primePropertyValidGetProbbability	= totalPrimePropertyValidGetTimeProbability 	/ ExperimentTime;
 
 	EstResult.allPropertyValidProportion		= totalAllPropertyValidGetNumProbability	/ ExperimentTime;
 	EstResult.allPropertyValidGetProbbability	= totalAllPropertyValidGetTimeProbability	/ ExperimentTime;
 
 	for (auto PriValidNumMapPos = mapPrimePropertyGetNum.begin(); PriValidNumMapPos != mapPrimePropertyGetNum.end(); PriValidNumMapPos++)
 	{
-		int		PriValidRelicNum	= PriValidNumMapPos.key();
-		int		caseTime			= PriValidNumMapPos.value();
+		int	PriValidRelicNum	= PriValidNumMapPos.key();
+		int	caseTime		= PriValidNumMapPos.value();
 		double	caseProbability		= (double)caseTime / (double)ExperimentTime;
 		EstResult.mapPriProValidGetNumProb.insert(PriValidRelicNum, caseProbability);
 		EstResult.primePropertyValidGetTimeExpectation += PriValidRelicNum * caseProbability;
@@ -790,17 +790,17 @@ void StarRailMediator::slot_startRelicValidEstimate(const St_RelicValidEstimateP
 
 	for (auto PriValidTimeMapPos = mapPrimePropertyGetTime.begin(); PriValidTimeMapPos != mapPrimePropertyGetTime.end(); PriValidTimeMapPos++)
 	{
-		int		PriValidGetTime = PriValidTimeMapPos.key();
-		int		caseTime		= PriValidTimeMapPos.value();
+		int	PriValidGetTime = PriValidTimeMapPos.key();
+		int	caseTime	= PriValidTimeMapPos.value();
 		double	caseProbability = (double)caseTime / (double)ExperimentTime;
 		playRaidGetPriProValidTimeExpectation += PriValidGetTime * caseProbability;
 	}
 
 	for (auto allValidNumMapPos = mapAllPropertyGetNum.begin(); allValidNumMapPos != mapAllPropertyGetNum.end(); allValidNumMapPos++)
 	{
-		int		allValidRelicNum		= allValidNumMapPos.key();
-		int		caseTime				= allValidNumMapPos.value();
-		double	caseProbability			= (double)caseTime / (double)ExperimentTime;
+		int	allValidRelicNum	= allValidNumMapPos.key();
+		int	caseTime		= allValidNumMapPos.value();
+		double	caseProbability		= (double)caseTime / (double)ExperimentTime;
 		EstResult.mapAllProValidGetNumProb.insert(allValidRelicNum, caseProbability);
 		EstResult.allPropertyValidGetTimeExpectation += allValidRelicNum * caseProbability;
 	}
@@ -809,9 +809,9 @@ void StarRailMediator::slot_startRelicValidEstimate(const St_RelicValidEstimateP
 
 	for (auto AllValidTimeMapPos = mapAllPropertyGetTime.begin(); AllValidTimeMapPos != mapAllPropertyGetTime.end(); AllValidTimeMapPos++)
 	{
-		int		AllValidGetTime		= AllValidTimeMapPos.key();
-		int		caseTime			= AllValidTimeMapPos.value();
-		double	caseProbability = (double)caseTime / (double)ExperimentTime;
+		int	AllValidGetTime		= AllValidTimeMapPos.key();
+		int	caseTime		= AllValidTimeMapPos.value();
+		double	caseProbability 	= (double)caseTime / (double)ExperimentTime;
 		playRaidGetAllProValidTimeExpectation += AllValidGetTime * caseProbability;
 	}
 
@@ -824,66 +824,66 @@ void StarRailMediator::slot_startRelicValidEstimate(const St_RelicValidEstimateP
 
 En_DrawCardResult StarRailMediator::DrawCardAtOnce(EN_CardPoolType poolType, bool wrongGoldBefore, int distanceToLastGold, std::default_random_engine& engine)
 {
-	//¸ÅÂÊ¼ÆËãÏà¹Ø²ÎÊı£¬»ñµÃÒ»¸ö1000ÒÔÄÚµÄËæ»úÊı£¬ÒÀÕÕËæ»úÊıµÄÖµÅĞ¶Ï½á¹û
+	//æ¦‚ç‡è®¡ç®—ç›¸å…³å‚æ•°ï¼Œè·å¾—ä¸€ä¸ª1000ä»¥å†…çš„éšæœºæ•°ï¼Œä¾ç…§éšæœºæ•°çš„å€¼åˆ¤æ–­ç»“æœ
 	int    goldRange	= 0;
 	int    UpGoldRange	= 0;
 
-	//ÉèÖÃ¼ÆËã·¶Î§
-	if (poolType == EN_CardPoolType::character)//½ÇÉ«³Ø
+	//è®¾ç½®è®¡ç®—èŒƒå›´
+	if (poolType == EN_CardPoolType::character)//è§’è‰²æ± 
 	{ 
-		if (wrongGoldBefore == false)//Ö®Ç°Ã»Íá
+		if (wrongGoldBefore == false)//ä¹‹å‰æ²¡æ­ª
 		{
-			if (distanceToLastGold < Const_LargestGetGoldCharTNum)//ÆÕÍ¨ÇéĞÎ£¨Ç°90³é£©
+			if (distanceToLastGold < Const_LargestGetGoldCharTNum)//æ™®é€šæƒ…å½¢ï¼ˆå‰90æŠ½ï¼‰
 			{
 				goldRange	= Const_GoldCharacterProbability * 1000;
-				UpGoldRange = Const_GoldUpCharacterProbability * goldRange;
+				UpGoldRange 	= Const_GoldUpCharacterProbability * goldRange;
 			}
-			else//Ğ¡±£µ×
+			else//å°ä¿åº•
 			{	
 				goldRange	= 1000;
-				UpGoldRange = Const_GoldUpCharacterProbability * goldRange;
+				UpGoldRange 	= Const_GoldUpCharacterProbability * goldRange;
 			}
 		}
-		else//Ö®Ç°ÍáÁË
+		else//ä¹‹å‰æ­ªäº†
 		{
-			if (distanceToLastGold < Const_LargestGetGoldCharTNum)//´ó±£µ×ÇéĞÎ£¨ºó90³é£©
+			if (distanceToLastGold < Const_LargestGetGoldCharTNum)//å¤§ä¿åº•æƒ…å½¢ï¼ˆå90æŠ½ï¼‰
 			{
 				goldRange	= Const_GoldCharacterProbability * 1000;
-				UpGoldRange = goldRange;
+				UpGoldRange 	= goldRange;
 			}
-			else//´ó±£µ×
+			else//å¤§ä¿åº•
 			{
 				goldRange	= 1000;
-				UpGoldRange = goldRange;
+				UpGoldRange 	= goldRange;
 			}
 		}
 	}
-	else if (poolType == EN_CardPoolType::weapon)//ÎäÆ÷³Ø
+	else if (poolType == EN_CardPoolType::weapon)//æ­¦å™¨æ± 
 	{
-		if (wrongGoldBefore == false)//Ö®Ç°Ã»Íá
+		if (wrongGoldBefore == false)//ä¹‹å‰æ²¡æ­ª
 		{
-			if (distanceToLastGold < Const_LargetGetGoldWeaponTNum)//ÆÕÍ¨ÇéĞÎ£¨Ç°80³é£©
+			if (distanceToLastGold < Const_LargetGetGoldWeaponTNum)//æ™®é€šæƒ…å½¢ï¼ˆå‰80æŠ½ï¼‰
 			{
 				goldRange	= Const_GoldWeaponProbability * 1000;
-				UpGoldRange = Const_GoldUpWeaponProbability * goldRange;
+				UpGoldRange 	= Const_GoldUpWeaponProbability * goldRange;
 			}
-			else//Ğ¡±£µ×
+			else//å°ä¿åº•
 			{
 				goldRange	= 1000;
-				UpGoldRange = Const_GoldUpWeaponProbability * goldRange;
+				UpGoldRange 	= Const_GoldUpWeaponProbability * goldRange;
 			}
 		}
-		else//Ö®Ç°ÍáÁË
+		else//ä¹‹å‰æ­ªäº†
 		{
-			if (distanceToLastGold < Const_LargetGetGoldWeaponTNum)//´ó±£µ×ÇéĞÎ£¨ºó90³é£©
+			if (distanceToLastGold < Const_LargetGetGoldWeaponTNum)//å¤§ä¿åº•æƒ…å½¢ï¼ˆå90æŠ½ï¼‰
 			{
 				goldRange	= Const_GoldWeaponProbability * 1000;
-				UpGoldRange = goldRange;
+				UpGoldRange 	= goldRange;
 			}
-			else//´ó±£µ×
+			else//å¤§ä¿åº•
 			{
 				goldRange	= 1000;
-				UpGoldRange = goldRange;
+				UpGoldRange 	= goldRange;
 			}
 		}
 	}
@@ -921,7 +921,7 @@ En_DrawCardResult StarRailMediator::DrawCardAtOnce(EN_CardPoolType poolType, boo
 
 int StarRailMediator::DrawCardUntilGetUp(EN_CardPoolType poolType, bool wrongGoldBefore, int areadyInTicket, std::default_random_engine& engine)
 {
-	int	largestDrawTime = 0;//Ò»´ÎÊµÑé×î¶à³é¶àÉÙ´Î¿¨
+	int	largestDrawTime = 0;//ä¸€æ¬¡å®éªŒæœ€å¤šæŠ½å¤šå°‘æ¬¡å¡
 
 	if (poolType == EN_CardPoolType::character)
 	{
@@ -948,9 +948,9 @@ int StarRailMediator::DrawCardUntilGetUp(EN_CardPoolType poolType, bool wrongGol
 	}
 
 
-	int					distanceToLastGold = areadyInTicket + 1;
-	En_DrawCardResult	currentResult = En_DrawCardResult::normal;
-	int					currentPos = 1;
+	int			distanceToLastGold 	= areadyInTicket + 1;
+	En_DrawCardResult	currentResult 		= En_DrawCardResult::normal;
+	int			currentPos 		= 1;
 
 
 	while (currentPos <= largestDrawTime)
@@ -964,7 +964,7 @@ int StarRailMediator::DrawCardUntilGetUp(EN_CardPoolType poolType, bool wrongGol
 		else if (currentResult == En_DrawCardResult::character_wrongGold || currentResult == En_DrawCardResult::weapon_wrongGold)
 		{
 			wrongGoldBefore = true;
-			distanceToLastGold = 0;//ÒòÎªÍáÁË£¬ÖØÖÃµ½´ï½ğµÄ¾àÀë,¶øºóÃæ»á+1£¬ÕâÀïÉèÎª0
+			distanceToLastGold = 0;//å› ä¸ºæ­ªäº†ï¼Œé‡ç½®åˆ°è¾¾é‡‘çš„è·ç¦»,è€Œåé¢ä¼š+1ï¼Œè¿™é‡Œè®¾ä¸º0
 		}
 
 		currentPos++;
@@ -987,14 +987,14 @@ QPair<int, int> StarRailMediator::DrawCardNPoolAMPoolB(En_PoolTransfromType tran
 
 	int currentTicketCost = 0;
 
-	bool	currentWrongGoldChaBefore			= wrongGoldCharacterbefore;
+	bool	currentWrongGoldChaBefore		= wrongGoldCharacterbefore;
 	bool	currentWrongGoldWeaponBefore		= wrongGoldWeaponBefore;
-	int		currentAreadyInChaPoolTicket		= areadyInCharacterPoolTicket;
-	int		currentAreadyInWeaponPoolTicket		= areadyInWeaponPoolTicket;
+	int	currentAreadyInChaPoolTicket		= areadyInCharacterPoolTicket;
+	int	currentAreadyInWeaponPoolTicket		= areadyInWeaponPoolTicket;
 
 	EN_CardPoolType currentPoolType = EN_CardPoolType::character;
 
-	//µ±Ç°»ñµÃÁË¶àÉÙUP½ÇÉ«/UPÎäÆ÷
+	//å½“å‰è·å¾—äº†å¤šå°‘UPè§’è‰²/UPæ­¦å™¨
 	int		currentGetUpGlodCharacter	= 0;
 	int		currentGetUpGlodWeapon		= 0;
 
@@ -1096,16 +1096,16 @@ QPair<int, int> StarRailMediator::DrawCardNTPoolAMTPoolB(En_PoolTransfromType tr
 
 	int		currentTicketCost = 0;
 
-	bool	currentWrongGoldChaBefore		= wrongGoldCharacterbefore;
+	bool	currentWrongGoldChaBefore	= wrongGoldCharacterbefore;
 	bool	currentWrongGoldWeaponBefore	= wrongGoldWeaponBefore;
-	int		distanceToLastGoldCharacter		= areadyInCharacterPoolTicket + 1;
-	int		distanceToLastGoldWeapon		= areadyInWeaponPoolTicket + 1;
+	int	distanceToLastGoldCharacter	= areadyInCharacterPoolTicket + 1;
+	int	distanceToLastGoldWeapon	= areadyInWeaponPoolTicket + 1;
 
 	EN_CardPoolType currentPoolType = EN_CardPoolType::character;
 
-	//µ±Ç°»ñµÃÁË¶àÉÙUP½ÇÉ«/UPÎäÆ÷
-	int		currentGetUpGlodCharacter = 0;
-	int		currentGetUpGlodWeapon = 0;
+	//å½“å‰è·å¾—äº†å¤šå°‘UPè§’è‰²/UPæ­¦å™¨
+	int	currentGetUpGlodCharacter = 0;
+	int	currentGetUpGlodWeapon = 0;
 
 
 	int RemainN = N;
@@ -1158,24 +1158,24 @@ QPair<int, int> StarRailMediator::DrawCardNTPoolAMTPoolB(En_PoolTransfromType tr
 			case En_DrawCardResult::character_UpGold:
 			{
 				currentGetUpGlodCharacter++;
-				distanceToLastGoldCharacter = 1;
-				currentWrongGoldChaBefore = false;
+				distanceToLastGoldCharacter 	= 1;
+				currentWrongGoldChaBefore 	= false;
 			}break;
 			case En_DrawCardResult::character_wrongGold:
 			{
-				distanceToLastGoldCharacter = 1;
-				currentWrongGoldChaBefore = true;
+				distanceToLastGoldCharacter 	= 1;
+				currentWrongGoldChaBefore 	= true;
 			}break;
 			case En_DrawCardResult::weapon_UpGold:
 			{
 				currentGetUpGlodWeapon++;
-				distanceToLastGoldWeapon = 1;
-				currentWrongGoldWeaponBefore = false;
+				distanceToLastGoldWeapon 	= 1;
+				currentWrongGoldWeaponBefore 	= false;
 			}break;
 			case En_DrawCardResult::weapon_wrongGold:
 			{
-				distanceToLastGoldWeapon = 1;
-				currentWrongGoldWeaponBefore = true;
+				distanceToLastGoldWeapon 	= 1;
+				currentWrongGoldWeaponBefore 	= true;
 			}break;
 		}
 
@@ -1235,7 +1235,7 @@ const EN_StarRailErrorNum StarRailMediator::checkRelicEstInputErr(const St_Relic
 		EstPara.PrimePro_Valid_Thunder ||
 		EstPara.PrimePro_Valid_Wind;
 
-	if (!hasValidPrimeProperty)//Ã»ÓĞÓĞĞ§Ö÷ÊôĞÔ
+	if (!hasValidPrimeProperty)//æ²¡æœ‰æœ‰æ•ˆä¸»å±æ€§
 	{
 		return EN_StarRailErrorNum::RelicEst_ValidPrimePropertyZero;
 	}
@@ -1249,13 +1249,13 @@ const EN_StarRailErrorNum StarRailMediator::checkRelicEstInputErr(const St_Relic
 	if (EstPara.SubPro_Valid_CriticalProb)		ValidSubPropertyNum++;
 	if (EstPara.SubPro_Valid_DeBuffAccuracy)	ValidSubPropertyNum++;
 	if (EstPara.SubPro_Valid_DeBuffDefence)		ValidSubPropertyNum++;
-	if (EstPara.SubPro_Valid_DefencePercentage) ValidSubPropertyNum++;
+	if (EstPara.SubPro_Valid_DefencePercentage) 	ValidSubPropertyNum++;
 	if (EstPara.SubPro_Valid_DefenceValue)		ValidSubPropertyNum++;
 	if (EstPara.SubPro_Valid_HPPercentage)		ValidSubPropertyNum++;
-	if (EstPara.SubPro_Valid_HPValue)			ValidSubPropertyNum++;
-	if (EstPara.SubPro_Valid_Speed)				ValidSubPropertyNum++;
+	if (EstPara.SubPro_Valid_HPValue)		ValidSubPropertyNum++;
+	if (EstPara.SubPro_Valid_Speed)			ValidSubPropertyNum++;
 
-	if(ValidSubPropertyNum < 4)//ÓĞĞ§¸±ÊôĞÔĞ¡ÓÚ4
+	if(ValidSubPropertyNum < 4)//æœ‰æ•ˆå‰¯å±æ€§å°äº4
 	{
 		return EN_StarRailErrorNum::RelicEst_ValidSubPropertyLessThan4;
 	}
@@ -1268,10 +1268,10 @@ void StarRailMediator::sendRelicEstErrorMsg(const EN_StarRailErrorNum ErrNum)
 	QString ErrMsg;
 	switch (ErrNum)
 	{
-		case EN_StarRailErrorNum::RelicEst_InputNoError					: break;
-		case EN_StarRailErrorNum::RelicEst_NoPlayTime					: ErrMsg = QString("´ò±¾´ÎÊıĞ¡ÓÚ1");break;
-		case EN_StarRailErrorNum::RelicEst_ValidPrimePropertyZero		: ErrMsg = QString("Ã»Ñ¡ÓĞĞ§Ö÷ÊôĞÔ");break;
-		case EN_StarRailErrorNum::RelicEst_ValidSubPropertyLessThan4	: ErrMsg = QString("ÓĞĞ§¸±ÊôĞÔĞ¡ÓÚ4");break;
+		case EN_StarRailErrorNum::RelicEst_InputNoError			: break;
+		case EN_StarRailErrorNum::RelicEst_NoPlayTime			: ErrMsg = QString("æ‰“æœ¬æ¬¡æ•°å°äº1");break;
+		case EN_StarRailErrorNum::RelicEst_ValidPrimePropertyZero	: ErrMsg = QString("æ²¡é€‰æœ‰æ•ˆä¸»å±æ€§");break;
+		case EN_StarRailErrorNum::RelicEst_ValidSubPropertyLessThan4	: ErrMsg = QString("æœ‰æ•ˆå‰¯å±æ€§å°äº4");break;
 	}
 	emit signal_RelicEstErrorMsg(ErrNum, ErrMsg);
 }

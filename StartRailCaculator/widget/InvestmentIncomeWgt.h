@@ -21,9 +21,9 @@
 #ifndef INVESTMENT_INCOME_WGT
 #define INVESTMENT_INCOME_WGT
 
-//Í¶×ÊÊÕÒæ·ÖÎö´°¿Ú
-//Ö÷Òª¹¦ÄÜÎªÍ³¼Æ»¨¹âÊäÈë×ÊÔ´Ö®ºó£¬¸÷ÖÖ¿ÉÄÜÊÂ¼şµÄ¸ÅÂÊ·Ö²¼
-//¿ÉÄÜÊÇÕâ¸öÈí¼ş×îÓĞ¼ÛÖµµÄÄ£¿é
+//æŠ•èµ„æ”¶ç›Šåˆ†æçª—å£
+//ä¸»è¦åŠŸèƒ½ä¸ºç»Ÿè®¡èŠ±å…‰è¾“å…¥èµ„æºä¹‹åï¼Œå„ç§å¯èƒ½äº‹ä»¶çš„æ¦‚ç‡åˆ†å¸ƒ
+//å¯èƒ½æ˜¯è¿™ä¸ªè½¯ä»¶æœ€æœ‰ä»·å€¼çš„æ¨¡å—
 
 #include <QWidget>
 #include <QDate>
@@ -46,20 +46,20 @@ public:
 	~InvestmentIncomeWgt();
 
 signals:
-	//¿ªÊ¼¹ÀËã×ÊÔ´Í¶ÈëÊÕÒæ
+	//å¼€å§‹ä¼°ç®—èµ„æºæŠ•å…¥æ”¶ç›Š
 	void signal_StartInvestmentIncomeEstimate(const St_InvestmentEstimatePara& EstPara);
 
 public slots:
 	void slot_updateEstimateProgress(const int val);
-	//½ÓÊÜ¼ÆËã½á¹û£¬¾ßÌåµÄÍ¼±íË¢ĞÂÂß¼­
+	//æ¥å—è®¡ç®—ç»“æœï¼Œå…·ä½“çš„å›¾è¡¨åˆ·æ–°é€»è¾‘
 	void slot_getInvestmentIncomeResult(const St_InvectmentEstimateResult& result);
 
 
 protected:
-	void	initUi();
-	void	init3DGraph();
+	void initUi();
+	void init3DGraph();
 
-	//¼ÆËã¹ı³ÌËøÃæ°å
+	//è®¡ç®—è¿‡ç¨‹é”é¢æ¿
 	void enablePanel(bool state);
 
 	void setInputCrystal(int value);
@@ -90,21 +90,21 @@ private:
 
 	Q3DBars* m_Graph = nullptr;
 
-	//ÉãÏñ»ú
-	Q3DCamera*			m_camera = nullptr;
+	//æ‘„åƒæœº
+	Q3DCamera*		m_camera = nullptr;
 
-	//Èı¸ö×ø±êÖá
+	//ä¸‰ä¸ªåæ ‡è½´
 	QCategory3DAxis*	m_axisCharacterNum	= nullptr;
 	QCategory3DAxis*	m_axisWeaponNum		= nullptr;
 	QValue3DAxis*		m_axisProbability	= nullptr;
 
-	//¸ÅÂÊÃÜ¶È¾ØÕó
+	//æ¦‚ç‡å¯†åº¦çŸ©é˜µ
 	QBar3DSeries*		m_seriesProbabilityDenseMatrix = nullptr;
-	//¾ßÌåµÄÊı¾İÈİÆ÷
+	//å…·ä½“çš„æ•°æ®å®¹å™¨
 	QBarDataProxy*		m_dataProxy = nullptr;
 	
-	QButtonGroup*		m_btnGroupDrawCardObj		= nullptr;		//³é¿¨¶ÔÏó°´Å¥Èº
-	QButtonGroup*		m_btnGroupPoolTransformType = nullptr;		//³é¿¨·½Ê½°´Å¥Èº
+	QButtonGroup*		m_btnGroupDrawCardObj		= nullptr;	//æŠ½å¡å¯¹è±¡æŒ‰é’®ç¾¤
+	QButtonGroup*		m_btnGroupPoolTransformType 	= nullptr;	//æŠ½å¡æ–¹å¼æŒ‰é’®ç¾¤
 
 };
 

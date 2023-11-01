@@ -21,10 +21,10 @@
 #ifndef RESOURCE_ESTIMATE_WGT
 #define RESOURCE_ESTIMATE_WGT
 
-//Ö¸¶¨ÈÕÆÚ×ÊÔ´¼ÆËã´°¿Ú£¬ÓÃÒÔ¹À¼Æ¿¨³ØÇ°ºóµÄ×ÊÔ´×´¿ö
-//½ö°üº¬È¨ÖØ×î´óµÄ¼¸¸öÊÕÒæµã£ºÈÕ³£/´óĞ¡ÔÂ¿¨/Ä£ÄâÓîÖæ/ÉîÔ¨
-//Îó²î×î´óµÄ´°¿Ú£¬Ö÷ÒªÔÚÓÚÄ¿Ç°»î¶¯ÊÕÒæ²»´óºÃÅĞ¶Ï£¬ËùÒÔºöÂÔ»î¶¯
-//ÎÃ×ÓÍÈ²»Í³¼ÆÊÇÎªÁËÃæ°å¼ò½à
+//æŒ‡å®šæ—¥æœŸèµ„æºè®¡ç®—çª—å£ï¼Œç”¨ä»¥ä¼°è®¡å¡æ± å‰åçš„èµ„æºçŠ¶å†µ
+//ä»…åŒ…å«æƒé‡æœ€å¤§çš„å‡ ä¸ªæ”¶ç›Šç‚¹ï¼šæ—¥å¸¸/å¤§å°æœˆå¡/æ¨¡æ‹Ÿå®‡å®™/æ·±æ¸Š
+//è¯¯å·®æœ€å¤§çš„çª—å£ï¼Œä¸»è¦åœ¨äºç›®å‰æ´»åŠ¨æ”¶ç›Šä¸å¤§å¥½åˆ¤æ–­ï¼Œæ‰€ä»¥å¿½ç•¥æ´»åŠ¨
+//èšŠå­è…¿ä¸ç»Ÿè®¡æ˜¯ä¸ºäº†é¢æ¿ç®€æ´
 
 #include <QWidget>
 #include <QDate>
@@ -38,7 +38,7 @@ class ResourceEstimateWgt :
 {
     Q_OBJECT
 public:
-	ResourceEstimateWgt(QWidget* parent);
+    ResourceEstimateWgt(QWidget* parent);
     ~ResourceEstimateWgt();
 
 signals:
@@ -50,30 +50,30 @@ protected:
     void initGraphWgt();
 
 protected:
-	//Í³¼Æ½áÂÛ´òÓ¡Âß¼­£¬ÊäÈë-1ÔòÇå¿ÕÊıÖµ
-    void    setCurrentEqualCrystal(int value);
-    void    setCurrentEqualTicket(int value);
-    void    setStopDayCrystal(int value);
-    void    setStopDayTicket(int value);
-    void    setStopDayPaidCrystal(int value);
-    void    setStopDayEqualCrystal(int value);
-    void    setStopDayEqualTicket(int value);
-    void    setTotalSmallMonthCardExpense(int value);
-    void    setTotalBigMonthCardExpense(int value);
-    void    setTotalExpense(int value);
+	//ç»Ÿè®¡ç»“è®ºæ‰“å°é€»è¾‘ï¼Œè¾“å…¥-1åˆ™æ¸…ç©ºæ•°å€¼
+    void setCurrentEqualCrystal(int value);
+    void setCurrentEqualTicket(int value);
+    void setStopDayCrystal(int value);
+    void setStopDayTicket(int value);
+    void setStopDayPaidCrystal(int value);
+    void setStopDayEqualCrystal(int value);
+    void setStopDayEqualTicket(int value);
+    void setTotalSmallMonthCardExpense(int value);
+    void setTotalBigMonthCardExpense(int value);
+    void setTotalExpense(int value);
 
-	int		getEqualCrystal(const St_ResourceEstimateDateResult& EstResult);
-	int		getEqualTicket(const St_ResourceEstimateDateResult& EstResult);
-	int		getPointIndex(const QPointF& ChartPos);
+    int	 getEqualCrystal(const St_ResourceEstimateDateResult& EstResult);
+    int  getEqualTicket(const St_ResourceEstimateDateResult& EstResult);
+    int	 getPointIndex(const QPointF& ChartPos);
 
 public slots:
     void slot_getErrorMsg(const EN_StarRailErrorNum ErrNum, const QString& ErrMsg);
     void slot_getResourceEstResult(const QVector<St_ResourceEstimateDateResult>& EstResultVec);
 
-	//´¦ÀíÍ¼±íÊó±êĞüÍ£ÊÂ¼ş
-	//´¦ÀíµÈĞ§ĞÇÇíÍ¼±íÊó±êĞü¸¡ĞÅºÅ
-	void slot_CrystalChartMouseHovered(const QPointF &point, bool state);
-	void slot_TicketChartMouseHovered(const QPointF &point, bool state);
+//å¤„ç†å›¾è¡¨é¼ æ ‡æ‚¬åœäº‹ä»¶
+//å¤„ç†ç­‰æ•ˆæ˜Ÿç¼å›¾è¡¨é¼ æ ‡æ‚¬æµ®ä¿¡å·
+    void slot_CrystalChartMouseHovered(const QPointF &point, bool state);
+    void slot_TicketChartMouseHovered(const QPointF &point, bool state);
 
 protected slots:
     void slot_startEstmate();
@@ -84,31 +84,31 @@ protected slots:
 
 private:
 	Ui_ResourceEstimateWgt Ui;
-    //´æ´¢Êı¾İ¼ÆËã½á¹û
-    QVector<St_ResourceEstimateDateResult> m_VecEstResult;
+    //å­˜å‚¨æ•°æ®è®¡ç®—ç»“æœ
+	QVector<St_ResourceEstimateDateResult> m_VecEstResult;
 
-	//Í¼±íÏà¹Ø
-	QDateTimeAxis*  m_axisCrystalDate		= nullptr;
-	QDateTimeAxis*  m_axisTicketDate		= nullptr;
+	//å›¾è¡¨ç›¸å…³
+	QDateTimeAxis*  m_axisCrystalDate	= nullptr;
+	QDateTimeAxis*  m_axisTicketDate	= nullptr;
 
-	QValueAxis*		m_axisCrystalVal		= nullptr;
-	QValueAxis*		m_axisTicketVal			= nullptr;
+	QValueAxis*	m_axisCrystalVal	= nullptr;
+	QValueAxis*	m_axisTicketVal		= nullptr;
 
-	//ÁÙÊ±Êı¾İ´æ´¢¶ÔÏó£¬Í¼±íÇå¿ÕÊ±Îª¿ÕÖ¸Õë
+	//ä¸´æ—¶æ•°æ®å­˜å‚¨å¯¹è±¡ï¼Œå›¾è¡¨æ¸…ç©ºæ—¶ä¸ºç©ºæŒ‡é’ˆ
 	QLineSeries*	m_seriesEqualCrystal	= nullptr;	
-	QLineSeries*	m_seriesEqualTicket		= nullptr;
+	QLineSeries*	m_seriesEqualTicket	= nullptr;
 
-	QChart*			m_ChtCrystal			= nullptr;
-	QChart*			m_ChtTicket				= nullptr;
+	QChart*		m_ChtCrystal		= nullptr;
+	QChart*		m_ChtTicket		= nullptr;
 
-	QChartView*		m_ChtViewCrystal		= nullptr;
-	QChartView*		m_ChtViewTicket			= nullptr;
+	QChartView*	m_ChtViewCrystal	= nullptr;
+	QChartView*	m_ChtViewTicket		= nullptr;
 
-	//ÒòÎªQChart×Ô´øÍ¼±íµÄÊı¾İÓĞ¶ªÊ§£¬ËùÒÔ¶îÍâÌí¼ÓÒ»¸öËãÎ»ÖÃµÄÖĞ¼äÁ¿
-	qreal			m_startValue	= 0;//Í¼±í¿ªÊ¼µÄxÖµ
-	qreal			m_endValue		= 0;//Í¼±í½áÊøµÄxÖµ
-	qreal			m_totalLength	= 0;//Í¼±íxÖµ¿ç¶È
-	qreal			m_interval		= 0;//Í¼±íÒ»¸öµãÕ¼¾İµÄ³¤¶È
+	//å› ä¸ºQChartè‡ªå¸¦å›¾è¡¨çš„æ•°æ®æœ‰ä¸¢å¤±ï¼Œæ‰€ä»¥é¢å¤–æ·»åŠ ä¸€ä¸ªç®—ä½ç½®çš„ä¸­é—´é‡
+	qreal		m_startValue	= 0;//å›¾è¡¨å¼€å§‹çš„xå€¼
+	qreal		m_endValue	= 0;//å›¾è¡¨ç»“æŸçš„xå€¼
+	qreal		m_totalLength	= 0;//å›¾è¡¨xå€¼è·¨åº¦
+	qreal		m_interval	= 0;//å›¾è¡¨ä¸€ä¸ªç‚¹å æ®çš„é•¿åº¦
 };
 
 #endif

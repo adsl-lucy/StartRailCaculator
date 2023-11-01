@@ -57,7 +57,7 @@ void RelicCultivateWgt::slot_getRelicEstResult(const St_ValidRelicEstimateResult
 	setAllPropertyValidPlayTimeExpectation(QString::number(EstResult.allPropertyValidPlayTimeExpectation, 'f', 2));
 
 
-	//´¦ÀíÍ¼±í
+	//å¤„ç†å›¾è¡¨
 	m_VecPrimePropertyTimesProb.clear();
 	m_VecAllPropertyTimesProb.clear();
 
@@ -92,10 +92,10 @@ void RelicCultivateWgt::slot_getRelicEstResult(const St_ValidRelicEstimateResult
 	m_ChartAllProperty->removeAllSeries();
 
 	m_seriesPrimePropertyDensity	= new QLineSeries();
-	m_seriesAllPropertyDensity		= new QLineSeries();
+	m_seriesAllPropertyDensity	= new QLineSeries();
 
 	connect(m_seriesPrimePropertyDensity,	&QLineSeries::hovered, this, &RelicCultivateWgt::slot_PrimePropertyChartMouseHovered);
-	connect(m_seriesAllPropertyDensity,		&QLineSeries::hovered, this, &RelicCultivateWgt::slot_SubPropertyChartMouseHovered);
+	connect(m_seriesAllPropertyDensity,	&QLineSeries::hovered, this, &RelicCultivateWgt::slot_SubPropertyChartMouseHovered);
 
 	double largestPriProValidProb = 0;
 
@@ -155,20 +155,20 @@ void RelicCultivateWgt::slot_getRelicEstResult(const St_ValidRelicEstimateResult
 
 
 
-	//¼ÇÂ¼Í¼±íºÜ×ø±ê¼ÆËãÖĞ¼äÁ¿
+	//è®°å½•å›¾è¡¨å¾ˆåæ ‡è®¡ç®—ä¸­é—´é‡
 	QVector<QPointF> priVecPointF = m_seriesPrimePropertyDensity->pointsVector();
 
 	m_PriChtStartValue	= priVecPointF.begin()->x();
 	m_PriChtEndValue	= priVecPointF.rbegin()->x();
-	m_PriChtTotalLength = m_PriChtEndValue - m_PriChtStartValue;
+	m_PriChtTotalLength 	= m_PriChtEndValue - m_PriChtStartValue;
 	m_PriChtInterval	= m_PriChtTotalLength / priVecPointF.size();
 
-	//¼ÇÂ¼Í¼±íºÜ×ø±ê¼ÆËãÖĞ¼äÁ¿
+	//è®°å½•å›¾è¡¨å¾ˆåæ ‡è®¡ç®—ä¸­é—´é‡
 	QVector<QPointF> allVecPointF = m_seriesAllPropertyDensity->pointsVector();
 
 	m_AllChtStartValue	= allVecPointF.begin()->x();
 	m_AllChtEndValue	= allVecPointF.rbegin()->x();
-	m_AllChtTotalLength = m_AllChtEndValue - m_AllChtStartValue;
+	m_AllChtTotalLength 	= m_AllChtEndValue - m_AllChtStartValue;
 	m_AllChtInterval	= m_AllChtTotalLength / allVecPointF.size();
 
 	enablePannel(true);
@@ -179,12 +179,12 @@ void RelicCultivateWgt::initUi()
 {
 	m_RelicBtnGroupBox = new QButtonGroup(this);
 	m_RelicBtnGroupBox->setExclusive(true);
-	m_RelicBtnGroupBox->addButton(Ui.radioButton_head,		1);
-	m_RelicBtnGroupBox->addButton(Ui.radioButton_hand,		2);
+	m_RelicBtnGroupBox->addButton(Ui.radioButton_head,	1);
+	m_RelicBtnGroupBox->addButton(Ui.radioButton_hand,	2);
 	m_RelicBtnGroupBox->addButton(Ui.radioButton_clothes,	3);
-	m_RelicBtnGroupBox->addButton(Ui.radioButton_shoes,		4);
-	m_RelicBtnGroupBox->addButton(Ui.radioButton_cord,		5);
-	m_RelicBtnGroupBox->addButton(Ui.radioButton_ball,		6);
+	m_RelicBtnGroupBox->addButton(Ui.radioButton_shoes,	4);
+	m_RelicBtnGroupBox->addButton(Ui.radioButton_cord,	5);
+	m_RelicBtnGroupBox->addButton(Ui.radioButton_ball,	6);
 
 	Ui.radioButton_head->setChecked(true);
 
@@ -192,10 +192,10 @@ void RelicCultivateWgt::initUi()
 
 	Ui.progressBar_EstimateProgress->setValue(0);
 
-	connect(m_RelicBtnGroupBox,			QOverload<int>::of(&QButtonGroup::buttonClicked),	this, &RelicCultivateWgt::slot_relicChanged);
-	connect(Ui.pushButton_startEstimate, &QPushButton::clicked,								this, &RelicCultivateWgt::slot_startEstimate);
-	connect(Ui.pushButton_resetPara,	&QPushButton::clicked,								this, &RelicCultivateWgt::slot_resetPara);
-	connect(Ui.pushButton_clearResult,	&QPushButton::clicked,								this, &RelicCultivateWgt::slot_clearResult);
+	connect(m_RelicBtnGroupBox,		QOverload<int>::of(&QButtonGroup::buttonClicked),	this, &RelicCultivateWgt::slot_relicChanged);
+	connect(Ui.pushButton_startEstimate, 	&QPushButton::clicked,					this, &RelicCultivateWgt::slot_startEstimate);
+	connect(Ui.pushButton_resetPara,	&QPushButton::clicked,					this, &RelicCultivateWgt::slot_resetPara);
+	connect(Ui.pushButton_clearResult,	&QPushButton::clicked,					this, &RelicCultivateWgt::slot_clearResult);
 
 }
 
@@ -353,18 +353,18 @@ void RelicCultivateWgt::initGraphWgt()
 	m_axisPrimePropertyValidTime = new QValueAxis();
 	m_axisPrimePropertyValidTime->setRange(0, 20);
 	m_axisPrimePropertyValidTime->setLabelFormat("%d");
-	m_axisPrimePropertyValidTime->setTitleText("Ö÷ÊôĞÔÓĞĞ§ÒÅÆ÷¸öÊı");
+	m_axisPrimePropertyValidTime->setTitleText("ä¸»å±æ€§æœ‰æ•ˆé—å™¨ä¸ªæ•°");
 
 	m_axisPrimePropertyValidProb = new QValueAxis();
 	m_axisPrimePropertyValidProb->setRange(0, 100);
 	m_axisPrimePropertyValidProb->setLabelFormat("%.2f%%");
-	m_axisPrimePropertyValidProb->setTitleText("·¢Éú¸ÅÂÊ");
+	m_axisPrimePropertyValidProb->setTitleText("å‘ç”Ÿæ¦‚ç‡");
 
 	m_seriesPrimePropertyDensity = nullptr;
 
 	m_ChartPrimeProperty = new QChart();
 
-	m_ChartPrimeProperty->setTitle("Ö÷ÊôĞÔÓĞĞ§ÒÅÆ÷ÊıÁ¿¸ÅÂÊÃÜ¶È·Ö²¼");
+	m_ChartPrimeProperty->setTitle("ä¸»å±æ€§æœ‰æ•ˆé—å™¨æ•°é‡æ¦‚ç‡å¯†åº¦åˆ†å¸ƒ");
 	m_ChartPrimeProperty->legend()->hide();
 	m_ChartPrimeProperty->addAxis(m_axisPrimePropertyValidTime, Qt::AlignBottom);
 	m_ChartPrimeProperty->addAxis(m_axisPrimePropertyValidProb, Qt::AlignLeft);
@@ -379,18 +379,18 @@ void RelicCultivateWgt::initGraphWgt()
 	m_axisAllPropertyValidTime = new QValueAxis();
 	m_axisAllPropertyValidTime->setRange(0, 20);
 	m_axisAllPropertyValidTime->setLabelFormat("%d");
-	m_axisAllPropertyValidTime->setTitleText("È«ÊôĞÔÓĞĞ§ÒÅÆ÷¸öÊı");
+	m_axisAllPropertyValidTime->setTitleText("å…¨å±æ€§æœ‰æ•ˆé—å™¨ä¸ªæ•°");
 
 	m_axisAllPropertyValidProb = new QValueAxis();
 	m_axisAllPropertyValidProb->setRange(0, 100);
 	m_axisAllPropertyValidProb->setLabelFormat("%.2f%%");
-	m_axisAllPropertyValidProb->setTitleText("·¢Éú¸ÅÂÊ");
+	m_axisAllPropertyValidProb->setTitleText("å‘ç”Ÿæ¦‚ç‡");
 
 	m_seriesAllPropertyDensity = nullptr;
 
 	m_ChartAllProperty = new QChart();
 
-	m_ChartAllProperty->setTitle("È«ÊôĞÔÓĞĞ§ÒÅÆ÷ÊıÁ¿¸ÅÂÊÃÜ¶È·Ö²¼");
+	m_ChartAllProperty->setTitle("å…¨å±æ€§æœ‰æ•ˆé—å™¨æ•°é‡æ¦‚ç‡å¯†åº¦åˆ†å¸ƒ");
 	m_ChartAllProperty->legend()->hide();
 	m_ChartAllProperty->addAxis(m_axisAllPropertyValidTime, Qt::AlignBottom);
 	m_ChartAllProperty->addAxis(m_axisAllPropertyValidProb, Qt::AlignLeft);
@@ -408,42 +408,42 @@ void RelicCultivateWgt::initGraphWgt()
 
 void RelicCultivateWgt::setPrimePropertyValidProportion(const QString& str)
 {
-	Ui.label_PriProValidProportion->setText(QString("Ö÷ÊôĞÔÓĞĞ§ÒÅÆ÷±ÈÀı:") + str);
+	Ui.label_PriProValidProportion->setText(QString("ä¸»å±æ€§æœ‰æ•ˆé—å™¨æ¯”ä¾‹:") + str);
 }
 
 void RelicCultivateWgt::setPrimePropertyValidGetProbability(const QString& str)
 {
-	Ui.label_PriProValidGetProbability->setText(QString("´ò±¾»ñÈ¡Ö÷ÊôĞÔÓĞĞ§ÒÅÎï¸ÅÂÊ:") + str);
+	Ui.label_PriProValidGetProbability->setText(QString("æ‰“æœ¬è·å–ä¸»å±æ€§æœ‰æ•ˆé—ç‰©æ¦‚ç‡:") + str);
 }
 
 void RelicCultivateWgt::setPrimePropertyValidGetTimeExpectation(const QString & str)
 {
-	Ui.label_PriProValidGetTimeExpectation->setText(QString("Ö÷ÊôĞÔÓĞĞ§ÒÅÎï»ñÈ¡ÆÚÍû:") + str);
+	Ui.label_PriProValidGetTimeExpectation->setText(QString("ä¸»å±æ€§æœ‰æ•ˆé—ç‰©è·å–æœŸæœ›:") + str);
 }
 
 void RelicCultivateWgt::setPrimePropertyValidPlayTimeExpectation(const QString & str)
 {
-	Ui.label_PriProValidGetPlayTimeExpectation->setText(QString("»ñÈ¡Ö÷ÊôĞÔÓĞĞ§ÒÅÎï´ò±¾´ÎÊıÆÚÍû:") + str);
+	Ui.label_PriProValidGetPlayTimeExpectation->setText(QString("è·å–ä¸»å±æ€§æœ‰æ•ˆé—ç‰©æ‰“æœ¬æ¬¡æ•°æœŸæœ›:") + str);
 }
 
 void RelicCultivateWgt::setAllPropertyValidProportion(const QString& str)
 {
-	Ui.label_AllProValidProportion->setText(QString("È«ÊôĞÔÓĞĞ§ÒÅÎï±ÈÀı:") + str);
+	Ui.label_AllProValidProportion->setText(QString("å…¨å±æ€§æœ‰æ•ˆé—ç‰©æ¯”ä¾‹:") + str);
 }
 
 void RelicCultivateWgt::setAllPropertyValidGetProbaility(const QString& str)
 {
-	Ui.label_AllPropertyValidGetPercentage->setText(QString("´ò±¾»ñÈ¡È«ÊôĞÔÓĞĞ§ÒÅÎï¸ÅÂÊ:") + str);
+	Ui.label_AllPropertyValidGetPercentage->setText(QString("æ‰“æœ¬è·å–å…¨å±æ€§æœ‰æ•ˆé—ç‰©æ¦‚ç‡:") + str);
 }
 
 void RelicCultivateWgt::setAllPropertyValidGetTimeExpectation(const QString & str)
 {
-	Ui.label_AllProValidGetTimeExpectation->setText(QString("È«ÊôĞÔÓĞĞ§ÒÅÎï»ñÈ¡ÆÚÍû:") + str);
+	Ui.label_AllProValidGetTimeExpectation->setText(QString("å…¨å±æ€§æœ‰æ•ˆé—ç‰©è·å–æœŸæœ›:") + str);
 }
 
 void RelicCultivateWgt::setAllPropertyValidPlayTimeExpectation(const QString & str)
 {
-	Ui.label_AllPropertyGetPlayTimeExpectation->setText(QString("»ñÈ¡È«ÊôĞÔÓĞĞ§ÒÅÎï´ò±¾´ÎÊıÆÚÍû:") + str);
+	Ui.label_AllPropertyGetPlayTimeExpectation->setText(QString("è·å–å…¨å±æ€§æœ‰æ•ˆé—ç‰©æ‰“æœ¬æ¬¡æ•°æœŸæœ›:") + str);
 }
 
 int RelicCultivateWgt::getPrimeChtPointIndex(const QPointF & ChartPos)
@@ -585,7 +585,7 @@ void RelicCultivateWgt::slot_startEstimate()
 			EstiPara.PrimePro_Valid_HPPercentage		= Ui.checkBox_PriProHPPercentage->isChecked();
 			EstiPara.PrimePro_Valid_DefencePercentage	= Ui.checkBox_PriProDefencePercentage->isChecked();
 
-			EstiPara.PrimePro_Valid_Speed				= Ui.checkBox_PriProSpeed->isChecked();
+			EstiPara.PrimePro_Valid_Speed			= Ui.checkBox_PriProSpeed->isChecked();
 		}break;
 		case En_RelicType::Cord:
 		{
@@ -593,7 +593,7 @@ void RelicCultivateWgt::slot_startEstimate()
 			EstiPara.PrimePro_Valid_HPPercentage		= Ui.checkBox_PriProHPPercentage->isChecked();
 			EstiPara.PrimePro_Valid_DefencePercentage	= Ui.checkBox_PriProDefencePercentage->isChecked();
 
-			EstiPara.PrimePro_Valid_BreakDamage			= Ui.checkBox_PriProBreakDamage->isChecked();
+			EstiPara.PrimePro_Valid_BreakDamage		= Ui.checkBox_PriProBreakDamage->isChecked();
 			EstiPara.PrimePro_Valid_ChargeEfficiency	= Ui.checkBox_PriProChargeEfficiency->isChecked();
 		}break;
 		case En_RelicType::Ball:
@@ -602,16 +602,16 @@ void RelicCultivateWgt::slot_startEstimate()
 			EstiPara.PrimePro_Valid_HPPercentage		= Ui.checkBox_PriProHPPercentage->isChecked();
 			EstiPara.PrimePro_Valid_DefencePercentage	= Ui.checkBox_PriProDefencePercentage->isChecked();
 
-			EstiPara.PrimePro_Valid_Fire		= Ui.checkBox_PriProFire->isChecked();
-			EstiPara.PrimePro_Valid_Thunder		= Ui.checkBox_PriProThunder->isChecked();
-			EstiPara.PrimePro_Valid_Wind		= Ui.checkBox_PriProWind->isChecked();
+			EstiPara.PrimePro_Valid_Fire			= Ui.checkBox_PriProFire->isChecked();
+			EstiPara.PrimePro_Valid_Thunder			= Ui.checkBox_PriProThunder->isChecked();
+			EstiPara.PrimePro_Valid_Wind			= Ui.checkBox_PriProWind->isChecked();
 			EstiPara.PrimePro_Valid_Ice			= Ui.checkBox_PriProIce->isChecked();
-			EstiPara.PrimePro_Valid_Null		= Ui.checkBox_PriProNull->isChecked();
-			EstiPara.PrimePro_Valid_Quantum		= Ui.checkBox_PriProQuantum->isChecked();
-			EstiPara.PrimePro_Valid_Physical	= Ui.checkBox_PriProPhysical->isChecked();
+			EstiPara.PrimePro_Valid_Null			= Ui.checkBox_PriProNull->isChecked();
+			EstiPara.PrimePro_Valid_Quantum			= Ui.checkBox_PriProQuantum->isChecked();
+			EstiPara.PrimePro_Valid_Physical		= Ui.checkBox_PriProPhysical->isChecked();
 		}break;
 	}
-	//¸±´Ê×ºÉ¸Ñ¡Æ÷
+	//å‰¯è¯ç¼€ç­›é€‰å™¨
 
 	auto getSubProFlagAndValue = [=](bool& flagRef,double& valueRef,QCheckBox* flagCheckBox,QDoubleSpinBox* doubleSpinBox)
 	{
@@ -626,7 +626,7 @@ void RelicCultivateWgt::slot_startEstimate()
 		}
 	};
 
-	//¹Ì¶¨ÉúÃüÖµ
+	//å›ºå®šç”Ÿå‘½å€¼
 	if (EstiPara.relicType != En_RelicType::Head)
 	{
 		getSubProFlagAndValue(EstiPara.SubPro_Valid_HPValue, EstiPara.SubPro_Value_HP, 
@@ -641,7 +641,7 @@ void RelicCultivateWgt::slot_startEstimate()
 		EstiPara.SubPro_Valid_HPValue = false;
 	}
 
-	//¹Ì¶¨¹¥»÷Á¦
+	//å›ºå®šæ”»å‡»åŠ›
 	if (EstiPara.relicType != En_RelicType::Hand)
 	{
 		getSubProFlagAndValue(EstiPara.SubPro_Valid_AttackValue, EstiPara.SubPro_Value_AttackValue, 
@@ -658,7 +658,7 @@ void RelicCultivateWgt::slot_startEstimate()
 	
 
 
-	//°Ù·Ö±È¹¥»÷
+	//ç™¾åˆ†æ¯”æ”»å‡»
 	getSubProFlagAndValue(EstiPara.SubPro_Valid_AttackPercentage, EstiPara.SubPro_Value_AttackPercentage,
 						Ui.checkBox_SubProAttackPercentage, Ui.doubleSpinBox_SubProAttactPercentage);
 
@@ -668,7 +668,7 @@ void RelicCultivateWgt::slot_startEstimate()
 	}
 
 
-	//±©»÷ÂÊ
+	//æš´å‡»ç‡
 	getSubProFlagAndValue(EstiPara.SubPro_Valid_CriticalProb, EstiPara.SubPro_Value_CriticalProb,
 						Ui.checkBox_SubProCriticalPercentage, Ui.doubleSpinBox_SubProCriticalPercentage);
 
@@ -677,7 +677,7 @@ void RelicCultivateWgt::slot_startEstimate()
 		EstiPara.vecSubPropertyValueRequirement.push_back(En_RelicSubProperty::CriticalProb);
 	}
 
-	//±©»÷ÉËº¦
+	//æš´å‡»ä¼¤å®³
 	getSubProFlagAndValue(EstiPara.SubPro_Valid_CriticalDamage, EstiPara.SubPro_Value_CriticalDamage,
 							Ui.checkBox_SubProCriticialDamage,	Ui.doubleSpinBox_SubProCriticalDamage);
 
@@ -686,7 +686,7 @@ void RelicCultivateWgt::slot_startEstimate()
 		EstiPara.vecSubPropertyValueRequirement.push_back(En_RelicSubProperty::CriticalDamage);
 	}
 
-	//ËÙ¶È
+	//é€Ÿåº¦
 	getSubProFlagAndValue(EstiPara.SubPro_Valid_Speed, EstiPara.SubPro_Value_Speed, 
 						Ui.checkBox_SubProSpeed, Ui.doubleSpinBox_SubProSpeed);
 
@@ -695,7 +695,7 @@ void RelicCultivateWgt::slot_startEstimate()
 		EstiPara.vecSubPropertyValueRequirement.push_back(En_RelicSubProperty::Speed);
 	}
 
-	//Ğ§¹ûÃüÖĞ
+	//æ•ˆæœå‘½ä¸­
 	getSubProFlagAndValue(EstiPara.SubPro_Valid_DeBuffAccuracy, EstiPara.SubPro_Value_DeBuffAccuracy, 
 						Ui.checkBox_SubProDebuffAccuracy,		Ui.doubleSpinBox_SubProDebuffAccuracy);
 
@@ -704,7 +704,7 @@ void RelicCultivateWgt::slot_startEstimate()
 		EstiPara.vecSubPropertyValueRequirement.push_back(En_RelicSubProperty::DeBuffAccuracy);
 	}
 
-	//»÷ÆÆÌØ¹¥
+	//å‡»ç ´ç‰¹æ”»
 	getSubProFlagAndValue(EstiPara.SubPro_Valid_BreakDamage, EstiPara.SubPro_Value_BreakDamage, 
 						Ui.checkBox_SubProBreakDamage, Ui.doubleSpinBox_SubProBreakDamage);
 
@@ -713,7 +713,7 @@ void RelicCultivateWgt::slot_startEstimate()
 		EstiPara.vecSubPropertyValueRequirement.push_back(En_RelicSubProperty::BreakDamage);
 	}
 
-	//¹Ì¶¨ÉúÃüÖµ
+	//å›ºå®šç”Ÿå‘½å€¼
 	getSubProFlagAndValue(EstiPara.SubPro_Valid_HPPercentage, EstiPara.SubPro_Value_HPPercentage, 
 						Ui.checkBox_SubProHPPercentage, Ui.doubleSpinBox_SubProHPPercentage);
 
@@ -722,7 +722,7 @@ void RelicCultivateWgt::slot_startEstimate()
 		EstiPara.vecSubPropertyValueRequirement.push_back(En_RelicSubProperty::HPPercentage);
 	}
 
-	//¹Ì¶¨·ÀÓùÁ¦
+	//å›ºå®šé˜²å¾¡åŠ›
 	getSubProFlagAndValue(EstiPara.SubPro_Valid_DefenceValue, EstiPara.SubPro_Value_DefenceValue, 
 						Ui.checkBox_SubProDefenceValue, Ui.doubleSpinBox_SubProDefenceValue);
 
@@ -731,7 +731,7 @@ void RelicCultivateWgt::slot_startEstimate()
 		EstiPara.vecSubPropertyValueRequirement.push_back(En_RelicSubProperty::DefenceValue);
 	}
 
-	//°Ù·Ö±È·ÀÓùÁ¦
+	//ç™¾åˆ†æ¯”é˜²å¾¡åŠ›
 	getSubProFlagAndValue(EstiPara.SubPro_Valid_DefencePercentage, EstiPara.SubPro_Value_DefencePercentage, 
 					Ui.checkBox_SubProDefencePercentage, Ui.doubleSpinBox_SubProDefencePercentage);
 
@@ -740,7 +740,7 @@ void RelicCultivateWgt::slot_startEstimate()
 		EstiPara.vecSubPropertyValueRequirement.push_back(En_RelicSubProperty::DefencePercentage);
 	}
 
-	//Ğ§¹ûµÖ¿¹
+	//æ•ˆæœæŠµæŠ—
 	getSubProFlagAndValue(EstiPara.SubPro_Valid_DeBuffDefence, EstiPara.SubPro_Value_DeBuffDefence, 
 						Ui.checkBox_SubProDebuffDefence, Ui.doubleSpinBox_SubProDebuffDefence);
 
@@ -749,14 +749,14 @@ void RelicCultivateWgt::slot_startEstimate()
 		EstiPara.vecSubPropertyValueRequirement.push_back(En_RelicSubProperty::DeBuffDefence);
 	}
 
-	//°Ù·ÖÊı×Ô¶¯³ıÒÔ100
-	EstiPara.SubPro_Value_HPPercentage		/= 100;
+	//ç™¾åˆ†æ•°è‡ªåŠ¨é™¤ä»¥100
+	EstiPara.SubPro_Value_HPPercentage	/= 100;
 	EstiPara.SubPro_Value_AttackPercentage	/= 100;
 	EstiPara.SubPro_Value_DefencePercentage /= 100;
-	EstiPara.SubPro_Value_CriticalProb		/= 100;
+	EstiPara.SubPro_Value_CriticalProb	/= 100;
 	EstiPara.SubPro_Value_CriticalDamage	/= 100;
-	EstiPara.SubPro_Value_DeBuffDefence		/= 100;
-	EstiPara.SubPro_Value_BreakDamage		/= 100;
+	EstiPara.SubPro_Value_DeBuffDefence	/= 100;
+	EstiPara.SubPro_Value_BreakDamage	/= 100;
 	EstiPara.SubPro_Value_DeBuffAccuracy	/= 100;
 
 
@@ -816,9 +816,9 @@ void RelicCultivateWgt::slot_PrimePropertyChartMouseHovered(const QPointF & poin
 
 	QString showText;
 
-	showText.push_back("Ö÷ÊôĞÔÓĞĞ§ÒÅÆ÷¸öÊı:");
+	showText.push_back("ä¸»å±æ€§æœ‰æ•ˆé—å™¨ä¸ªæ•°:");
 	showText.push_back(QString::number(pointIndex));
-	showText.push_back("·¢Éú¸ÅÂÊ:");
+	showText.push_back("å‘ç”Ÿæ¦‚ç‡:");
 	showText.push_back(QString::asprintf("%.2f%%", PointProb));
 
 	QToolTip::showText(QCursor::pos(), showText);
@@ -837,9 +837,9 @@ void RelicCultivateWgt::slot_SubPropertyChartMouseHovered(const QPointF & point,
 
 	QString showText;
 
-	showText.push_back("È«ÊôĞÔÓĞĞ§ÒÅÆ÷¸öÊı:");
+	showText.push_back("å…¨å±æ€§æœ‰æ•ˆé—å™¨ä¸ªæ•°:");
 	showText.push_back(QString::number(pointIndex));
-	showText.push_back("·¢Éú¸ÅÂÊ:");
+	showText.push_back("å‘ç”Ÿæ¦‚ç‡:");
 	showText.push_back(QString::asprintf("%.2f%%", PointProb));
 
 	QToolTip::showText(QCursor::pos(), showText);
@@ -867,7 +867,7 @@ void RelicCultivateWgt::slot_relicChanged(int btnId)
 	Ui.checkBox_PriProThunder->setEnabled(false);
 	Ui.checkBox_PriProWind->setEnabled(false);
 	
-	//ÒòÎªÇĞÍ·ºÍ»¨»áÓ°Ïì¸±´Ê×º·¶Î§£¬ËùÒÔÕâÒªµÖÏûÉÏÊöÇĞ»»µÄ×÷ÓÃ
+	//å› ä¸ºåˆ‡å¤´å’ŒèŠ±ä¼šå½±å“å‰¯è¯ç¼€èŒƒå›´ï¼Œæ‰€ä»¥è¿™è¦æŠµæ¶ˆä¸Šè¿°åˆ‡æ¢çš„ä½œç”¨
 	Ui.checkBox_SubProHPValue->setEnabled(true);
 	Ui.checkBox_SubProAttackValue->setEnabled(true);
 	Ui.doubleSpinBox_SubProHPValue->setEnabled(Ui.checkBox_SubProHPValue->isChecked());

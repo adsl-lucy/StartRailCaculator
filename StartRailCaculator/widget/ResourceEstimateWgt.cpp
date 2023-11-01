@@ -55,46 +55,46 @@ void ResourceEstimateWgt::initPannelWgt()
 
 	connect(Ui.pushButton_startCaculate,	&QPushButton::clicked, this, &ResourceEstimateWgt::slot_startEstmate);
 	connect(Ui.pushButton_resetParameter,	&QPushButton::clicked, this, &ResourceEstimateWgt::slot_resetParameter);
-	connect(Ui.pushButton_clearResult,		&QPushButton::clicked, this, &ResourceEstimateWgt::slot_clearResult);
+	connect(Ui.pushButton_clearResult,	&QPushButton::clicked, this, &ResourceEstimateWgt::slot_clearResult);
 
 }
 
 void ResourceEstimateWgt::initGraphWgt()
 {
-	m_axisCrystalDate	= new QDateTimeAxis();
+	m_axisCrystalDate = new QDateTimeAxis();
 	m_axisCrystalDate->setRange(Const_StarRailOpenDay, Const_StarRailLatestDay);
 	m_axisCrystalDate->setFormat("yyyy/MM/dd");
-	m_axisTicketDate	= new QDateTimeAxis();
+	m_axisTicketDate = new QDateTimeAxis();
 	m_axisTicketDate->setRange(Const_StarRailOpenDay, Const_StarRailLatestDay);
 	m_axisTicketDate->setFormat("yyyy/MM/dd");
 
-	m_axisCrystalVal	= new QValueAxis();
+	m_axisCrystalVal = new QValueAxis();
 	m_axisCrystalVal->setRange(0, 10000);
 	m_axisCrystalVal->setLabelFormat("%d");
-	m_axisTicketVal		= new QValueAxis;
+	m_axisTicketVal	= new QValueAxis;
 	m_axisTicketVal->setRange(0, 100);
 	m_axisTicketVal->setLabelFormat("%d");
 
 	m_seriesEqualCrystal	= nullptr;
-	m_seriesEqualTicket		= nullptr;
+	m_seriesEqualTicket	= nullptr;
 
 	m_ChtCrystal	= new QChart();
-	m_ChtTicket		= new QChart();
+	m_ChtTicket	= new QChart();
 
-	m_ChtCrystal->setTitle("Ã¿ÈÕµÈĞ§ĞÇÇí");
+	m_ChtCrystal->setTitle("æ¯æ—¥ç­‰æ•ˆæ˜Ÿç¼");
 	m_ChtCrystal->legend()->hide();
 	m_ChtCrystal->addAxis(m_axisCrystalDate, Qt::AlignBottom);
 	m_ChtCrystal->addAxis(m_axisCrystalVal, Qt::AlignLeft);
 	m_ChtCrystal->setTheme(QChart::ChartThemeDark);
 
-	m_ChtTicket->setTitle("Ã¿ÈÕµÈĞ§×¨Æ±");
+	m_ChtTicket->setTitle("æ¯æ—¥ç­‰æ•ˆä¸“ç¥¨");
 	m_ChtTicket->legend()->hide();
 	m_ChtTicket->addAxis(m_axisTicketDate, Qt::AlignBottom);
 	m_ChtTicket->addAxis(m_axisTicketVal, Qt::AlignLeft);
 	m_ChtTicket->setTheme(QChart::ChartThemeDark);
 
 
-	m_ChtViewCrystal	= new QChartView(m_ChtCrystal);
+	m_ChtViewCrystal = new QChartView(m_ChtCrystal);
 	m_ChtViewCrystal->setRenderHint(QPainter::Antialiasing);
 	m_ChtViewCrystal->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -112,15 +112,15 @@ void ResourceEstimateWgt::initGraphWgt()
 void ResourceEstimateWgt::slot_startEstmate()
 {
 	St_ResourceEstimateParameter EstPara;
-	EstPara.startDate				= Ui.dateEdit_today->date();
-	EstPara.stopDate				= Ui.dateEdit_stopday->date();
-	EstPara.currentTicket			= Ui.spinBox_currentTicket->value();
-	EstPara.currentCrystal			= Ui.spinBox_currentCrystal->value();
-	EstPara.currentPaidCrystal		= Ui.spinBox_currentPaidCrystal->value();
-	EstPara.buySmallMonthCard		= Ui.checkBox_smallMonthCard->isChecked();
-	EstPara.buyBigMonthCard			= Ui.checkBox_bigMonthCard->isChecked();
+	EstPara.startDate		= Ui.dateEdit_today->date();
+	EstPara.stopDate		= Ui.dateEdit_stopday->date();
+	EstPara.currentTicket		= Ui.spinBox_currentTicket->value();
+	EstPara.currentCrystal		= Ui.spinBox_currentCrystal->value();
+	EstPara.currentPaidCrystal	= Ui.spinBox_currentPaidCrystal->value();
+	EstPara.buySmallMonthCard	= Ui.checkBox_smallMonthCard->isChecked();
+	EstPara.buyBigMonthCard		= Ui.checkBox_bigMonthCard->isChecked();
 	EstPara.smallMonthCardLastday	= Ui.spinBox_smallMonthCardRemainDay->value();
-	EstPara.abyssAverageNum			= Ui.spinBox_averageAbyssNum->value();
+	EstPara.abyssAverageNum		= Ui.spinBox_averageAbyssNum->value();
 
 	emit signal_StartEstimateResource(EstPara);
 
@@ -176,18 +176,18 @@ void ResourceEstimateWgt::slot_clearResult()
 	m_ChtCrystal->removeAllSeries();
 	m_ChtTicket->removeAllSeries();
 	m_seriesEqualCrystal	= nullptr;
-	m_seriesEqualTicket		= nullptr;
+	m_seriesEqualTicket	= nullptr;
 
 	m_startValue	= 0;
-	m_endValue		= 0;
+	m_endValue	= 0;
 	m_totalLength	= 0;
-	m_interval		= 0;
+	m_interval	= 0;
 };
 
 
 void ResourceEstimateWgt::setCurrentEqualCrystal(int value)
 {
-	QString baseText("µ±Ç°µÈĞ§ĞÇÇí:");
+	QString baseText("å½“å‰ç­‰æ•ˆæ˜Ÿç¼:");
 	if (value == -1)
 	{
 		Ui.label_currentEqualCrystal->setText(baseText);
@@ -200,7 +200,7 @@ void ResourceEstimateWgt::setCurrentEqualCrystal(int value)
 
 void ResourceEstimateWgt::setCurrentEqualTicket(int value)
 {
-	QString baseText("µ±Ç°µÈĞ§×¨Æ±:");
+	QString baseText("å½“å‰ç­‰æ•ˆä¸“ç¥¨:");
 	if (value == -1)
 	{
 		Ui.label_CurrentEqualTicket->setText(baseText);
@@ -213,7 +213,7 @@ void ResourceEstimateWgt::setCurrentEqualTicket(int value)
 
 void ResourceEstimateWgt::setStopDayCrystal(int value)
 {
-	QString baseText("Í£Ö¹ÈÕÆÚĞÇÇí:");
+	QString baseText("åœæ­¢æ—¥æœŸæ˜Ÿç¼:");
 	if (value == -1)
 	{
 		Ui.label_StopDayCrystal->setText(baseText);
@@ -226,7 +226,7 @@ void ResourceEstimateWgt::setStopDayCrystal(int value)
 
 void ResourceEstimateWgt::setStopDayTicket(int value)
 {
-	QString baseText("Í£Ö¹ÈÕÆÚ×¨Æ±:");
+	QString baseText("åœæ­¢æ—¥æœŸä¸“ç¥¨:");
 	if (value == -1)
 	{
 		Ui.label_StopdayTicket->setText(baseText);
@@ -239,7 +239,7 @@ void ResourceEstimateWgt::setStopDayTicket(int value)
 
 void ResourceEstimateWgt::setStopDayPaidCrystal(int value)
 {
-	QString baseText("Í£Ö¹ÈÕÆÚ¹ÅÀÏÃÎ»ª:");
+	QString baseText("åœæ­¢æ—¥æœŸå¤è€æ¢¦å:");
 	if (value == -1)
 	{
 		Ui.label_StopDayPaidCrystal->setText(baseText);
@@ -252,7 +252,7 @@ void ResourceEstimateWgt::setStopDayPaidCrystal(int value)
 
 void ResourceEstimateWgt::setStopDayEqualCrystal(int value)
 {
-	QString baseText("Í£Ö¹ÈÕÆÚµÈĞ§ĞÇÇí:");
+	QString baseText("åœæ­¢æ—¥æœŸç­‰æ•ˆæ˜Ÿç¼:");
 	if (value == -1)
 	{
 		Ui.label_StopdayEqualCrystal->setText(baseText);
@@ -265,7 +265,7 @@ void ResourceEstimateWgt::setStopDayEqualCrystal(int value)
 
 void ResourceEstimateWgt::setStopDayEqualTicket(int value)
 {
-	QString baseText("Í£Ö¹ÈÕÆÚµÈĞ§×¨Æ±:");
+	QString baseText("åœæ­¢æ—¥æœŸç­‰æ•ˆä¸“ç¥¨:");
 	if (value == -1)
 	{
 		Ui.label_StopDayEqualTicket->setText(baseText);
@@ -278,7 +278,7 @@ void ResourceEstimateWgt::setStopDayEqualTicket(int value)
 
 void ResourceEstimateWgt::setTotalSmallMonthCardExpense(int value)
 {
-	QString baseText("ÀÛ¼ÆĞ¡ÔÂ¿¨Í¶Èë:");
+	QString baseText("ç´¯è®¡å°æœˆå¡æŠ•å…¥:");
 	if (value == -1)
 	{
 		Ui.label_SmallMonthCardInvestment->setText(baseText);
@@ -291,7 +291,7 @@ void ResourceEstimateWgt::setTotalSmallMonthCardExpense(int value)
 
 void ResourceEstimateWgt::setTotalBigMonthCardExpense(int value)
 {
-	QString baseText("ÀÛ¼Æ´óÔÂ¿¨Í¶Èë:");
+	QString baseText("ç´¯è®¡å¤§æœˆå¡æŠ•å…¥:");
 	if (value == -1)
 	{
 		Ui.label_BigMonthCardInvestment->setText(baseText);
@@ -304,7 +304,7 @@ void ResourceEstimateWgt::setTotalBigMonthCardExpense(int value)
 
 void ResourceEstimateWgt::setTotalExpense(int value)
 {
-	QString baseText("ÀÛ¼Æ×ÜÍ¶Èë:");
+	QString baseText("ç´¯è®¡æ€»æŠ•å…¥:");
 	if (value == -1)
 	{
 		Ui.label_TotalInvestMent->setText(baseText);
@@ -354,7 +354,7 @@ void ResourceEstimateWgt::slot_getResourceEstResult(const QVector<St_ResourceEst
 	int endDayEqualCrystal	= getEqualCrystal(endDayResult);
 	int endDayEqualTicket	= getEqualTicket(endDayResult);
 
-	//´òÓ¡ÓÒ²à±êÇ©
+	//æ‰“å°å³ä¾§æ ‡ç­¾
 	setCurrentEqualCrystal(startDayEqualCrystal);
 	setCurrentEqualTicket(startDayEqualTicket);
 	setStopDayCrystal(endDayResult.currentCrystal);
@@ -366,7 +366,7 @@ void ResourceEstimateWgt::slot_getResourceEstResult(const QVector<St_ResourceEst
 	setTotalBigMonthCardExpense(endDayResult.totalBigMonthCardExpence);
 	setTotalExpense(endDayResult.totalExpense);
 
-	//´¦ÀíÍ¼±í
+	//å¤„ç†å›¾è¡¨
 	m_VecEstResult.clear();
 
 	m_axisCrystalDate->setRange(QDateTime(startDayResult.currentDate), QDateTime(endDayResult.currentDate));
@@ -411,21 +411,21 @@ void ResourceEstimateWgt::slot_getResourceEstResult(const QVector<St_ResourceEst
 	m_ChtCrystal->addSeries(m_seriesEqualCrystal);
 	m_ChtTicket->addSeries(m_seriesEqualTicket);
 
-	//¼ÇÂ¼Í¼±íºÜ×ø±ê¼ÆËãÖĞ¼äÁ¿
+	//è®°å½•å›¾è¡¨å¾ˆåæ ‡è®¡ç®—ä¸­é—´é‡
 	QVector<QPointF> vecPointF = m_seriesEqualCrystal->pointsVector();
 
-	//DebugÓÃ£¬Êµ¼Ê²»´æÔÚµÄÇé¿ö
+	//Debugç”¨ï¼Œå®é™…ä¸å­˜åœ¨çš„æƒ…å†µ
 	if (vecPointF.size() == 0 || vecPointF.size() == 1)
 	{
 		m_startValue	= 0;
-		m_endValue		= 0;
+		m_endValue	= 0;
 		m_totalLength	= 0;
-		m_interval		= 0;
+		m_interval	= 0;
 	}
 	m_startValue		= vecPointF.begin()->x();
-	m_endValue			= vecPointF.rbegin()->x();
+	m_endValue		= vecPointF.rbegin()->x();
 	m_totalLength		= m_endValue - m_startValue;
-	m_interval			= m_totalLength / vecPointF.size();
+	m_interval		= m_totalLength / vecPointF.size();
 
 
 }
@@ -443,9 +443,9 @@ void ResourceEstimateWgt::slot_CrystalChartMouseHovered(const QPointF &point, bo
 
 	QString showText;
 
-	showText.push_back("ÈÕÆÚ:");
+	showText.push_back("æ—¥æœŸ:");
 	showText.push_back(PointValue.currentDate.toString("yyyy/MM/dd"));
-	showText.push_back("\nµÈĞ§ĞÇÇí:");
+	showText.push_back("\nç­‰æ•ˆæ˜Ÿç¼:");
 	showText.push_back(QString::number(getEqualCrystal(PointValue)));
 
 	QToolTip::showText(QCursor::pos(), showText);
@@ -464,9 +464,9 @@ void ResourceEstimateWgt::slot_TicketChartMouseHovered(const QPointF & point, bo
 
 	QString showText;
 
-	showText.push_back("ÈÕÆÚ:");
+	showText.push_back("æ—¥æœŸ:");
 	showText.push_back(PointValue.currentDate.toString("yyyy/MM/dd"));
-	showText.push_back("\nµÈĞ§×¨Æ±:");
+	showText.push_back("\nç­‰æ•ˆä¸“ç¥¨:");
 	showText.push_back(QString::number(getEqualTicket(PointValue)));
 
 	QToolTip::showText(QCursor::pos(), showText);
